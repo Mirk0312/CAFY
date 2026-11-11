@@ -4,7 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class GestorEscenas : MonoBehaviour
 {
-    // Campo opcional por si quieres capturar el input del nombre en la Escena 1
     public TMP_InputField inputNombreJugador;
 
     // Método para el botón INICIAR en el Menú Principal
@@ -30,13 +29,13 @@ public class GestorEscenas : MonoBehaviour
         SceneManager.LoadScene("JuegoPrincipal");
     }
 
-    // Método para ir a la escena de Pausa mediante tecla ESC (se usa en Gameplay)
+    // Método para ir a la escena de Pausa mediante tecla ESC
     public void IrAPausa()
     {
         SceneManager.LoadScene("Pausa");
     }
 
-    // Método para ir a Game Over (cuando pierdas las vidas)
+    // Método para ir a Game Over (cuando pierdas las vidas o algo por el estilo)
     public void IrAGameOver()
     {
         SceneManager.LoadScene("GameOver");

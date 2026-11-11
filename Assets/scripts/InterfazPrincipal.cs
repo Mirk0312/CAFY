@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ControladorInterfazPrincipal : MonoBehaviour
 {
@@ -30,9 +31,12 @@ public class ControladorInterfazPrincipal : MonoBehaviour
     }
 
     // Se ejecuta cuando termines el minijuego con éxito para volver al mostrador
-    public void RegresarAlMostrador()
+    public void RegresarAPreparacion()
     {
         if (PanelMinijuego != null) PanelMinijuego.SetActive(false);
-        if (PanelJuegoPrincipal != null) PanelJuegoPrincipal.SetActive(true);
+        if (PanelPreparacion != null) PanelPreparacion.SetActive(true);
+
+        //  if (PanelJuegoPrincipal != null) PanelJuegoPrincipal.SetActive(true);
     }
+
 }

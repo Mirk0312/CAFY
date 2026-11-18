@@ -67,6 +67,16 @@ public static class GenerarMinijuegoCAFY
             return;
         }
 
+        // Esta comprobación protege los botones movidos a mano al restaurar el
+        // repo: si la escena ya trae el minijuego, no se reconstruye nada.
+        if (panelMini.GetComponent<ControladorMinijuego>() != null && Buscar(scene, "PedidoEntregar") != null)
+        {
+            File.WriteAllText(Marcador, System.DateTime.Now.ToString("s"));
+            Debug.Log("CAFY: minijuego ya presente en la escena; no se regenera.");
+            if (!yaAbierta) EditorSceneManager.CloseScene(scene, true);
+            return;
+        }
+
         ControladorMinijuego mini = ConstruirMinijuego(panelMini.transform, clipCafetera);
         ControladorPedido pedido = ConstruirPedido(canvasRaiz.transform);
 

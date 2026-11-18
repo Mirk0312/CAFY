@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Estado del pedido guardado: se crea al terminar los tres pasos del
@@ -11,17 +12,20 @@ public class ControladorPedido : MonoBehaviour
 {
     public TextMeshProUGUI textoPedido;
     public TextMeshProUGUI feedback;
+    public Image iconoPedido;
 
     public bool HayPedido { get; private set; }
+    public Receta RecetaActual { get; private set; }
 
     private void Awake()
     {
         Actualizar();
     }
 
-    public void GuardarPedido()
+    public void GuardarPedido(Receta receta = null)
     {
         HayPedido = true;
+        RecetaActual = receta;
         Mensaje("Pedido guardado", new Color(0.4f, 1f, 0.5f));
         Actualizar();
     }
@@ -29,6 +33,7 @@ public class ControladorPedido : MonoBehaviour
     public void DescartarPedido()
     {
         HayPedido = false;
+        RecetaActual = null;
         Mensaje("Pedido descartado", new Color(1f, 0.75f, 0.3f));
         Actualizar();
     }
@@ -42,6 +47,7 @@ public class ControladorPedido : MonoBehaviour
         }
 
         HayPedido = false;
+        RecetaActual = null;
         Mensaje("¡Pedido entregado!", new Color(0.4f, 1f, 0.5f));
         Actualizar();
     }
@@ -57,7 +63,15 @@ public class ControladorPedido : MonoBehaviour
     {
         if (textoPedido != null)
         {
-            textoPedido.text = HayPedido ? "Pedido listo" : "Sin pedido";
+            textoPedido.text = HayPedido
+                ? (RecetaActual != null ? RecetaActual.nombre : "Pedido listo")
+                : "Sin pedido";
+        }
+
+        if (iconoPedido != null)
+        {
+            iconoPedido.sprite = HayPedido && RecetaActual != null ? RecetaActual.icono : null;
+            iconoPedido.enabled = iconoPedido.sprite != null;
         }
     }
 }

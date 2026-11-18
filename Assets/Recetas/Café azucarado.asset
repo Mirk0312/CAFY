@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35177351ed9851c4f8ed785f5378d1af, type: 3}
+  m_Name: "Caf\xE9 azucarado"
+  m_EditorClassIdentifier: Assembly-CSharp::Receta
+  nombre: "Caf\xE9 azucarado"
+  descripcion: Espresso endulzado al punto justo.
+  icono: {fileID: 2922303045725553639, guid: 88cf15d7ddbfaa74885be1ba5aebc4c9, type: 3}
+  ingredientes: 0000000001000000i
+  nombresPaso:
+  - "Extracci\xF3n"
+  - Endulzado
+  animacionesExito:
+  - {fileID: 9100000, guid: 0882121d09849c94b8d2665b75e08a93, type: 2}
+  - {fileID: 0}
+  velocidades:
+  - 1.1
+  - 1.4
+  anchosZona:
+  - 0.24
+  - 0.18
+  coloresZona:
+  - {r: 0.95, g: 0.62, b: 0.22, a: 0.95}
+  - {r: 0.95, g: 0.82, b: 0.3, a: 0.95}

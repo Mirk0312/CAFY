@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -34,6 +35,14 @@ public class ControladorMinijuego : MonoBehaviour
     [Header("Referencias")]
     public ControladorPedido pedido;
     public ControladorInterfazPrincipal interfaz;
+    public Receta receta;
+
+    [Header("Ingredientes elegidos en Preparación")]
+    public Ingrediente[] ingredientes;
+    public RuntimeAnimatorController animacionCafetera;
+    public RuntimeAnimatorController animacionJarabe;
+
+    private Receta recetaTemporal;
 
     private int paso;
     private float posicion;
@@ -51,10 +60,28 @@ public class ControladorMinijuego : MonoBehaviour
         Detener();
     }
 
+    /// <summary>Recibe los ingredientes marcados en el panel de preparación.</summary>
+    public void EstablecerIngredientes(Ingrediente[] seleccionados)
+    {
+        ingredientes = seleccionados;
+        if (recetaTemporal != null)
+        {
+            Destroy(recetaTemporal);
+            recetaTemporal = null;
+        }
+        receta = null;
+    }
+
     /// <summary>Llama el botón Preparar al abrir el panel del minijuego.</summary>
     public void Iniciar()
     {
         if (rutina != null) { StopCoroutine(rutina); rutina = null; }
+
+        if (receta == null && ingredientes != null && ingredientes.Length > 0)
+        {
+            recetaTemporal = ConstruirRecetaDesdeIngredientes(ingredientes);
+            receta = recetaTemporal;
+        }
 
         paso = 0;
         posicion = 0f;
@@ -77,7 +104,7 @@ public class ControladorMinijuego : MonoBehaviour
 
     private void ConfigurarPaso()
     {
-        float ancho = Obtener(anchosZona, paso, 0.2f);
+        float ancho = AnchoActual();
 
         if (zonaVerde != null)
         {
@@ -85,10 +112,24 @@ public class ControladorMinijuego : MonoBehaviour
             zonaVerde.anchorMax = new Vector2(0.5f + ancho * 0.5f, 1f);
             zonaVerde.offsetMin = Vector2.zero;
             zonaVerde.offsetMax = Vector2.zero;
+
+            Image imagenZona = zonaVerde.GetComponent<Image>();
+            if (imagenZona != null)
+            {
+                imagenZona.color = receta != null
+                    ? receta.ColorZona(paso, new Color(0.25f, 0.75f, 0.35f, 0.9f))
+                    : new Color(0.25f, 0.75f, 0.35f, 0.9f);
+            }
         }
 
-        if (titulo != null) titulo.text = "Paso " + (paso + 1) + " de 3";
-        if (instruccion != null) instruccion.text = "Pulsa cuando el cursor esté en la zona verde";
+        string nombrePaso = receta != null ? receta.NombrePaso(paso) : "Paso " + (paso + 1);
+        if (titulo != null) titulo.text = nombrePaso + "  (" + (paso + 1) + "/" + NumeroPasos() + ")";
+        if (instruccion != null)
+        {
+            instruccion.text = receta != null && !string.IsNullOrEmpty(receta.descripcion)
+                ? receta.descripcion
+                : "Pulsa cuando el cursor esté en la zona marcada";
+        }
         if (feedback != null)
         {
             feedback.text = "";
@@ -111,7 +152,7 @@ public class ControladorMinijuego : MonoBehaviour
     {
         if (!activo || ocupado) return;
 
-        posicion += Time.deltaTime * Obtener(velocidades, paso, 1f) * direccion;
+        posicion += Time.deltaTime * VelocidadActual() * direccion;
         if (posicion >= 1f) { posicion = 1f; direccion = -1; }
         else if (posicion <= 0f) { posicion = 0f; direccion = 1; }
         ActualizarCursor();
@@ -127,7 +168,7 @@ public class ControladorMinijuego : MonoBehaviour
     {
         if (!activo || ocupado) return;
 
-        float ancho = Obtener(anchosZona, paso, 0.2f);
+        float ancho = AnchoActual();
         bool acierto = Mathf.Abs(posicion - 0.5f) <= ancho * 0.5f;
 
         if (acierto)
@@ -155,9 +196,9 @@ public class ControladorMinijuego : MonoBehaviour
             feedback.color = new Color(0.4f, 1f, 0.5f);
         }
 
-        RuntimeAnimatorController controller = animacionesExito != null && paso < animacionesExito.Length
-            ? animacionesExito[paso]
-            : null;
+        RuntimeAnimatorController controller = receta != null
+            ? receta.Animacion(paso)
+            : (animacionesExito != null && paso < animacionesExito.Length ? animacionesExito[paso] : null);
 
         if (controller != null && animadorExito != null && arteExito != null)
         {
@@ -173,7 +214,7 @@ public class ControladorMinijuego : MonoBehaviour
             yield return new WaitForSeconds(duracionMensaje);
         }
 
-        if (paso + 1 < 3)
+        if (paso + 1 < NumeroPasos())
         {
             paso++;
             posicion = 0f;
@@ -183,7 +224,7 @@ public class ControladorMinijuego : MonoBehaviour
             yield break;
         }
 
-        if (pedido != null) pedido.GuardarPedido();
+        if (pedido != null) pedido.GuardarPedido(receta);
         if (feedback != null)
         {
             feedback.text = "¡Pedido listo!";
@@ -193,6 +234,85 @@ public class ControladorMinijuego : MonoBehaviour
 
         activo = false;
         if (interfaz != null) interfaz.RegresarAlMostrador();
+    }
+
+    private Receta ConstruirRecetaDesdeIngredientes(Ingrediente[] seleccionados)
+    {
+        List<string> pasos = new List<string>();
+        List<RuntimeAnimatorController> animaciones = new List<RuntimeAnimatorController>();
+        List<float> velocidades = new List<float>();
+        List<float> anchos = new List<float>();
+        List<Color> colores = new List<Color>();
+        List<string> nombres = new List<string>();
+
+        foreach (Ingrediente ingrediente in seleccionados)
+        {
+            nombres.Add(ControladorRecetas.Nombre(ingrediente));
+            switch (ingrediente)
+            {
+                case Ingrediente.Cafe:
+                    pasos.Add("Extracción");
+                    animaciones.Add(animacionCafetera);
+                    velocidades.Add(1.1f);
+                    anchos.Add(0.24f);
+                    colores.Add(new Color(0.95f, 0.62f, 0.22f, 0.95f));
+                    break;
+                case Ingrediente.Azucar:
+                    pasos.Add("Endulzado");
+                    animaciones.Add(null);
+                    velocidades.Add(1.4f);
+                    anchos.Add(0.18f);
+                    colores.Add(new Color(0.95f, 0.82f, 0.30f, 0.95f));
+                    break;
+                case Ingrediente.Leche:
+                    pasos.Add("Vaporizado de leche");
+                    animaciones.Add(null);
+                    velocidades.Add(1.7f);
+                    anchos.Add(0.16f);
+                    colores.Add(new Color(0.95f, 0.88f, 0.72f, 0.95f));
+                    break;
+                case Ingrediente.Chocolate:
+                    pasos.Add("Latte art");
+                    animaciones.Add(null);
+                    velocidades.Add(2.5f);
+                    anchos.Add(0.10f);
+                    colores.Add(new Color(0.55f, 0.30f, 0.16f, 0.95f));
+                    break;
+                case Ingrediente.Jarabe:
+                    pasos.Add("Toque de jarabe");
+                    animaciones.Add(animacionJarabe);
+                    velocidades.Add(1.5f);
+                    anchos.Add(0.18f);
+                    colores.Add(new Color(0.78f, 0.45f, 0.18f, 0.95f));
+                    break;
+            }
+        }
+
+        Receta receta = ScriptableObject.CreateInstance<Receta>();
+        receta.nombre = string.Join(" + ", nombres);
+        receta.descripcion = "Prepara " + receta.nombre;
+        receta.ingredientes = seleccionados;
+        receta.nombresPaso = pasos.ToArray();
+        receta.animacionesExito = animaciones.ToArray();
+        receta.velocidades = velocidades.ToArray();
+        receta.anchosZona = anchos.ToArray();
+        receta.coloresZona = colores.ToArray();
+        return receta;
+    }
+
+    private int NumeroPasos()
+    {
+        return receta != null ? receta.NumeroPasos : 3;
+    }
+
+    private float VelocidadActual()
+    {
+        return receta != null ? receta.Velocidad(paso) : Obtener(velocidades, paso, 1f);
+    }
+
+    private float AnchoActual()
+    {
+        return receta != null ? receta.AnchoZona(paso) : Obtener(anchosZona, paso, 0.2f);
     }
 
     private static float Obtener(float[] valores, int indice, float porDefecto)

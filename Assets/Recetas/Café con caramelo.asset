@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35177351ed9851c4f8ed785f5378d1af, type: 3}
+  m_Name: "Caf\xE9 con caramelo"
+  m_EditorClassIdentifier: Assembly-CSharp::Receta
+  nombre: "Caf\xE9 con caramelo"
+  descripcion: Espresso con un toque de jarabe.
+  icono: {fileID: -8347667645110701622, guid: be3faafd18fcf194a90b5c6cab401691, type: 3}
+  ingredientes: 0000000004000000i
+  nombresPaso:
+  - "Extracci\xF3n"
+  - Toque de jarabe
+  animacionesExito:
+  - {fileID: 9100000, guid: 0882121d09849c94b8d2665b75e08a93, type: 2}
+  - {fileID: 9100000, guid: 4aba324a8c81cea42b12f5a1d4b4c6d1, type: 2}
+  velocidades:
+  - 1.1
+  - 1.5
+  anchosZona:
+  - 0.24
+  - 0.18
+  coloresZona:
+  - {r: 0.95, g: 0.62, b: 0.22, a: 0.95}
+  - {r: 0.78, g: 0.45, b: 0.18, a: 0.95}

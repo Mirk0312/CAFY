@@ -15,6 +15,7 @@ public class ControladorTelefono : MonoBehaviour
     public GameObject panelOpciones;
     public GameObject notificacion;
     public TextMeshProUGUI textoOpciones;
+    public ControladorRecetas panelRecetas;
 
     [Header("Tiempo de las animaciones")]
     public float duracionSubida = 1f;
@@ -22,6 +23,7 @@ public class ControladorTelefono : MonoBehaviour
 
     private bool arriba;
     private bool animando;
+    private Coroutine rutina;
 
     private void Awake()
     {
@@ -36,8 +38,8 @@ public class ControladorTelefono : MonoBehaviour
     {
         if (animando || animador == null) return;
 
-        if (arriba) StartCoroutine(BajarTelefono());
-        else StartCoroutine(SubirTelefono());
+        if (arriba) rutina = StartCoroutine(BajarTelefono());
+        else rutina = StartCoroutine(SubirTelefono());
     }
 
     private IEnumerator SubirTelefono()
@@ -64,6 +66,18 @@ public class ControladorTelefono : MonoBehaviour
         animando = false;
     }
 
+    /// <summary>Cierra el teléfono sin esperar la animación (lo usa el panel de recetas).</summary>
+    public void CerrarInmediatamente()
+    {
+        if (rutina != null) { StopCoroutine(rutina); rutina = null; }
+        animando = false;
+        arriba = false;
+
+        if (panelOpciones != null) panelOpciones.SetActive(false);
+        if (textoOpciones != null) textoOpciones.text = "Elige una opción";
+        if (animador != null) animador.SetTrigger("Bajar");
+    }
+
     public void MostrarPedidos()
     {
         if (textoOpciones != null) textoOpciones.text = "Pedidos\n(próximamente)";
@@ -71,6 +85,13 @@ public class ControladorTelefono : MonoBehaviour
 
     public void MostrarRecetas()
     {
+        if (panelRecetas != null)
+        {
+            panelRecetas.Abrir();
+            if (textoOpciones != null) textoOpciones.text = "Recetas";
+            return;
+        }
+
         if (textoOpciones != null) textoOpciones.text = "Recetas\n(próximamente)";
     }
 

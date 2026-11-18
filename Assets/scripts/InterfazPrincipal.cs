@@ -7,6 +7,7 @@ public class ControladorInterfazPrincipal : MonoBehaviour
     public GameObject PanelJuegoPrincipal;
     public GameObject PanelPreparacion;
     public GameObject PanelMinijuego;
+    public ControladorMinijuego minijuego;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class ControladorInterfazPrincipal : MonoBehaviour
     {
         if (PanelPreparacion != null) PanelPreparacion.SetActive(false);
         if (PanelMinijuego != null) PanelMinijuego.SetActive(true);
+        if (minijuego != null) minijuego.Iniciar();
     }
 
     // Se ejecuta cuando termines el minijuego con �xito para volver al mostrador
@@ -35,7 +37,7 @@ public class ControladorInterfazPrincipal : MonoBehaviour
     {
         if (PanelMinijuego != null) PanelMinijuego.SetActive(false);
         if (PanelPreparacion != null) PanelPreparacion.SetActive(true);
-
+        if (minijuego != null) minijuego.Detener();
     }
 
     // Botón "volver" del panel de preparación: vuelve al mostrador sin recargar

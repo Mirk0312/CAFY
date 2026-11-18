@@ -1,44 +1,61 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class HUDJuego : MonoBehaviour
 {
+    private const string EscenaJuego = "JuegoPrincipal";
+
     public TextMeshProUGUI textoNombreJugador;
 
-    void Start()
+    private void OnEnable()
     {
-        // Si no est· asignado en el Inspector, lo buscamos autom·ticamente
+        PerfilJugador.NombreCambiado += ActualizarNombre;
+    }
+
+    private void OnDisable()
+    {
+        PerfilJugador.NombreCambiado -= ActualizarNombre;
+    }
+
+    private void Start()
+    {
+        // Si no est√° asignado en el Inspector, lo buscamos por su nombre real.
         if (textoNombreJugador == null)
         {
-            GameObject objTexto = GameObject.Find("nombreJugado");
+            GameObject objTexto = GameObject.Find("nombreJugador");
             if (objTexto != null)
             {
                 textoNombreJugador = objTexto.GetComponent<TextMeshProUGUI>();
             }
         }
 
-        // Cargamos el nombre del jugador o usamos "Cafetero" por defecto
-        string nombre = PlayerPrefs.GetString("NombreJugador", "Cafetero");
+        ActualizarNombre(PerfilJugador.Nombre);
+    }
 
-        if (string.IsNullOrEmpty(nombre) || nombre.Trim() == "")
-        {
-            nombre = "Cafetero";
-        }
-
+    private void ActualizarNombre(string nombre)
+    {
         if (textoNombreJugador != null)
         {
             textoNombreJugador.text = "Jugador: " + nombre;
         }
     }
 
-    void Update()
+    private void Update()
     {
-        // Detecta la tecla ESC para ir a la escena de Pausa
+        // Este script est√° en todas las escenas. Solo debe reaccionar en
+        // JuegoPrincipal y solo en la escena activa (Pausa se carga encima).
+        if (SceneManager.GetActiveScene().name != EscenaJuego) return;
+        if (gameObject.scene != SceneManager.GetActiveScene()) return;
+
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            SceneManager.LoadScene("Pausa");
+            GestorEscenas gestor = FindAnyObjectByType<GestorEscenas>();
+            if (gestor != null)
+            {
+                gestor.AlternarPausa();
+            }
         }
     }
 }

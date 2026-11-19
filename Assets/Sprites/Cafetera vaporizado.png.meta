@@ -1,0 +1,639 @@
+fileFormatVersion: 2
+guid: 9631f5f654532a04ba6b226cbddc9e80
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8659646552267945124
+    second: Cafetera vaporizado_0
+  - first:
+      213: 1201086295722605790
+    second: Cafetera vaporizado_1
+  - first:
+      213: -5976377165246386290
+    second: Cafetera vaporizado_2
+  - first:
+      213: -7574963016871965188
+    second: Cafetera vaporizado_3
+  - first:
+      213: 362862696606488618
+    second: Cafetera vaporizado_4
+  - first:
+      213: -7423648796368108565
+    second: Cafetera vaporizado_5
+  - first:
+      213: 661311683286444039
+    second: Cafetera vaporizado_6
+  - first:
+      213: 8782058496242827335
+    second: Cafetera vaporizado_7
+  - first:
+      213: -5186703921276068937
+    second: Cafetera vaporizado_8
+  - first:
+      213: 3703786461994207670
+    second: Cafetera vaporizado_9
+  - first:
+      213: -2255545625958924383
+    second: Cafetera vaporizado_10
+  - first:
+      213: 7714371375217663073
+    second: Cafetera vaporizado_11
+  - first:
+      213: -6889798488410274702
+    second: Cafetera vaporizado_12
+  - first:
+      213: -3639627331998766429
+    second: Cafetera vaporizado_13
+  - first:
+      213: -8233702236565045531
+    second: Cafetera vaporizado_14
+  - first:
+      213: 3051786599955787028
+    second: Cafetera vaporizado_15
+  - first:
+      213: 5396386540220363890
+    second: Cafetera vaporizado_16
+  - first:
+      213: 4112692665973281730
+    second: Cafetera vaporizado_17
+  - first:
+      213: 4994639072147633645
+    second: Cafetera vaporizado_18
+  - first:
+      213: 5577427056359794849
+    second: Cafetera vaporizado_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cafetera vaporizado_0
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 1289
+        width: 272
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a4fd5498ae3d2870800000000000000
+      internalID: 8659646552267945124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_1
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 1289
+        width: 272
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edcb2215f9d1ba010800000000000000
+      internalID: 1201086295722605790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_2
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 1289
+        width: 282
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8fabb5e1a4af0da0800000000000000
+      internalID: -5976377165246386290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_3
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 1289
+        width: 302
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfd00a0254350e690800000000000000
+      internalID: -7574963016871965188
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_4
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 869
+        width: 302
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a28587533b5290500800000000000000
+      internalID: 362862696606488618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_5
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 929
+        width: 102
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be3093b70c6e9f890800000000000000
+      internalID: -7423648796368108565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_6
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 869
+        width: 302
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 708aa10e8737d2900800000000000000
+      internalID: 661311683286444039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_7
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 949
+        width: 102
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74041494ca320e970800000000000000
+      internalID: 8782058496242827335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_8
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 869
+        width: 342
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bbd63193402508b0800000000000000
+      internalID: -5186703921276068937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_9
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 869
+        width: 342
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b9c017e92e766330800000000000000
+      internalID: 3703786461994207670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_10
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 449
+        width: 342
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1af380e1431b2b0e0800000000000000
+      internalID: -2255545625958924383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_11
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 449
+        width: 342
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16c5a4da4e3fe0b60800000000000000
+      internalID: 7714371375217663073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_12
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 449
+        width: 342
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 274484c47c48260a0800000000000000
+      internalID: -6889798488410274702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_13
+      rect:
+        serializedVersion: 2
+        x: 1319
+        y: 449
+        width: 272
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3aa2961a9327d7dc0800000000000000
+      internalID: -3639627331998766429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_14
+      rect:
+        serializedVersion: 2
+        x: 1569
+        y: 589
+        width: 92
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ee733b90730cbd80800000000000000
+      internalID: -8233702236565045531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_15
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 29
+        width: 342
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41d69ac5ebf1a5a20800000000000000
+      internalID: 3051786599955787028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_16
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 29
+        width: 302
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 274b88097f0d3ea40800000000000000
+      internalID: 5396386540220363890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_17
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 119
+        width: 102
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c311b19038331930800000000000000
+      internalID: 4112692665973281730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_18
+      rect:
+        serializedVersion: 2
+        x: 899
+        y: 29
+        width: 302
+        height: 362
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de575acf5c5805540800000000000000
+      internalID: 4994639072147633645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cafetera vaporizado_19
+      rect:
+        serializedVersion: 2
+        x: 1139
+        y: 99
+        width: 102
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a86af67b50076d40800000000000000
+      internalID: 5577427056359794849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Cafetera vaporizado_0: 8659646552267945124
+      Cafetera vaporizado_1: 1201086295722605790
+      Cafetera vaporizado_10: -2255545625958924383
+      Cafetera vaporizado_11: 7714371375217663073
+      Cafetera vaporizado_12: -6889798488410274702
+      Cafetera vaporizado_13: -3639627331998766429
+      Cafetera vaporizado_14: -8233702236565045531
+      Cafetera vaporizado_15: 3051786599955787028
+      Cafetera vaporizado_16: 5396386540220363890
+      Cafetera vaporizado_17: 4112692665973281730
+      Cafetera vaporizado_18: 4994639072147633645
+      Cafetera vaporizado_19: 5577427056359794849
+      Cafetera vaporizado_2: -5976377165246386290
+      Cafetera vaporizado_3: -7574963016871965188
+      Cafetera vaporizado_4: 362862696606488618
+      Cafetera vaporizado_5: -7423648796368108565
+      Cafetera vaporizado_6: 661311683286444039
+      Cafetera vaporizado_7: 8782058496242827335
+      Cafetera vaporizado_8: -5186703921276068937
+      Cafetera vaporizado_9: 3703786461994207670
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

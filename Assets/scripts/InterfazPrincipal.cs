@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ControladorInterfazPrincipal : MonoBehaviour
 {
@@ -11,20 +10,20 @@ public class ControladorInterfazPrincipal : MonoBehaviour
 
     void Start()
     {
-        // solo el mostrador principal empiece visible
+        // Solo el mostrador principal empieza visible.
         if (PanelJuegoPrincipal != null) PanelJuegoPrincipal.SetActive(true);
         if (PanelPreparacion != null) PanelPreparacion.SetActive(false);
         if (PanelMinijuego != null) PanelMinijuego.SetActive(false);
     }
 
-    // Este m�todo se llamar� al hacer clic en la cafetera
+    // Este método se llama al hacer clic en la cafetera.
     public void AbrirEstacionPreparacion()
     {
         if (PanelJuegoPrincipal != null) PanelJuegoPrincipal.SetActive(false);
         if (PanelPreparacion != null) PanelPreparacion.SetActive(true);
     }
 
-    // Se ejecuta al hacer clic en el bot�n "btnPreparar" de los ingredientes
+    // Se ejecuta al hacer clic en el botón "btnPreparar" de los ingredientes.
     public void IniciarMinijuego()
     {
         if (PanelPreparacion != null) PanelPreparacion.SetActive(false);
@@ -32,7 +31,7 @@ public class ControladorInterfazPrincipal : MonoBehaviour
         if (minijuego != null) minijuego.Iniciar();
     }
 
-    // Se ejecuta cuando termines el minijuego con �xito para volver al mostrador
+    // Se ejecuta cuando termines el minijuego con éxito para volver al mostrador.
     public void RegresarAPreparacion()
     {
         if (PanelMinijuego != null) PanelMinijuego.SetActive(false);
@@ -48,5 +47,4 @@ public class ControladorInterfazPrincipal : MonoBehaviour
         if (PanelPreparacion != null) PanelPreparacion.SetActive(false);
         if (PanelJuegoPrincipal != null) PanelJuegoPrincipal.SetActive(true);
     }
-
 }

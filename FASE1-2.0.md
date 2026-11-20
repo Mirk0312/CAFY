@@ -68,7 +68,7 @@ Generadas por:
 
 ### Recetas
 - `Assets/scripts/Receta.cs` → ScriptableObject.
-- `Assets/Recetas/` → `Espresso`, `Capuchino`, `Mocha`, `Café azucarado`, `Café con caramelo`.
+- `Assets/Resources/Recetas/` → `Espresso`, `Capuchino`, `Mocha`, `Café azucarado`, `Café con caramelo` (antes estaban en `Assets/Recetas/`; se movieron para cargarlas con `Resources.LoadAll`).
 - `PanelRecetas` en el Canvas, cerrado por defecto, tarjetas informativas generadas en runtime.
 - `Assets/Editor/ConfigurarRecetasCAFY.cs`.
 

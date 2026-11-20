@@ -52,7 +52,7 @@ public static class GenerarAnimacionesCAFY
         AnimationClip motero = CrearClip("Motero", "Assets/Sprites/Motero sprite.png", 8f, true);
         AnimationClip cafe = CrearClip("CoffeeInicio", "Assets/Sprites/coffee INICIO.png", 2.5f, true);
         AnimationClip final = CrearClip("CafyFinal", "Assets/Sprites/CAFY FINAL.png", 2.5f, true);
-        AnimationClip jarabe = CrearClip("Jarabe", "Assets/Sprites/Jarabe CAFY.png", 8f, true);
+        AnimationClip jarabe = CrearClip("Jarabe", "Assets/Sprites/Jarabe CAFY.png", 4f, true);
         // El frame _0 se dejó fuera de la animación a petición del usuario.
         AnimationClip telefonoArriba = CrearClip(
             "TelefonoSube", "Assets/Sprites/SpriteTelefonoArriba.png", 12f, false, 1);
@@ -88,7 +88,7 @@ public static class GenerarAnimacionesCAFY
         ConfigurarScene(RutaJuego, scene =>
         {
             AsignarAnimator(scene, "Motero", ctrlMotero);
-            AsignarAnimator(scene, "Jarabe", ctrlJarabe);
+            // El Jarabe ya no se anima solo en el panel: solo se mueve en la vista previa al hacer hover.
 
             GameObject telefono = Buscar(scene, "Telefono");
             if (telefono == null)
@@ -345,12 +345,18 @@ public static class GenerarAnimacionesCAFY
 
         Image imagen = noti.GetComponent<Image>();
         Sprite[] frames = CargarSprites("Assets/Sprites/SpriteTelefonoNoti.png");
-        if (frames.Length > 0) imagen.sprite = frames[0];
+        if (frames.Length > 4) imagen.sprite = frames[4];
+        else if (frames.Length > 0) imagen.sprite = frames[0];
         imagen.raycastTarget = false;
         imagen.preserveAspect = true;
 
+        // Notificación estática: usamos solo SpriteTelefonoNoti_4, sin animar.
         Animator animador = noti.GetComponent<Animator>();
-        animador.runtimeAnimatorController = controller;
+        if (animador != null)
+        {
+            animador.enabled = false;
+            animador.runtimeAnimatorController = null;
+        }
 
         noti.SetActive(false);
         return noti.transform;

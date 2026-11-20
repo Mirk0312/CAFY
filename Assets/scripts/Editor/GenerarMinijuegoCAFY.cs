@@ -120,11 +120,11 @@ public static class GenerarMinijuegoCAFY
             AssetDatabase.CreateAsset(clip, rutaClip);
         }
 
-        clip.frameRate = 12f;
+        clip.frameRate = 6f;
         clip.wrapMode = WrapMode.Loop;
         EditorCurveBinding enlace = EditorCurveBinding.PPtrCurve(string.Empty, typeof(Image), "m_Sprite");
         AnimationUtility.SetObjectReferenceCurve(clip, enlace, frames
-            .Select((s, i) => new ObjectReferenceKeyframe { time = i / 12f, value = s })
+            .Select((s, i) => new ObjectReferenceKeyframe { time = i / 6f, value = s })
             .ToArray());
         AnimationClipSettings ajustes = AnimationUtility.GetAnimationClipSettings(clip);
         ajustes.loopTime = true;

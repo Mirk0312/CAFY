@@ -17,7 +17,7 @@ using UnityEngine.UI;
 public static class ConfigurarRecetasCAFY
 {
     private const string RutaJuego = "Assets/Scenes/JuegoPrincipal.unity";
-    private const string CarpetaRecetas = "Assets/Recetas";
+    private const string CarpetaRecetas = "Assets/Resources/Recetas";
     private const string Marcador = "Temp/cafy_recetas_configuradas";
 
     private static readonly Color Ambar = new Color(0.95f, 0.62f, 0.22f, 0.95f);

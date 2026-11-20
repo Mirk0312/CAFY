@@ -32,6 +32,17 @@ public class ControladorMinijuego : MonoBehaviour
     public float duracionExito = 1.4f;
     public float duracionMensaje = 0.9f;
 
+    [Header("Temporizador")]
+    public TextMeshProUGUI textoTiempo;
+    public Image barraTiempo;
+    public float segundosPorPaso = 12f;
+
+    [Header("Dificultad al fallar")]
+    [Tooltip("Cada fallo reduce la zona verde a este factor del ancho actual.")]
+    public float reduccionPorFallo = 0.88f;
+    [Tooltip("La zona nunca baja de este factor del ancho inicial del paso.")]
+    public float reduccionMinima = 0.35f;
+
     [Header("Referencias")]
     public ControladorPedido pedido;
     public ControladorInterfazPrincipal interfaz;
@@ -41,8 +52,14 @@ public class ControladorMinijuego : MonoBehaviour
     public Ingrediente[] ingredientes;
     public RuntimeAnimatorController animacionCafetera;
     public RuntimeAnimatorController animacionJarabe;
+    public RuntimeAnimatorController animacionVaporizado;
+    public ControladorPedidos sistemaPedidos;
 
     private Receta recetaTemporal;
+    private float tiempoRestante;
+    private float zonaOffset;
+    private float factorZona = 1f;
+    private ControladorPreparacion preparacion;
 
     private int paso;
     private float posicion;
@@ -55,9 +72,89 @@ public class ControladorMinijuego : MonoBehaviour
     {
         if (pedido == null) pedido = FindAnyObjectByType<ControladorPedido>();
         if (interfaz == null) interfaz = FindAnyObjectByType<ControladorInterfazPrincipal>();
+        if (sistemaPedidos == null) sistemaPedidos = FindAnyObjectByType<ControladorPedidos>();
+        if (preparacion == null) preparacion = FindAnyObjectByType<ControladorPreparacion>();
+        if (animacionVaporizado == null)
+            animacionVaporizado = Resources.Load<RuntimeAnimatorController>("Animaciones/Vaporizado");
+        if (animacionJarabe == null)
+            animacionJarabe = Resources.Load<RuntimeAnimatorController>("Animaciones/PreviewJarabe");
+
         if (btnAccionar != null) btnAccionar.onClick.AddListener(Accionar);
         if (arteExito != null) arteExito.SetActive(false);
+        AsegurarUITiempo();
         Detener();
+    }
+
+    /// <summary>Crea (o reutiliza) el texto y la barra del temporizador.</summary>
+    private void AsegurarUITiempo()
+    {
+        Transform panel = GetComponent<RectTransform>() != null
+            ? transform
+            : (GameObject.Find("PanelMiniJuego") != null ? GameObject.Find("PanelMiniJuego").transform : null);
+        if (panel == null) return;
+
+        if (textoTiempo == null)
+        {
+            Transform encontrado = panel.Find("TextoTiempo");
+            if (encontrado != null) textoTiempo = encontrado.GetComponent<TextMeshProUGUI>();
+        }
+        if (textoTiempo == null)
+        {
+            GameObject go = new GameObject("TextoTiempo", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            go.transform.SetParent(panel, false);
+            RectTransform rect = go.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.30f, 0.66f);
+            rect.anchorMax = new Vector2(0.70f, 0.74f);
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
+            textoTiempo = go.GetComponent<TextMeshProUGUI>();
+            if (TMP_Settings.defaultFontAsset != null) textoTiempo.font = TMP_Settings.defaultFontAsset;
+            textoTiempo.fontSize = 34f;
+            textoTiempo.alignment = TextAlignmentOptions.Center;
+            textoTiempo.color = new Color(1f, 0.85f, 0.45f);
+            textoTiempo.raycastTarget = false;
+        }
+
+        if (barraTiempo == null)
+        {
+            Transform encontrado = panel.Find("BarraTiempo");
+            if (encontrado != null) barraTiempo = encontrado.GetComponent<Image>();
+        }
+        if (barraTiempo == null)
+        {
+            GameObject go = new GameObject("BarraTiempo", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            go.transform.SetParent(panel, false);
+            RectTransform rect = go.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.15f, 0.635f);
+            rect.anchorMax = new Vector2(0.85f, 0.66f);
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
+            barraTiempo = go.GetComponent<Image>();
+            barraTiempo.color = new Color(1f, 0.75f, 0.25f, 0.95f);
+        }
+
+        // Image.Type.Filled necesita un sprite: sin él el fillAmount no se ve.
+        if (barraTiempo.sprite == null) barraTiempo.sprite = SpriteBlanco();
+        barraTiempo.type = Image.Type.Filled;
+        barraTiempo.fillMethod = Image.FillMethod.Horizontal;
+        barraTiempo.fillOrigin = 0;
+        barraTiempo.raycastTarget = false;
+    }
+
+    private static Sprite spriteBlanco;
+
+    private static Sprite SpriteBlanco()
+    {
+        if (spriteBlanco != null) return spriteBlanco;
+
+        Texture2D textura = new Texture2D(1, 1, TextureFormat.RGBA32, false);
+        textura.SetPixel(0, 0, Color.white);
+        textura.Apply();
+        textura.hideFlags = HideFlags.DontSave;
+
+        spriteBlanco = Sprite.Create(textura, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
+        spriteBlanco.hideFlags = HideFlags.DontSave;
+        return spriteBlanco;
     }
 
     /// <summary>Recibe los ingredientes marcados en el panel de preparación.</summary>
@@ -76,6 +173,7 @@ public class ControladorMinijuego : MonoBehaviour
     public void Iniciar()
     {
         if (rutina != null) { StopCoroutine(rutina); rutina = null; }
+        if (sistemaPedidos == null) sistemaPedidos = FindAnyObjectByType<ControladorPedidos>();
 
         if (receta == null && ingredientes != null && ingredientes.Length > 0)
         {
@@ -86,6 +184,8 @@ public class ControladorMinijuego : MonoBehaviour
         paso = 0;
         posicion = 0f;
         direccion = 1;
+        zonaOffset = 0f;
+        factorZona = 1f;
         ocupado = false;
         activo = true;
 
@@ -100,19 +200,18 @@ public class ControladorMinijuego : MonoBehaviour
         ocupado = false;
         if (rutina != null) { StopCoroutine(rutina); rutina = null; }
         if (arteExito != null) arteExito.SetActive(false);
+        if (textoTiempo != null) textoTiempo.text = "";
+        if (barraTiempo != null) barraTiempo.fillAmount = 1f;
     }
 
     private void ConfigurarPaso()
     {
-        float ancho = AnchoActual();
+        // Cada paso tiene su propio tiempo; no se arrastra el del paso anterior.
+        tiempoRestante = SegundosPorPaso();
+        ActualizarZona();
 
         if (zonaVerde != null)
         {
-            zonaVerde.anchorMin = new Vector2(0.5f - ancho * 0.5f, 0f);
-            zonaVerde.anchorMax = new Vector2(0.5f + ancho * 0.5f, 1f);
-            zonaVerde.offsetMin = Vector2.zero;
-            zonaVerde.offsetMax = Vector2.zero;
-
             Image imagenZona = zonaVerde.GetComponent<Image>();
             if (imagenZona != null)
             {
@@ -137,6 +236,7 @@ public class ControladorMinijuego : MonoBehaviour
         }
 
         ActualizarCursor();
+        ActualizarUITiempo();
     }
 
     private void ActualizarCursor()
@@ -152,10 +252,22 @@ public class ControladorMinijuego : MonoBehaviour
     {
         if (!activo || ocupado) return;
 
+        if (tiempoRestante > 0f)
+        {
+            tiempoRestante -= Time.deltaTime;
+            ActualizarUITiempo();
+            if (tiempoRestante <= 0f)
+            {
+                TiempoAgotado();
+                return;
+            }
+        }
+
         posicion += Time.deltaTime * VelocidadActual() * direccion;
         if (posicion >= 1f) { posicion = 1f; direccion = -1; }
         else if (posicion <= 0f) { posicion = 0f; direccion = 1; }
         ActualizarCursor();
+        ActualizarZona();
 
         if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
@@ -169,7 +281,7 @@ public class ControladorMinijuego : MonoBehaviour
         if (!activo || ocupado) return;
 
         float ancho = AnchoActual();
-        bool acierto = Mathf.Abs(posicion - 0.5f) <= ancho * 0.5f;
+        bool acierto = Mathf.Abs(posicion - (0.5f + zonaOffset)) <= ancho * 0.5f;
 
         if (acierto)
         {
@@ -182,6 +294,11 @@ public class ControladorMinijuego : MonoBehaviour
             feedback.text = "Fallaste, intenta de nuevo";
             feedback.color = new Color(1f, 0.45f, 0.35f);
         }
+        // Cada fallo encoge un poco la zona verde de este paso (con suelo),
+        // así no sirve pulsar siempre en el mismo sitio esperando acertar.
+        factorZona = Mathf.Max(reduccionMinima, factorZona * reduccionPorFallo);
+        ActualizarZona();
+
         posicion = 0f;
         direccion = 1;
         ActualizarCursor();
@@ -205,7 +322,14 @@ public class ControladorMinijuego : MonoBehaviour
             animadorExito.runtimeAnimatorController = controller;
             animadorExito.enabled = true;
             arteExito.SetActive(true);
-            yield return new WaitForSeconds(duracionExito);
+
+            // Esperamos lo que dure el clip real para que la animación no se corte.
+            float espera = duracionExito;
+            AnimationClip[] clips = controller.animationClips;
+            if (clips != null && clips.Length > 0)
+                espera = Mathf.Max(duracionExito, clips[0].length + 0.15f);
+
+            yield return new WaitForSeconds(espera);
             arteExito.SetActive(false);
         }
         else
@@ -219,12 +343,22 @@ public class ControladorMinijuego : MonoBehaviour
             paso++;
             posicion = 0f;
             direccion = 1;
+            factorZona = 1f;
             ocupado = false;
             ConfigurarPaso();
             yield break;
         }
 
-        if (pedido != null) pedido.GuardarPedido(receta);
+        if (sistemaPedidos == null) sistemaPedidos = FindAnyObjectByType<ControladorPedidos>();
+        if (sistemaPedidos != null)
+        {
+            sistemaPedidos.GuardarBebida(receta);
+            sistemaPedidos.LimpiarIngredientes();
+        }
+        else if (pedido != null)
+        {
+            pedido.GuardarPedido(receta);
+        }
         if (feedback != null)
         {
             feedback.text = "¡Pedido listo!";
@@ -266,7 +400,7 @@ public class ControladorMinijuego : MonoBehaviour
                     break;
                 case Ingrediente.Leche:
                     pasos.Add("Vaporizado de leche");
-                    animaciones.Add(null);
+                    animaciones.Add(animacionVaporizado);
                     velocidades.Add(1.7f);
                     anchos.Add(0.16f);
                     colores.Add(new Color(0.95f, 0.88f, 0.72f, 0.95f));
@@ -305,14 +439,101 @@ public class ControladorMinijuego : MonoBehaviour
         return receta != null ? receta.NumeroPasos : 3;
     }
 
+    private int NivelActual()
+    {
+        return Mathf.Max(1, EstadoPartida.Nivel);
+    }
+
+    /// <summary>Cada nivel el cursor va más rápido y la zona se reduce.</summary>
+    private float MultiplicadorVelocidad()
+    {
+        return 1f + 0.12f * (NivelActual() - 1);
+    }
+
+    private float MultiplicadorAncho()
+    {
+        return Mathf.Max(0.55f, 1f - 0.10f * (NivelActual() - 1));
+    }
+
+    private float SegundosPorPaso()
+    {
+        return segundosPorPaso * Mathf.Max(0.6f, 1f - 0.07f * (NivelActual() - 1));
+    }
+
+    /// <summary>Desde el nivel 3 la zona objetivo se desplaza de lado a lado.</summary>
+    private bool ZonaMovil()
+    {
+        return EstadoPartida.Nivel >= 3;
+    }
+
+    private void ActualizarZona()
+    {
+        if (zonaVerde == null) return;
+
+        float ancho = AnchoActual();
+        float rango = Mathf.Max(0f, 0.5f - ancho * 0.5f);
+        zonaOffset = ZonaMovil() ? Mathf.Sin(Time.time * 1.4f) * rango * 0.75f : 0f;
+
+        zonaVerde.anchorMin = new Vector2(0.5f + zonaOffset - ancho * 0.5f, 0f);
+        zonaVerde.anchorMax = new Vector2(0.5f + zonaOffset + ancho * 0.5f, 1f);
+        zonaVerde.offsetMin = Vector2.zero;
+        zonaVerde.offsetMax = Vector2.zero;
+    }
+
+    private void ActualizarUITiempo()
+    {
+        float total = Mathf.Max(0.01f, SegundosPorPaso());
+        if (textoTiempo != null)
+        {
+            textoTiempo.text = activo
+                ? Mathf.CeilToInt(Mathf.Max(0f, tiempoRestante)).ToString()
+                : "";
+        }
+        if (barraTiempo != null)
+        {
+            barraTiempo.fillAmount = activo ? Mathf.Clamp01(tiempoRestante / total) : 1f;
+            barraTiempo.color = tiempoRestante < total * 0.3f
+                ? new Color(0.95f, 0.30f, 0.25f, 0.95f)
+                : new Color(1f, 0.75f, 0.25f, 0.95f);
+        }
+    }
+
+    private void TiempoAgotado()
+    {
+        activo = false;
+        ocupado = false;
+        ActualizarUITiempo();
+        if (feedback != null)
+        {
+            feedback.text = "¡Se acabó el tiempo!";
+            feedback.color = new Color(1f, 0.45f, 0.35f);
+        }
+        if (sistemaPedidos == null) sistemaPedidos = FindAnyObjectByType<ControladorPedidos>();
+        if (sistemaPedidos != null) sistemaPedidos.CancelarArmado();
+
+        EstadoPartida.PerderVida();
+        // Si aún quedan vidas, el jugador vuelve al panel de preparación para
+        // volver a intentarlo. Con la última vida se carga GameOver automáticamente.
+        if (EstadoPartida.SinVidas) return;
+
+        if (preparacion == null) preparacion = FindAnyObjectByType<ControladorPreparacion>();
+        if (preparacion != null)
+            preparacion.MostrarMensaje("¡Se acabó el tiempo! Vuelve a intentarlo",
+                new Color(1f, 0.45f, 0.35f));
+
+        if (interfaz != null) interfaz.RegresarAPreparacion();
+    }
+
     private float VelocidadActual()
     {
-        return receta != null ? receta.Velocidad(paso) : Obtener(velocidades, paso, 1f);
+        float baseVelocidad = receta != null ? receta.Velocidad(paso) : Obtener(velocidades, paso, 1f);
+        return baseVelocidad * MultiplicadorVelocidad();
     }
 
     private float AnchoActual()
     {
-        return receta != null ? receta.AnchoZona(paso) : Obtener(anchosZona, paso, 0.2f);
+        float baseAncho = receta != null ? receta.AnchoZona(paso) : Obtener(anchosZona, paso, 0.2f);
+        return baseAncho * MultiplicadorAncho() * factorZona;
     }
 
     private static float Obtener(float[] valores, int indice, float porDefecto)

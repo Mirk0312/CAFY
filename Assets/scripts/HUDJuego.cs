@@ -48,6 +48,9 @@ public class HUDJuego : MonoBehaviour
         // JuegoPrincipal y solo en la escena activa (Pausa se carga encima).
         if (SceneManager.GetActiveScene().name != EscenaJuego) return;
         if (gameObject.scene != SceneManager.GetActiveScene()) return;
+        // Durante el 5-4-3-2-1 no se puede ni pausar.
+        if (ControladorCuentaRegresiva.Instancia != null &&
+            !ControladorCuentaRegresiva.Terminado) return;
 
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {

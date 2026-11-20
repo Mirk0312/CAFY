@@ -19,6 +19,8 @@ public static class EstadoPartida
     public static event Action<int> VidasCambiadas;
     public static event Action<int> PuntosCambiados;
     public static event Action<int> NivelCambiado;
+    /// <summary>Solo se dispara al subir de nivel (no al reiniciar la partida).</summary>
+    public static event Action<int> NivelSubido;
     public static event Action PartidaPerdida;
     public static event Action PartidaReiniciada;
 
@@ -58,6 +60,10 @@ public static class EstadoPartida
     public static void SubirNivel()
     {
         Nivel++;
+        // Cada nivel nuevo empieza con las 3 vidas llenas.
+        Vidas = VidasIniciales;
+        VidasCambiadas?.Invoke(Vidas);
         NivelCambiado?.Invoke(Nivel);
+        NivelSubido?.Invoke(Nivel);
     }
 }

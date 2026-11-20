@@ -1,12 +1,12 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
-/// Controla el teléfono del mostrador: al hacer clic reproduce la animación
-/// de subida, muestra el sprite base con los botones Pedidos/Recetas y al
-/// volver a hacer clic reproduce la de bajada. La lógica de pedidos real
-/// vendrá después; aquí solo está la parte visual.
+/// Controla el teléfono del mostrador: animación de subida/bajada, panel de
+/// opciones, notificación grande (teléfono abajo) y mini badge sobre Pedidos
+/// cuando el teléfono está arriba.
 /// </summary>
 public class ControladorTelefono : MonoBehaviour
 {
@@ -24,13 +24,35 @@ public class ControladorTelefono : MonoBehaviour
     private bool arriba;
     private bool animando;
     private Coroutine rutina;
+    private Coroutine rutinaNoti;
+
+    private GameObject badgePedidos;
+    private TextMeshProUGUI badgeTexto;
+    private int pedidosSinVer;
+
+    public bool EstaArriba => arriba;
 
     private void Awake()
     {
         if (animador == null) animador = GetComponent<Animator>();
         if (panelOpciones != null) panelOpciones.SetActive(false);
         if (notificacion != null) notificacion.SetActive(false);
-        if (textoOpciones != null) textoOpciones.text = "Elige una opción";
+        OcultarTextoOpciones();
+        CrearBadgePedidos();
+    }
+
+    /// <summary>El panel de opciones solo muestra botones: sin texto de estado.</summary>
+    private void OcultarTextoOpciones()
+    {
+        if (textoOpciones != null) textoOpciones.gameObject.SetActive(false);
+
+        // La escena tiene un TextoOpciones duplicado del generador; también se oculta.
+        foreach (Transform t in FindObjectsByType<Transform>(FindObjectsInactive.Include))
+        {
+            if (t.name != "TextoOpciones") continue;
+            if (t.gameObject.scene != gameObject.scene) continue;
+            t.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>Se llama desde el Button del GameObject Telefono.</summary>
@@ -45,6 +67,9 @@ public class ControladorTelefono : MonoBehaviour
     private IEnumerator SubirTelefono()
     {
         animando = true;
+        // La notificación grande queda abajo: se oculta para no quedarse flotando.
+        if (notificacion != null) notificacion.SetActive(false);
+
         animador.SetTrigger("Subir");
         yield return new WaitForSeconds(duracionSubida);
 
@@ -57,13 +82,13 @@ public class ControladorTelefono : MonoBehaviour
     {
         animando = true;
         if (panelOpciones != null) panelOpciones.SetActive(false);
-        if (textoOpciones != null) textoOpciones.text = "Elige una opción";
 
         animador.SetTrigger("Bajar");
         yield return new WaitForSeconds(duracionBajada);
 
         arriba = false;
         animando = false;
+        MostrarNotificacionPendienteAlBajar();
     }
 
     /// <summary>Cierra el teléfono sin esperar la animación (lo usa el panel de recetas).</summary>
@@ -74,30 +99,141 @@ public class ControladorTelefono : MonoBehaviour
         arriba = false;
 
         if (panelOpciones != null) panelOpciones.SetActive(false);
-        if (textoOpciones != null) textoOpciones.text = "Elige una opción";
         if (animador != null) animador.SetTrigger("Bajar");
+        MostrarNotificacionPendienteAlBajar();
+    }
+
+    private void MostrarNotificacionPendienteAlBajar()
+    {
+        if (pedidosSinVer <= 0 || notificacion == null) return;
+
+        notificacion.SetActive(true);
+        if (rutinaNoti != null) StopCoroutine(rutinaNoti);
+        rutinaNoti = StartCoroutine(OcultarNotificacionAutomatica(5f));
     }
 
     public void MostrarPedidos()
     {
-        if (textoOpciones != null) textoOpciones.text = "Pedidos\n(próximamente)";
+        // Primero se marca como visto y se baja el teléfono; así no aparece
+        // la notificación grande encima de la ventana de pedidos.
+        MarcarPedidosVistos();
+        CerrarInmediatamente();
+        if (rutinaNoti != null) { StopCoroutine(rutinaNoti); rutinaNoti = null; }
+        if (notificacion != null) notificacion.SetActive(false);
+
+        ControladorPedidos sistema = ControladorPedidos.Instancia;
+        if (sistema != null) sistema.AbrirPanelPedidos();
     }
 
     public void MostrarRecetas()
     {
-        if (panelRecetas != null)
+        if (panelRecetas != null) panelRecetas.Abrir();
+    }
+
+    /// <summary>
+    /// Teléfono abajo: notificación grande. Teléfono arriba o en movimiento:
+    /// mini badge sobre el botón Pedidos, que se mantiene hasta que el jugador lo vea.
+    /// </summary>
+    public void MostrarNotificacion(bool visible)
+    {
+        if (notificacion == null) return;
+
+        if (visible)
         {
-            panelRecetas.Abrir();
-            if (textoOpciones != null) textoOpciones.text = "Recetas";
+            // El aviso siempre queda registrado, esté el teléfono arriba o abajo.
+            // Así el badge persiste aunque la notificación grande se oculte a los
+            // 5 s o el jugador suba el teléfono, y al bajarlo vuelve a aparecer.
+            int pendientes = ControladorPedidos.Instancia != null
+                ? ControladorPedidos.Instancia.PedidosPendientes
+                : 1;
+            SenalarPedido(pendientes);
+        }
+
+        if (visible && (arriba || animando))
+        {
+            notificacion.SetActive(false);
             return;
         }
 
-        if (textoOpciones != null) textoOpciones.text = "Recetas\n(próximamente)";
+        if (visible)
+        {
+            notificacion.SetActive(true);
+            if (rutinaNoti != null) StopCoroutine(rutinaNoti);
+            rutinaNoti = StartCoroutine(OcultarNotificacionAutomatica(5f));
+        }
+        else
+        {
+            notificacion.SetActive(false);
+        }
     }
 
-    /// <summary>La usará la lógica de pedidos cuando llegue un encargo.</summary>
-    public void MostrarNotificacion(bool visible)
+    private IEnumerator OcultarNotificacionAutomatica(float espera)
     {
-        if (notificacion != null) notificacion.SetActive(visible);
+        yield return new WaitForSeconds(espera);
+        if (notificacion != null) notificacion.SetActive(false);
+        rutinaNoti = null;
+    }
+
+    /// <summary>Enciende el mini contador sobre btnPedidos.</summary>
+    public void SenalarPedido(int cantidad)
+    {
+        pedidosSinVer = Mathf.Max(1, cantidad);
+        if (badgePedidos == null) CrearBadgePedidos();
+        if (badgePedidos != null) badgePedidos.SetActive(true);
+        if (badgeTexto != null) badgeTexto.text = pedidosSinVer.ToString();
+    }
+
+    /// <summary>El jugador abrió Pedidos: apagamos el aviso.</summary>
+    public void MarcarPedidosVistos()
+    {
+        pedidosSinVer = 0;
+        if (badgePedidos != null) badgePedidos.SetActive(false);
+    }
+
+    private void CrearBadgePedidos()
+    {
+        Button[] botones = FindObjectsByType<Button>(FindObjectsInactive.Include);
+        foreach (Button boton in botones)
+        {
+            if (boton.name != "btnPedidos") continue;
+            if (boton.gameObject.scene != gameObject.scene) continue;
+            if (panelOpciones != null && !boton.transform.IsChildOf(panelOpciones.transform)) continue;
+
+            GameObject go = new GameObject("BadgePedidos",
+                typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+            go.transform.SetParent(boton.transform, false);
+
+            RectTransform rect = go.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.72f, 0.70f);
+            rect.anchorMax = new Vector2(1.14f, 1.14f);
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
+
+            Image imagen = go.GetComponent<Image>();
+            imagen.color = new Color(0.92f, 0.22f, 0.18f, 1f);
+            imagen.raycastTarget = false;
+
+            GameObject numeroGO = new GameObject("Numero",
+                typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
+            numeroGO.transform.SetParent(go.transform, false);
+
+            RectTransform numeroRect = numeroGO.GetComponent<RectTransform>();
+            numeroRect.anchorMin = Vector2.zero;
+            numeroRect.anchorMax = Vector2.one;
+            numeroRect.offsetMin = Vector2.zero;
+            numeroRect.offsetMax = Vector2.zero;
+
+            badgeTexto = numeroGO.GetComponent<TextMeshProUGUI>();
+            if (TMP_Settings.defaultFontAsset != null) badgeTexto.font = TMP_Settings.defaultFontAsset;
+            badgeTexto.text = "1";
+            badgeTexto.fontSize = 22f;
+            badgeTexto.alignment = TextAlignmentOptions.Center;
+            badgeTexto.color = Color.white;
+            badgeTexto.raycastTarget = false;
+
+            badgePedidos = go;
+            badgePedidos.SetActive(false);
+            return;
+        }
     }
 }

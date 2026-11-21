@@ -1,73 +1,61 @@
 fileFormatVersion: 2
-guid: df53bd423f591074b8756f28b6d3639b
+guid: 12edb4cda779b554785d3fbef60418f5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3687091442251681796
-    second: TomaAzuca1._0
+      213: -6394497199322047629
+    second: TomaAzuca2._0
   - first:
-      213: -1375937927599029435
-    second: TomaAzuca1._1
+      213: -3914321059194580494
+    second: TomaAzuca2._1
   - first:
-      213: 5080517661560793480
-    second: TomaAzuca1._2
+      213: -6370032413653573523
+    second: TomaAzuca2._2
   - first:
-      213: -8737247272237426987
-    second: TomaAzuca1._3
+      213: 1849752562149132717
+    second: TomaAzuca2._3
   - first:
-      213: -96110839971688827
-    second: TomaAzuca1._4
+      213: -2583952109438011756
+    second: TomaAzuca2._4
   - first:
-      213: -6076845216805079784
-    second: TomaAzuca1._5
+      213: -6658934693874317435
+    second: TomaAzuca2._5
   - first:
-      213: -7968411067804137352
-    second: TomaAzuca1._6
+      213: 5623048310861025709
+    second: TomaAzuca2._6
   - first:
-      213: 2701358746549491855
-    second: TomaAzuca1._7
+      213: 368896612503650764
+    second: TomaAzuca2._7
   - first:
-      213: -2027283398637731873
-    second: TomaAzuca1._8
+      213: -6820706518507381082
+    second: TomaAzuca2._8
   - first:
-      213: -1043378923432613133
-    second: TomaAzuca1._9
+      213: 5575388690123027172
+    second: TomaAzuca2._9
   - first:
-      213: -4047441190798842548
-    second: TomaAzuca1._10
+      213: 2759956025866551236
+    second: TomaAzuca2._10
   - first:
-      213: 2039735555763645665
-    second: TomaAzuca1._11
+      213: -1996069468973988414
+    second: TomaAzuca2._11
   - first:
-      213: -6315143617978171439
-    second: TomaAzuca1._12
+      213: -6171448352774070046
+    second: TomaAzuca2._12
   - first:
-      213: -5672368005270177114
-    second: TomaAzuca1._13
+      213: 7779374737701263165
+    second: TomaAzuca2._13
   - first:
-      213: -3449249655603612631
-    second: TomaAzuca1._14
+      213: -1912565007337883885
+    second: TomaAzuca2._14
   - first:
-      213: 9150325062885076065
-    second: TomaAzuca1._15
+      213: -4538935496374230968
+    second: TomaAzuca2._15
   - first:
-      213: -2262010440828704425
-    second: TomaAzuca1._16
+      213: -732221698039994044
+    second: TomaAzuca2._16
   - first:
-      213: -7124163905507559329
-    second: TomaAzuca1._17
-  - first:
-      213: -5408537435888180565
-    second: TomaAzuca1._18
-  - first:
-      213: -9005210993090571979
-    second: TomaAzuca1._19
-  - first:
-      213: -8794624131417267947
-    second: TomaAzuca1._20
-  - first:
-      213: -4350402351679071249
-    second: TomaAzuca1._21
+      213: 7288365625320792473
+    second: TomaAzuca2._17
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -114,7 +102,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -165,13 +153,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TomaAzuca1._0
+      name: TomaAzuca2._0
       rect:
         serializedVersion: 2
-        x: 219
-        y: 959
-        width: 182
-        height: 202
+        x: 4
+        y: 95
+        width: 18
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,41 +168,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cffa43a4ed1d4dcc0800000000000000
-      internalID: -3687091442251681796
+      spriteID: 37bdd2d3dae2247a0800000000000000
+      internalID: -6394497199322047629
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._1
+      name: TomaAzuca2._1
       rect:
         serializedVersion: 2
-        x: 639
-        y: 959
-        width: 182
-        height: 212
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5430970bebfa7ece0800000000000000
-      internalID: -1375937927599029435
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaAzuca1._2
-      rect:
-        serializedVersion: 2
-        x: 1059
-        y: 1149
-        width: 22
+        x: 21
+        y: 95
+        width: 20
         height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -224,20 +190,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 889ed6c35ef918640800000000000000
-      internalID: 5080517661560793480
+      spriteID: 2f150e15cb98da9c0800000000000000
+      internalID: -3914321059194580494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._3
+      name: TomaAzuca2._2
       rect:
         serializedVersion: 2
-        x: 1059
-        y: 959
-        width: 182
-        height: 202
+        x: 46
+        y: 95
+        width: 18
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -246,20 +212,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5d69987d5ef0fb680800000000000000
-      internalID: -8737247272237426987
+      spriteID: d60647805491997a0800000000000000
+      internalID: -6370032413653573523
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._4
+      name: TomaAzuca2._3
       rect:
         serializedVersion: 2
-        x: 49
-        y: 959
-        width: 162
-        height: 122
+        x: 63
+        y: 95
+        width: 20
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,20 +234,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 58e4c6443bb8aaef0800000000000000
-      internalID: -96110839971688827
+      spriteID: da98445a724aba910800000000000000
+      internalID: 1849752562149132717
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._5
+      name: TomaAzuca2._4
       rect:
         serializedVersion: 2
-        x: 469
-        y: 959
-        width: 162
-        height: 122
+        x: 88
+        y: 95
+        width: 18
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -290,20 +256,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8153d49c875baaba0800000000000000
-      internalID: -6076845216805079784
+      spriteID: 49673503f35f32cd0800000000000000
+      internalID: -2583952109438011756
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._6
+      name: TomaAzuca2._5
       rect:
         serializedVersion: 2
-        x: 889
-        y: 959
-        width: 162
-        height: 122
+        x: 105
+        y: 95
+        width: 20
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -312,19 +278,63 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8784e3f2a548a6190800000000000000
-      internalID: -7968411067804137352
+      spriteID: 587c81d2d26b693a0800000000000000
+      internalID: -6658934693874317435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._7
+      name: TomaAzuca2._6
       rect:
         serializedVersion: 2
-        x: 179
-        y: 729
-        width: 22
+        x: 4
+        y: 53
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da15bb385a4190e40800000000000000
+      internalID: 5623048310861025709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TomaAzuca2._7
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 53
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc1002bb3859e1500800000000000000
+      internalID: 368896612503650764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TomaAzuca2._8
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 53
+        width: 18
         height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -334,41 +344,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f881af2b7772d7520800000000000000
-      internalID: 2701358746549491855
+      spriteID: 6ae1d2f1f8bf751a0800000000000000
+      internalID: -6820706518507381082
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._8
+      name: TomaAzuca2._9
       rect:
         serializedVersion: 2
-        x: 219
-        y: 539
-        width: 182
-        height: 202
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fdfb62d6d74add3e0800000000000000
-      internalID: -2027283398637731873
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaAzuca1._9
-      rect:
-        serializedVersion: 2
-        x: 559
-        y: 719
-        width: 22
+        x: 63
+        y: 53
+        width: 20
         height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -378,20 +366,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3fa6baea56c2581f0800000000000000
-      internalID: -1043378923432613133
+      spriteID: 4e273875972cf5d40800000000000000
+      internalID: 5575388690123027172
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._10
+      name: TomaAzuca2._10
       rect:
         serializedVersion: 2
-        x: 639
-        y: 539
-        width: 182
-        height: 202
+        x: 88
+        y: 53
+        width: 18
+        height: 19
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -400,41 +388,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c45a6256ea994d7c0800000000000000
-      internalID: -4047441190798842548
+      spriteID: 4cf7975f1655d4620800000000000000
+      internalID: 2759956025866551236
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._11
+      name: TomaAzuca2._11
       rect:
         serializedVersion: 2
-        x: 1059
-        y: 539
-        width: 182
-        height: 202
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1eca6055ea89e4c10800000000000000
-      internalID: 2039735555763645665
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaAzuca1._12
-      rect:
-        serializedVersion: 2
-        x: 959
-        y: 689
-        width: 22
+        x: 105
+        y: 53
+        width: 20
         height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -444,20 +410,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1dff5d8a65a1c58a0800000000000000
-      internalID: -6315143617978171439
+      spriteID: 2c58dc2c4698c44e0800000000000000
+      internalID: -1996069468973988414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._13
+      name: TomaAzuca2._12
       rect:
         serializedVersion: 2
-        x: 49
-        y: 539
-        width: 162
-        height: 122
+        x: 4
+        y: 11
+        width: 18
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -466,20 +432,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6aa749a4a53b741b0800000000000000
-      internalID: -5672368005270177114
+      spriteID: 2e06b3fbb6c9a5aa0800000000000000
+      internalID: -6171448352774070046
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._14
+      name: TomaAzuca2._13
       rect:
         serializedVersion: 2
-        x: 469
-        y: 539
-        width: 162
-        height: 122
+        x: 21
+        y: 11
+        width: 20
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -488,20 +454,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 924bb1096bdc120d0800000000000000
-      internalID: -3449249655603612631
+      spriteID: d37d4576b14e5fb60800000000000000
+      internalID: 7779374737701263165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._15
+      name: TomaAzuca2._14
       rect:
         serializedVersion: 2
-        x: 889
-        y: 539
-        width: 162
-        height: 122
+        x: 46
+        y: 11
+        width: 18
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -510,20 +476,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 16c6e980a2c7cfe70800000000000000
-      internalID: 9150325062885076065
+      spriteID: 31778cf42443575e0800000000000000
+      internalID: -1912565007337883885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._16
+      name: TomaAzuca2._15
       rect:
         serializedVersion: 2
-        x: 49
-        y: 119
-        width: 162
-        height: 142
+        x: 63
+        y: 11
+        width: 20
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -532,20 +498,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7592e2c1d79bb90e0800000000000000
-      internalID: -2262010440828704425
+      spriteID: 840e330e6367201c0800000000000000
+      internalID: -4538935496374230968
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._17
+      name: TomaAzuca2._16
       rect:
         serializedVersion: 2
-        x: 219
-        y: 119
-        width: 182
-        height: 202
+        x: 88
+        y: 11
+        width: 18
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -554,20 +520,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f58ff826ca2e12d90800000000000000
-      internalID: -7124163905507559329
+      spriteID: 4492e7fbe30a6d5f0800000000000000
+      internalID: -732221698039994044
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TomaAzuca1._18
+      name: TomaAzuca2._17
       rect:
         serializedVersion: 2
-        x: 469
-        y: 119
-        width: 162
-        height: 132
+        x: 105
+        y: 11
+        width: 20
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -576,74 +542,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ba2ab739bd301f4b0800000000000000
-      internalID: -5408537435888180565
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaAzuca1._19
-      rect:
-        serializedVersion: 2
-        x: 639
-        y: 119
-        width: 182
-        height: 202
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 531d46d3050170380800000000000000
-      internalID: -9005210993090571979
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaAzuca1._20
-      rect:
-        serializedVersion: 2
-        x: 889
-        y: 119
-        width: 162
-        height: 122
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 511abc9c2f733f580800000000000000
-      internalID: -8794624131417267947
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaAzuca1._21
-      rect:
-        serializedVersion: 2
-        x: 1059
-        y: 119
-        width: 182
-        height: 202
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: feb152e4c1440a3c0800000000000000
-      internalID: -4350402351679071249
+      spriteID: 991e96abbe9752560800000000000000
+      internalID: 7288365625320792473
       vertices: []
       indices: 
       edges: []
@@ -662,28 +562,24 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TomaAzuca1._0: -3687091442251681796
-      TomaAzuca1._1: -1375937927599029435
-      TomaAzuca1._10: -4047441190798842548
-      TomaAzuca1._11: 2039735555763645665
-      TomaAzuca1._12: -6315143617978171439
-      TomaAzuca1._13: -5672368005270177114
-      TomaAzuca1._14: -3449249655603612631
-      TomaAzuca1._15: 9150325062885076065
-      TomaAzuca1._16: -2262010440828704425
-      TomaAzuca1._17: -7124163905507559329
-      TomaAzuca1._18: -5408537435888180565
-      TomaAzuca1._19: -9005210993090571979
-      TomaAzuca1._2: 5080517661560793480
-      TomaAzuca1._20: -8794624131417267947
-      TomaAzuca1._21: -4350402351679071249
-      TomaAzuca1._3: -8737247272237426987
-      TomaAzuca1._4: -96110839971688827
-      TomaAzuca1._5: -6076845216805079784
-      TomaAzuca1._6: -7968411067804137352
-      TomaAzuca1._7: 2701358746549491855
-      TomaAzuca1._8: -2027283398637731873
-      TomaAzuca1._9: -1043378923432613133
+      TomaAzuca2._0: -6394497199322047629
+      TomaAzuca2._1: -3914321059194580494
+      TomaAzuca2._10: 2759956025866551236
+      TomaAzuca2._11: -1996069468973988414
+      TomaAzuca2._12: -6171448352774070046
+      TomaAzuca2._13: 7779374737701263165
+      TomaAzuca2._14: -1912565007337883885
+      TomaAzuca2._15: -4538935496374230968
+      TomaAzuca2._16: -732221698039994044
+      TomaAzuca2._17: 7288365625320792473
+      TomaAzuca2._2: -6370032413653573523
+      TomaAzuca2._3: 1849752562149132717
+      TomaAzuca2._4: -2583952109438011756
+      TomaAzuca2._5: -6658934693874317435
+      TomaAzuca2._6: 5623048310861025709
+      TomaAzuca2._7: 368896612503650764
+      TomaAzuca2._8: -6820706518507381082
+      TomaAzuca2._9: 5575388690123027172
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

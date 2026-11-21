@@ -428,8 +428,8 @@ public class ControladorMinijuego : MonoBehaviour
         {
             case Ingrediente.Cafe: clip = "HaciendoCafe"; break;
             case Ingrediente.Azucar: clip = "AzucarCafe"; break;
-            case Ingrediente.Leche:
-            case Ingrediente.Vaporizado: clip = "Leche"; break;
+            case Ingrediente.Leche: clip = "Leche"; break;
+            case Ingrediente.Vaporizado: clip = "vaporizado"; break;
             case Ingrediente.Jarabe: clip = "JarabeChocolate"; break;
         }
 

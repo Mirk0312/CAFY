@@ -110,7 +110,7 @@ public class ControladorAudioCAFY : MonoBehaviour
         string[] nombres =
         {
             "AzucarCafe", "HaciendoCafe", "Leche", "JarabeChocolate", "GameOver",
-            "Basura", "Entrega", "SubidaNivel", "daño",
+            "Basura", "Entrega", "SubidaNivel", "daño", "vaporizado",
             "musicaFondo", "notiTelefono", "SonidoApartado"
         };
 

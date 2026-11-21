@@ -195,12 +195,12 @@ TextureImporter:
       name: TomaLeche2_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 183
-        width: 14
-        height: 11
+        x: 0
+        y: 168
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -217,12 +217,12 @@ TextureImporter:
       name: TomaLeche2_1
       rect:
         serializedVersion: 2
-        x: 22
-        y: 183
-        width: 15
-        height: 16
+        x: 42
+        y: 168
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -239,12 +239,12 @@ TextureImporter:
       name: TomaLeche2_2
       rect:
         serializedVersion: 2
-        x: 50
-        y: 183
-        width: 14
-        height: 11
+        x: 84
+        y: 168
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -261,12 +261,12 @@ TextureImporter:
       name: TomaLeche2_3
       rect:
         serializedVersion: 2
-        x: 64
-        y: 185
-        width: 15
-        height: 16
+        x: 126
+        y: 168
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -283,12 +283,12 @@ TextureImporter:
       name: TomaLeche2_4
       rect:
         serializedVersion: 2
-        x: 92
-        y: 183
-        width: 14
-        height: 11
+        x: 0
+        y: 126
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -305,12 +305,12 @@ TextureImporter:
       name: TomaLeche2_5
       rect:
         serializedVersion: 2
-        x: 106
-        y: 188
-        width: 15
-        height: 16
+        x: 42
+        y: 126
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -327,12 +327,12 @@ TextureImporter:
       name: TomaLeche2_6
       rect:
         serializedVersion: 2
-        x: 134
-        y: 183
-        width: 14
-        height: 11
+        x: 84
+        y: 126
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -349,12 +349,12 @@ TextureImporter:
       name: TomaLeche2_7
       rect:
         serializedVersion: 2
-        x: 148
-        y: 191
-        width: 15
-        height: 16
+        x: 126
+        y: 126
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -371,12 +371,12 @@ TextureImporter:
       name: TomaLeche2_8
       rect:
         serializedVersion: 2
-        x: 19
-        y: 153
-        width: 17
-        height: 15
+        x: 0
+        y: 84
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -393,12 +393,12 @@ TextureImporter:
       name: TomaLeche2_9
       rect:
         serializedVersion: 2
-        x: 50
-        y: 141
-        width: 14
-        height: 12
+        x: 42
+        y: 84
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -415,12 +415,12 @@ TextureImporter:
       name: TomaLeche2_10
       rect:
         serializedVersion: 2
-        x: 56
-        y: 152
-        width: 17
-        height: 16
+        x: 84
+        y: 84
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -437,12 +437,12 @@ TextureImporter:
       name: TomaLeche2_11
       rect:
         serializedVersion: 2
-        x: 92
-        y: 141
-        width: 23
-        height: 27
+        x: 126
+        y: 84
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -459,12 +459,12 @@ TextureImporter:
       name: TomaLeche2_12
       rect:
         serializedVersion: 2
-        x: 134
-        y: 141
-        width: 23
-        height: 27
+        x: 0
+        y: 42
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -481,12 +481,12 @@ TextureImporter:
       name: TomaLeche2_13
       rect:
         serializedVersion: 2
-        x: 8
-        y: 141
-        width: 14
-        height: 11
+        x: 42
+        y: 42
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -503,12 +503,12 @@ TextureImporter:
       name: TomaLeche2_14
       rect:
         serializedVersion: 2
-        x: 8
-        y: 99
-        width: 23
-        height: 27
+        x: 84
+        y: 42
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -525,12 +525,12 @@ TextureImporter:
       name: TomaLeche2_15
       rect:
         serializedVersion: 2
-        x: 50
-        y: 99
-        width: 23
-        height: 27
+        x: 126
+        y: 42
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -547,12 +547,12 @@ TextureImporter:
       name: TomaLeche2_16
       rect:
         serializedVersion: 2
-        x: 92
-        y: 99
-        width: 23
-        height: 27
+        x: 0
+        y: 0
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -569,12 +569,12 @@ TextureImporter:
       name: TomaLeche2_17
       rect:
         serializedVersion: 2
-        x: 134
-        y: 99
-        width: 14
-        height: 11
+        x: 42
+        y: 0
+        width: 42
+        height: 42
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -587,297 +587,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_18
-      rect:
-        serializedVersion: 2
-        x: 139
-        y: 110
-        width: 18
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e4ed1ee1ddf4f8990800000000000000
-      internalID: -7381593453112467890
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_19
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 69
-        width: 17
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c3bfa6abe0dba19f0800000000000000
-      internalID: -496876937916253380
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_20
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 65
-        width: 15
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: e7174e08548c75530800000000000000
-      internalID: 3843761007824761214
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_21
-      rect:
-        serializedVersion: 2
-        x: 106
-        y: 65
-        width: 15
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3654159ed93ba1a00800000000000000
-      internalID: 728091780579411299
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_22
-      rect:
-        serializedVersion: 2
-        x: 148
-        y: 63
-        width: 15
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1520d486f650db730800000000000000
-      internalID: 4016372418733736529
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_23
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 57
-        width: 14
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 53eec0f3222fd7970800000000000000
-      internalID: 8754419479578734133
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_24
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 57
-        width: 14
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 842ec832458692b20800000000000000
-      internalID: 3110131728259015240
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_25
-      rect:
-        serializedVersion: 2
-        x: 92
-        y: 57
-        width: 14
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f58e0fa29b2c2abc0800000000000000
-      internalID: -3773239437237884833
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_26
-      rect:
-        serializedVersion: 2
-        x: 134
-        y: 57
-        width: 14
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1978bd24c870d5f40800000000000000
-      internalID: 5718735400828897169
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_27
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 15
-        width: 14
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f3cc7e8865fc27080800000000000000
-      internalID: -9191055918938731457
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_28
-      rect:
-        serializedVersion: 2
-        x: 22
-        y: 18
-        width: 15
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 92439502b46056f50800000000000000
-      internalID: 6873907325985961001
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_29
-      rect:
-        serializedVersion: 2
-        x: 50
-        y: 15
-        width: 14
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 28cca95a30fb283e0800000000000000
-      internalID: -2052868457743332222
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TomaLeche2_30
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 15
-        width: 15
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a24e78dae7a8d3a80800000000000000
-      internalID: -8485473846214269910
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c29be6b1428f648419b04e5bdb36335a
     internalID: 0
     vertices: []
     indices: 
@@ -885,7 +599,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":42.0,"y":42.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       TomaLeche2_0: -8031274786451901497
       TomaLeche2_1: 7996545786425844827
@@ -897,21 +613,8 @@ TextureImporter:
       TomaLeche2_15: -4617903906193489975
       TomaLeche2_16: 5300616642902197917
       TomaLeche2_17: 6468363179464583730
-      TomaLeche2_18: -7381593453112467890
-      TomaLeche2_19: -496876937916253380
       TomaLeche2_2: -3249578223454958566
-      TomaLeche2_20: 3843761007824761214
-      TomaLeche2_21: 728091780579411299
-      TomaLeche2_22: 4016372418733736529
-      TomaLeche2_23: 8754419479578734133
-      TomaLeche2_24: 3110131728259015240
-      TomaLeche2_25: -3773239437237884833
-      TomaLeche2_26: 5718735400828897169
-      TomaLeche2_27: -9191055918938731457
-      TomaLeche2_28: 6873907325985961001
-      TomaLeche2_29: -2052868457743332222
       TomaLeche2_3: -8461382554420829369
-      TomaLeche2_30: -8485473846214269910
       TomaLeche2_4: -5048006478596730253
       TomaLeche2_5: -6198728203850255761
       TomaLeche2_6: 2534239601625776812

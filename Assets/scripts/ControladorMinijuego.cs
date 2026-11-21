@@ -347,12 +347,13 @@ public class ControladorMinijuego : MonoBehaviour
             animadorExito.enabled = true;
             arteExito.SetActive(true);
 
-            // Leche, vaporizado y chocolate se muestran al 70 % para que se vean
-            // mejor; el resto conserva su tamaño original.
+            // La leche se muestra algo más grande que el resto; vaporizado y
+            // chocolate conservan su escala reducida de siempre.
             Ingrediente ingrediente = IngredienteDelPaso();
-            float escala = (ingrediente == Ingrediente.Leche ||
-                            ingrediente == Ingrediente.Vaporizado ||
-                            ingrediente == Ingrediente.Chocolate) ? 0.7f : 1f;
+            float escala = 1f;
+            if (ingrediente == Ingrediente.Leche) escala = 1.15f;
+            else if (ingrediente == Ingrediente.Vaporizado ||
+                     ingrediente == Ingrediente.Chocolate) escala = 0.7f;
             arteExito.transform.localScale = Vector3.one * escala;
             animadorExito.Play(0, 0, 0f);
 

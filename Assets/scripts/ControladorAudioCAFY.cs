@@ -26,6 +26,10 @@ public class ControladorAudioCAFY : MonoBehaviour
 
     private AudioSource fuenteMusica;
     private AudioSource fuenteEfectos;
+    // Fuentes separadas para los avisos importantes: así entrega, descarte y
+    // subida de nivel pueden oírse a la vez sin cortarse entre sí.
+    private AudioSource fuenteEventos;
+    private AudioSource fuenteSubida;
 
     private GameObject menuAudio;
     private TextMeshProUGUI textoMusica;
@@ -36,6 +40,8 @@ public class ControladorAudioCAFY : MonoBehaviour
     private bool musicaSilenciada;
     private bool efectosSilenciados;
     private int idEfecto;
+    private int idEvento;
+    private int idSubida;
 
     private bool TodoSilenciado => musicaSilenciada && efectosSilenciados;
     private bool AlgunSilenciado => musicaSilenciada || efectosSilenciados;
@@ -146,6 +152,18 @@ public class ControladorAudioCAFY : MonoBehaviour
         fuenteEfectos.spatialBlend = 0f;
         fuenteEfectos.volume = 0.9f;
 
+        fuenteEventos = gameObject.AddComponent<AudioSource>();
+        fuenteEventos.playOnAwake = false;
+        fuenteEventos.loop = false;
+        fuenteEventos.spatialBlend = 0f;
+        fuenteEventos.volume = 0.9f;
+
+        fuenteSubida = gameObject.AddComponent<AudioSource>();
+        fuenteSubida.playOnAwake = false;
+        fuenteSubida.loop = false;
+        fuenteSubida.spatialBlend = 0f;
+        fuenteSubida.volume = 0.9f;
+
         ReproducirMusica();
     }
 
@@ -166,7 +184,7 @@ public class ControladorAudioCAFY : MonoBehaviour
         fuenteMusica.Play();
     }
 
-    /// <summary>Reproduce un efecto por su nombre lógico.</summary>
+    /// <summary>Reproduce un efecto por su nombre lógico en la fuente principal.</summary>
     public static void Reproducir(string nombre)
     {
         Reproducir(nombre, -1f);
@@ -181,31 +199,68 @@ public class ControladorAudioCAFY : MonoBehaviour
         if (instancia == null) return;
         AudioClip clip = instancia.ObtenerClip(nombre);
         if (clip == null || instancia.fuenteEfectos == null) return;
-        instancia.ReproducirEfecto(clip, duracionMaxima);
+        instancia.ReproducirEn(instancia.fuenteEfectos, clip, duracionMaxima, 0);
     }
 
-    private void ReproducirEfecto(AudioClip clip, float duracionMaxima)
+    /// <summary>Aviso importante (entrega, descarte) en su propia fuente.</summary>
+    public static void ReproducirEvento(string nombre, float duracionMaxima = -1f)
     {
-        idEfecto++;
-        fuenteEfectos.Stop();
+        if (instancia == null) return;
+        AudioClip clip = instancia.ObtenerClip(nombre);
+        if (clip == null || instancia.fuenteEventos == null) return;
+        instancia.ReproducirEn(instancia.fuenteEventos, clip, duracionMaxima, 1);
+    }
+
+    // 0 = efectos, 1 = eventos, 2 = subida de nivel.
+    private void ReproducirEn(AudioSource fuente, AudioClip clip, float duracionMaxima, int tipo)
+    {
+        if (fuente == null || clip == null) return;
 
         if (duracionMaxima > 0f)
         {
-            fuenteEfectos.clip = clip;
-            fuenteEfectos.time = 0f;
-            fuenteEfectos.Play();
-            StartCoroutine(DetenerEfecto(idEfecto, duracionMaxima));
+            int id = ObtenerNuevoId(tipo);
+            fuente.Stop();
+            fuente.clip = clip;
+            fuente.time = 0f;
+            fuente.Play();
+            StartCoroutine(DetenerEfecto(fuente, id, tipo, duracionMaxima));
             return;
         }
 
-        // Los efectos sin duración (botones, avisos) se dejan terminar solos.
-        fuenteEfectos.PlayOneShot(clip);
+        // Sin duración: PlayOneShot directo. No llamamos a Stop() aquí porque
+        // podía cortar el one-shot que acabamos de iniciar en el mismo frame.
+        fuente.PlayOneShot(clip);
     }
 
-    private IEnumerator DetenerEfecto(int id, float duracion)
+    private int ObtenerNuevoId(int tipo)
+    {
+        switch (tipo)
+        {
+            case 1: idEvento++; return idEvento;
+            case 2: idSubida++; return idSubida;
+            default: idEfecto++; return idEfecto;
+        }
+    }
+
+    private IEnumerator DetenerEfecto(AudioSource fuente, int id, int tipo, float duracion)
     {
         yield return new WaitForSeconds(Mathf.Max(0f, duracion));
-        if (id == idEfecto && fuenteEfectos != null) fuenteEfectos.Stop();
+        bool sigueVigente = tipo == 0 ? id == idEfecto
+            : tipo == 1 ? id == idEvento
+            : id == idSubida;
+        if (sigueVigente && fuente != null) fuente.Stop();
+    }
+
+    /// <summary>
+    /// Aviso de subida de nivel en su propia fuente: suena justo cuando aparece
+    /// el mensaje, sin esperar a que termine el sonido de entrega.
+    /// </summary>
+    public static void ReproducirSubida(string nombre, float duracionMaxima = 1.3f)
+    {
+        if (instancia == null || instancia.fuenteSubida == null) return;
+        AudioClip clip = instancia.ObtenerClip(nombre);
+        if (clip == null) return;
+        instancia.ReproducirEn(instancia.fuenteSubida, clip, duracionMaxima, 2);
     }
 
     /// <summary>Efecto con retardo: se usa para el aviso del teléfono.</summary>
@@ -430,6 +485,8 @@ public class ControladorAudioCAFY : MonoBehaviour
     {
         if (fuenteMusica != null) fuenteMusica.mute = musicaSilenciada;
         if (fuenteEfectos != null) fuenteEfectos.mute = efectosSilenciados;
+        if (fuenteEventos != null) fuenteEventos.mute = efectosSilenciados;
+        if (fuenteSubida != null) fuenteSubida.mute = efectosSilenciados;
         ActualizarIndicadores();
     }
 

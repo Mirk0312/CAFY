@@ -225,9 +225,9 @@ MonoBehaviour:
   arteExito: {fileID: 1829129730}
   animadorExito: {fileID: 1829129732}
   velocidades:
-  - 1.1
-  - 1.7
-  - 2.5
+  - 0.7
+  - 1
+  - 1.4
   anchosZona:
   - 0.24
   - 0.16
@@ -242,23 +242,23 @@ MonoBehaviour:
   barraTiempo: {fileID: 0}
   segundosPorPaso: 12
   multiplicadoresVelocidadPorNivel:
-  - 1
-  - 1.12
-  - 1.24
-  - 1.36
-  - 1.5
+  - 0.85
+  - 0.95
+  - 1.1
+  - 1.35
+  - 1.65
   multiplicadoresAnchoPorNivel:
-  - 1
-  - 0.92
-  - 0.84
-  - 0.75
-  - 0.65
+  - 1.15
+  - 1.05
+  - 0.95
+  - 0.78
+  - 0.6
   multiplicadoresTiempoPorNivel:
+  - 1.2
+  - 1.1
   - 1
-  - 0.93
-  - 0.86
-  - 0.79
-  - 0.72
+  - 0.85
+  - 0.68
   reduccionPorFallo: 0.88
   reduccionMinima: 0.35
   pedido: {fileID: 1904311435}
@@ -1780,7 +1780,7 @@ GameObject:
   - component: {fileID: 551361131}
   - component: {fileID: 551361133}
   m_Layer: 5
-  m_Name: Taza
+  m_Name: Vaporizado
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

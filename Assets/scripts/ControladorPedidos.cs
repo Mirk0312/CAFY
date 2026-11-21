@@ -473,18 +473,17 @@ public class ControladorPedidos : MonoBehaviour
         else
             ingredientes.Add(Ingrediente.Cafe);
 
-        // Nivel 2 en adelante: algunos pedidos piden cantidad extra de un
-        // ingrediente (+2 de azúcar, +4 de chocolate...). El texto del pedido
-        // solo muestra el nombre de la receta y ese aviso, nunca la receta entera.
+        // Solo los niveles 4 y 5 tienen clientes que piden combinaciones
+        // (+2 de azúcar, +4 de chocolate...). Niveles 1 a 3: recetas normales.
         string extra = "";
-        if (EstadoPartida.Nivel >= 2 && Random.value < 0.5f)
+        if (EstadoPartida.Nivel >= 4 && Random.value < 0.5f)
         {
-            // Taza es un paso de elaboración (vaporizado), nunca un extra que
+            // Vaporizado es un paso de elaboración, nunca un extra que
             // un cliente pueda pedir. Solo se permiten ingredientes de receta.
             List<Ingrediente> candidatos = new List<Ingrediente>();
             foreach (Ingrediente ingrediente in System.Enum.GetValues(typeof(Ingrediente)))
             {
-                if (ingrediente == Ingrediente.Taza) continue;
+                if (ingrediente == Ingrediente.Vaporizado) continue;
                 candidatos.Add(ingrediente);
             }
 
@@ -754,7 +753,7 @@ public class ControladorPedidos : MonoBehaviour
 
         if (correcto)
         {
-            ControladorAudioCAFY.Reproducir("Entrega");
+            ControladorAudioCAFY.ReproducirEvento("Entrega", 1.3f);
             float segundos = Mathf.Max(0f, Time.time - pedidoSeleccionado.creadoEn);
             int puntos = PuntosPorEntrega(segundos);
             EstadoPartida.SumarPuntos(puntos);
@@ -769,8 +768,8 @@ public class ControladorPedidos : MonoBehaviour
                 entregasCorrectas = 0;
                 EstadoPartida.SubirNivel();
                 subioDeNivel = true;
-                // Entrega dura ~2.8 s: el aviso de nivel entra justo después.
-                ControladorAudioCAFY.ReproducirDiferido("SubidaNivel", 3f);
+                // Suena al mismo tiempo que el mensaje de subida de nivel.
+                ControladorAudioCAFY.ReproducirSubida("SubidaNivel", 1.3f);
             }
 
             string aviso = (subioDeNivel ? "¡Nivel " + EstadoPartida.Nivel + "! " : "")
@@ -793,7 +792,7 @@ public class ControladorPedidos : MonoBehaviour
     public void ConfirmarDesechar()
     {
         if (bebidaSeleccionada == null) return;
-        ControladorAudioCAFY.Reproducir("Basura");
+        ControladorAudioCAFY.ReproducirEvento("Basura", 1.3f);
         inventario.Remove(bebidaSeleccionada);
         MostrarAviso("Bebida descartada", new Color(1f, 0.75f, 0.3f));
         bebidaSeleccionada = null;

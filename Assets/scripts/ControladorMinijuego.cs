@@ -26,7 +26,7 @@ public class ControladorMinijuego : MonoBehaviour
     public Animator animadorExito;
 
     [Header("Configuración de los 3 pasos")]
-    public float[] velocidades = { 1.1f, 1.7f, 2.5f };
+    public float[] velocidades = { 0.7f, 1.0f, 1.4f };
     public float[] anchosZona = { 0.24f, 0.16f, 0.10f };
     public RuntimeAnimatorController[] animacionesExito = new RuntimeAnimatorController[3];
     public float duracionExito = 1.4f;
@@ -347,11 +347,11 @@ public class ControladorMinijuego : MonoBehaviour
             animadorExito.enabled = true;
             arteExito.SetActive(true);
 
-            // Leche, taza y chocolate se muestran al 70 % para que se vean
+            // Leche, vaporizado y chocolate se muestran al 70 % para que se vean
             // mejor; el resto conserva su tamaño original.
             Ingrediente ingrediente = IngredienteDelPaso();
             float escala = (ingrediente == Ingrediente.Leche ||
-                            ingrediente == Ingrediente.Taza ||
+                            ingrediente == Ingrediente.Vaporizado ||
                             ingrediente == Ingrediente.Chocolate) ? 0.7f : 1f;
             arteExito.transform.localScale = Vector3.one * escala;
             animadorExito.Play(0, 0, 0f);
@@ -422,7 +422,7 @@ public class ControladorMinijuego : MonoBehaviour
             case Ingrediente.Cafe: clip = "HaciendoCafe"; break;
             case Ingrediente.Azucar: clip = "AzucarCafe"; break;
             case Ingrediente.Leche:
-            case Ingrediente.Taza: clip = "Leche"; break;
+            case Ingrediente.Vaporizado: clip = "Leche"; break;
             case Ingrediente.Jarabe: clip = "JarabeChocolate"; break;
         }
 
@@ -464,7 +464,7 @@ public class ControladorMinijuego : MonoBehaviour
                     anchos.Add(0.16f);
                     colores.Add(new Color(0.95f, 0.88f, 0.72f, 0.95f));
                     break;
-                case Ingrediente.Taza:
+                case Ingrediente.Vaporizado:
                     pasos.Add("Vaporizado de leche");
                     animaciones.Add(animacionVaporizado);
                     velocidades.Add(1.7f);

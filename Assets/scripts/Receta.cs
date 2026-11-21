@@ -7,7 +7,7 @@ public enum Ingrediente
     Leche,
     Chocolate,
     Jarabe,
-    Taza
+    Vaporizado
 }
 
 /// <summary>

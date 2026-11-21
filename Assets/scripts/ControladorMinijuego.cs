@@ -146,8 +146,9 @@ public class ControladorMinijuego : MonoBehaviour
             GameObject go = new GameObject("BarraTiempo", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             go.transform.SetParent(panel, false);
             RectTransform rect = go.GetComponent<RectTransform>();
-            rect.anchorMin = new Vector2(0.15f, 0.635f);
-            rect.anchorMax = new Vector2(0.85f, 0.66f);
+            // Barra más corta y más fina visualmente; la duración no cambia.
+            rect.anchorMin = new Vector2(0.22f, 0.637f);
+            rect.anchorMax = new Vector2(0.78f, 0.655f);
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
             rect.anchoredPosition = new Vector2(0f, -40f);

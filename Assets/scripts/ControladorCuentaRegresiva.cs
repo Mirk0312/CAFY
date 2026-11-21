@@ -112,6 +112,8 @@ public class ControladorCuentaRegresiva : MonoBehaviour
             texto.fontStyle = FontStyles.Bold;
             texto.alignment = TextAlignmentOptions.Center;
             texto.color = colorTexto;
+            texto.outlineWidth = 0.25f;
+            texto.outlineColor = new Color32(70, 24, 12, 255);
             texto.raycastTarget = false;
             go.transform.SetAsLastSibling();
         }
@@ -128,21 +130,50 @@ public class ControladorCuentaRegresiva : MonoBehaviour
 
     private IEnumerator CorrerCuenta()
     {
-        for (int n = Mathf.Max(1, desde); n >= 1; n--)
+        int primero = Mathf.Max(1, desde);
+        for (int n = primero; n >= 1; n--)
         {
-            if (texto != null) texto.text = n.ToString();
-            yield return new WaitForSeconds(segundosPorNumero);
+            if (texto != null)
+            {
+                texto.text = n.ToString();
+                texto.color = ColorDelNumero(n);
+            }
+
+            // Cada número late durante exactamente segundosPorNumero.
+            float baseEscala = 1f + (primero - n) * 0.04f;
+            float transcurrido = 0f;
+            while (transcurrido < segundosPorNumero)
+            {
+                if (texto != null)
+                {
+                    float pulso = Mathf.PingPong(transcurrido * 6f, 1f);
+                    texto.transform.localScale = Vector3.one * (baseEscala + 0.12f * pulso);
+                }
+                transcurrido += Time.unscaledDeltaTime;
+                yield return null;
+            }
         }
 
         if (texto != null)
         {
             texto.text = "";
+            texto.transform.localScale = Vector3.one;
             texto.gameObject.SetActive(false);
         }
         if (bloqueo != null) bloqueo.SetActive(false);
 
         Terminado = true;
         rutina = null;
+    }
+
+    /// <summary>Amarillo → naranja → rojo según avanza la cuenta inicial.</summary>
+    private Color ColorDelNumero(int numero)
+    {
+        if (numero <= 1) return new Color(1f, 0.18f, 0.16f, 1f);
+        if (numero == 2) return new Color(1f, 0.36f, 0.14f, 1f);
+        if (numero == 3) return new Color(1f, 0.55f, 0.16f, 1f);
+        if (numero == 4) return new Color(1f, 0.72f, 0.22f, 1f);
+        return colorTexto;
     }
 
     private void Reiniciar()

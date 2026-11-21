@@ -38,12 +38,12 @@ public class ControladorMinijuego : MonoBehaviour
     public float segundosPorPaso = 12f;
 
     [Header("Curva de dificultad niveles 1 a 5")]
-    [Tooltip("Velocidad del cursor por nivel. El paso ya aplica su propia base.")]
-    public float[] multiplicadoresVelocidadPorNivel = { 0.85f, 0.95f, 1.1f, 1.35f, 1.65f };
+    [Tooltip("Nivel 1 y 2 fáciles, 3 normal, 4 normal-difícil, 5 difícil. No depende de los ingredientes.")]
+    public float[] multiplicadoresVelocidadPorNivel = { 0.8f, 0.9f, 1.05f, 1.25f, 1.5f };
     [Tooltip("Ancho de la zona verde por nivel.")]
-    public float[] multiplicadoresAnchoPorNivel = { 1.15f, 1.05f, 0.95f, 0.78f, 0.6f };
-    [Tooltip("Tiempo por paso. 1 = 12 s, nivel 5 = 68 % de ese tiempo.")]
-    public float[] multiplicadoresTiempoPorNivel = { 1.2f, 1.1f, 1f, 0.85f, 0.68f };
+    public float[] multiplicadoresAnchoPorNivel = { 1.2f, 1.1f, 1f, 0.85f, 0.7f };
+    [Tooltip("Tiempo por paso. 1 = 12 s, nivel 5 = 80 % de ese tiempo.")]
+    public float[] multiplicadoresTiempoPorNivel = { 1.2f, 1.1f, 1f, 0.9f, 0.8f };
 
     [Header("Dificultad al fallar")]
     [Tooltip("Cada fallo reduce la zona verde a este factor del ancho actual.")]
@@ -600,13 +600,18 @@ public class ControladorMinijuego : MonoBehaviour
 
     private float VelocidadActual()
     {
-        float baseVelocidad = receta != null ? receta.Velocidad(paso) : Obtener(velocidades, paso, 1f);
+        // La dificultad depende solo del nivel, nunca de cuántos ingredientes
+        // tenga la receta. Así el nivel 1 sigue siendo fácil aunque el pedido
+        // tenga tres o cuatro pasos.
+        float baseVelocidad = Obtener(velocidades, paso, 1f);
         return baseVelocidad * MultiplicadorVelocidad();
     }
 
     private float AnchoActual()
     {
-        float baseAncho = receta != null ? receta.AnchoZona(paso) : Obtener(anchosZona, paso, 0.2f);
+        // Igual que la velocidad: se ignora el ancho por receta para que añadir
+        // ingredientes no reduzca la zona de precisión.
+        float baseAncho = Obtener(anchosZona, paso, 0.2f);
         return baseAncho * MultiplicadorAncho() * factorZona;
     }
 

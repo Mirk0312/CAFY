@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: be3faafd18fcf194a90b5c6cab401691
+guid: 166786b92341bc44d98c84ff18e212f8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8347667645110701622
-    second: Jarabe CAFY_0
+      213: 4080719531920588165
+    second: BoteBasuraS_0
   - first:
-      213: 3057112367020553895
-    second: Jarabe CAFY_1
+      213: 2769221951998345315
+    second: BoteBasuraS_1
   - first:
-      213: -6082654282536496530
-    second: Jarabe CAFY_2
+      213: -2938860257249750330
+    second: BoteBasuraS_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -108,13 +108,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jarabe CAFY_0
+      name: BoteBasuraS_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 31
-        width: 18
-        height: 32
+        x: 49
+        y: 369
+        width: 212
+        height: 232
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,20 +123,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ac1b72e2180272c80800000000000000
-      internalID: -8347667645110701622
+      spriteID: 58dff103bc0a1a830800000000000000
+      internalID: 4080719531920588165
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFY_1
+      name: BoteBasuraS_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 31
-        width: 18
-        height: 32
+        x: 49
+        y: 219
+        width: 212
+        height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7a6b6b2208b0d6a20800000000000000
-      internalID: 3057112367020553895
+      spriteID: 360431181b04e6620800000000000000
+      internalID: 2769221951998345315
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFY_2
+      name: BoteBasuraS_2
       rect:
         serializedVersion: 2
-        x: 7
-        y: 0
-        width: 18
-        height: 30
+        x: 59
+        y: 49
+        width: 192
+        height: 162
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e6257e54822169ba0800000000000000
-      internalID: -6082654282536496530
+      spriteID: 6c29d12ba221737d0800000000000000
+      internalID: -2938860257249750330
       vertices: []
       indices: 
       edges: []
@@ -187,9 +187,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Jarabe CAFY_0: -8347667645110701622
-      Jarabe CAFY_1: 3057112367020553895
-      Jarabe CAFY_2: -6082654282536496530
+      BoteBasuraS_0: 4080719531920588165
+      BoteBasuraS_1: 2769221951998345315
+      BoteBasuraS_2: -2938860257249750330
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

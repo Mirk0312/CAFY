@@ -131,6 +131,7 @@ public class ControladorRecetas : MonoBehaviour
             case Ingrediente.Leche: return "Leche";
             case Ingrediente.Chocolate: return "Chocolate";
             case Ingrediente.Jarabe: return "Jarabe";
+            case Ingrediente.Taza: return "Taza";
             default: return ingrediente.ToString();
         }
     }

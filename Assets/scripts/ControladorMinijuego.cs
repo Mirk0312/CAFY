@@ -53,6 +53,9 @@ public class ControladorMinijuego : MonoBehaviour
     public RuntimeAnimatorController animacionCafetera;
     public RuntimeAnimatorController animacionJarabe;
     public RuntimeAnimatorController animacionVaporizado;
+    public RuntimeAnimatorController animacionAzucar;
+    public RuntimeAnimatorController animacionLeche;
+    public RuntimeAnimatorController animacionChocolate;
     public ControladorPedidos sistemaPedidos;
 
     private Receta recetaTemporal;
@@ -78,6 +81,12 @@ public class ControladorMinijuego : MonoBehaviour
             animacionVaporizado = Resources.Load<RuntimeAnimatorController>("Animaciones/Vaporizado");
         if (animacionJarabe == null)
             animacionJarabe = Resources.Load<RuntimeAnimatorController>("Animaciones/PreviewJarabe");
+        if (animacionAzucar == null)
+            animacionAzucar = Resources.Load<RuntimeAnimatorController>("Animaciones/ExitoAzucar");
+        if (animacionLeche == null)
+            animacionLeche = Resources.Load<RuntimeAnimatorController>("Animaciones/ExitoLeche");
+        if (animacionChocolate == null)
+            animacionChocolate = Resources.Load<RuntimeAnimatorController>("Animaciones/ExitoChocolate");
 
         if (btnAccionar != null) btnAccionar.onClick.AddListener(Accionar);
         if (arteExito != null) arteExito.SetActive(false);
@@ -307,6 +316,7 @@ public class ControladorMinijuego : MonoBehaviour
     private IEnumerator MostrarExito()
     {
         ocupado = true;
+        ReproducirSonidoDelPaso();
         if (feedback != null)
         {
             feedback.text = "¡Perfecto!";
@@ -370,6 +380,27 @@ public class ControladorMinijuego : MonoBehaviour
         if (interfaz != null) interfaz.RegresarAlMostrador();
     }
 
+    /// <summary>Suena el recurso asociado al ingrediente de este paso al acertar.</summary>
+    private void ReproducirSonidoDelPaso()
+    {
+        Ingrediente ingrediente = Ingrediente.Cafe;
+        if (receta != null && receta.ingredientes != null && paso < receta.ingredientes.Length)
+            ingrediente = receta.ingredientes[paso];
+        else if (ingredientes != null && paso < ingredientes.Length)
+            ingrediente = ingredientes[paso];
+
+        string clip = null;
+        switch (ingrediente)
+        {
+            case Ingrediente.Cafe: clip = "HaciendoCafe"; break;
+            case Ingrediente.Azucar: clip = "AzucarCafe"; break;
+            case Ingrediente.Leche:
+            case Ingrediente.Taza: clip = "Leche"; break;
+        }
+
+        if (!string.IsNullOrEmpty(clip)) ControladorAudioCAFY.Reproducir(clip);
+    }
+
     private Receta ConstruirRecetaDesdeIngredientes(Ingrediente[] seleccionados)
     {
         List<string> pasos = new List<string>();
@@ -393,21 +424,28 @@ public class ControladorMinijuego : MonoBehaviour
                     break;
                 case Ingrediente.Azucar:
                     pasos.Add("Endulzado");
-                    animaciones.Add(null);
+                    animaciones.Add(animacionAzucar);
                     velocidades.Add(1.4f);
                     anchos.Add(0.18f);
                     colores.Add(new Color(0.95f, 0.82f, 0.30f, 0.95f));
                     break;
                 case Ingrediente.Leche:
-                    pasos.Add("Vaporizado de leche");
-                    animaciones.Add(animacionVaporizado);
+                    pasos.Add("Vaciado de leche");
+                    animaciones.Add(animacionLeche);
                     velocidades.Add(1.7f);
                     anchos.Add(0.16f);
                     colores.Add(new Color(0.95f, 0.88f, 0.72f, 0.95f));
                     break;
+                case Ingrediente.Taza:
+                    pasos.Add("Vaporizado de leche");
+                    animaciones.Add(animacionVaporizado);
+                    velocidades.Add(1.7f);
+                    anchos.Add(0.16f);
+                    colores.Add(new Color(0.86f, 0.86f, 0.90f, 0.95f));
+                    break;
                 case Ingrediente.Chocolate:
                     pasos.Add("Latte art");
-                    animaciones.Add(null);
+                    animaciones.Add(animacionChocolate);
                     velocidades.Add(2.5f);
                     anchos.Add(0.10f);
                     colores.Add(new Color(0.55f, 0.30f, 0.16f, 0.95f));

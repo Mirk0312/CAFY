@@ -6,7 +6,8 @@ public enum Ingrediente
     Azucar,
     Leche,
     Chocolate,
-    Jarabe
+    Jarabe,
+    Taza
 }
 
 /// <summary>

@@ -306,6 +306,7 @@ public class ControladorPreparacion : MonoBehaviour
             case Ingrediente.Leche: return new Color(0.95f, 0.88f, 0.72f, 0.95f);
             case Ingrediente.Chocolate: return new Color(0.55f, 0.30f, 0.16f, 0.95f);
             case Ingrediente.Jarabe: return new Color(0.78f, 0.45f, 0.18f, 0.95f);
+            case Ingrediente.Taza: return new Color(0.86f, 0.86f, 0.90f, 0.95f);
             default: return new Color(0.18f, 0.13f, 0.10f, 0.95f);
         }
     }

@@ -34,6 +34,8 @@ public class ControladorPedidos : MonoBehaviour
     public Image boteImagen;
     public Sprite boteCerrado;
     public Sprite boteAbierto;
+    public Sprite boteCuerpoSprite;
+    public Sprite boteTapaSprite;
 
     [Header("Colores de los clientes")]
     public Color[] coloresCliente =
@@ -259,9 +261,38 @@ public class ControladorPedidos : MonoBehaviour
         if (textoNivel != null) textoNivel.text = "Nivel: " + Mathf.Max(1, nivel);
     }
 
-    /// <summary>El botón PedidoDesechar ya trae el sprite cerrado; buscamos el abierto en Resources.</summary>
+    [Header("Bote de basura (tapa separada)")]
+    [Tooltip("Desplazamiento de la tapa cuando el bote está abierto.")]
+    public Vector2 tapaAbiertaOffset = new Vector2(6f, 28f);
+    [Tooltip("Rotación de la tapa abierta en grados.")]
+    public float tapaAbiertaRotacion = -18f;
+    public float duracionTapa = 0.18f;
+
+    private Image boteCuerpo;
+    private Image boteTapa;
+    private RectTransform tapaRect;
+    private Coroutine rutinaTapa;
+    private bool boteEstaAbierto;
+
+    /// <summary>
+    /// El bote nuevo trae tres frames: _0 cerrado, _1 solo tapa y _2 solo cuerpo.
+    /// Con el panel cerrado se usa _0; al abrir se muestran _2 y _1 separados.
+    /// </summary>
     private void ConfigurarBoteBasura()
     {
+        Sprite[] frames = Resources.LoadAll<Sprite>("Sprites/BoteBasuraS");
+        if (frames != null)
+        {
+            foreach (Sprite frame in frames)
+            {
+                if (frame == null) continue;
+                if (frame.name == "BoteBasuraS_0") boteCerrado = frame;
+                else if (frame.name == "BoteBasuraS_1") boteTapaSprite = frame;
+                else if (frame.name == "BoteBasuraS_2") boteCuerpoSprite = frame;
+            }
+        }
+
+        ControladorBoteCAFY ajustes = null;
         Button[] botones = FindObjectsByType<Button>(FindObjectsInactive.Include);
         foreach (Button boton in botones)
         {
@@ -269,30 +300,96 @@ public class ControladorPedidos : MonoBehaviour
             if (boton.gameObject.scene != gameObject.scene) continue;
 
             boteImagen = boton.GetComponent<Image>();
-            if (boteImagen != null) boteCerrado = boteImagen.sprite;
+            ajustes = boton.GetComponent<ControladorBoteCAFY>();
             break;
         }
 
-        boteAbierto = CargarSpriteBote("BoteBasura_5");
+        if (ajustes != null)
+        {
+            tapaAbiertaOffset = ajustes.tapaAbiertaOffset;
+            tapaAbiertaRotacion = ajustes.tapaAbiertaRotacion;
+            duracionTapa = ajustes.duracionTapa;
+            if (ajustes.spriteCerrado != null) boteCerrado = ajustes.spriteCerrado;
+            if (ajustes.spriteTapa != null) boteTapaSprite = ajustes.spriteTapa;
+            if (ajustes.spriteCuerpo != null) boteCuerpoSprite = ajustes.spriteCuerpo;
+        }
+
+        if (boteImagen == null) return;
+        if (boteCerrado != null) boteImagen.sprite = boteCerrado;
+
+        boteCuerpo = CrearCapaBote("BoteCuerpoCAFY", boteCuerpoSprite);
+        boteTapa = CrearCapaBote("BoteTapaCAFY", boteTapaSprite);
+        if (boteTapa != null) tapaRect = boteTapa.rectTransform;
+
+        boteCuerpo.gameObject.SetActive(false);
+        boteTapa.gameObject.SetActive(false);
+        ApplyBoteState(false, Vector2.zero, 0f);
     }
 
-    private static Sprite CargarSpriteBote(string nombre)
+    private Image CrearCapaBote(string nombre, Sprite sprite)
     {
-        Sprite[] frames = Resources.LoadAll<Sprite>("Sprites/BoteBasura");
-        if (frames == null) return null;
+        GameObject go = new GameObject(nombre, typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+        go.transform.SetParent(boteImagen.transform, false);
 
-        for (int i = 0; i < frames.Length; i++)
+        RectTransform rect = go.GetComponent<RectTransform>();
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.one;
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+
+        Image imagen = go.GetComponent<Image>();
+        if (sprite != null) imagen.sprite = sprite;
+        imagen.preserveAspect = true;
+        imagen.raycastTarget = false;
+        return imagen;
+    }
+
+    private void ApplyBoteState(bool abierto, Vector2 offsetTapa, float rotacionTapa)
+    {
+        if (boteImagen == null) return;
+
+        boteCuerpo.gameObject.SetActive(abierto);
+        boteTapa.gameObject.SetActive(abierto);
+        boteImagen.enabled = !abierto;
+
+        if (abierto && tapaRect != null)
         {
-            if (frames[i] != null && frames[i].name == nombre) return frames[i];
+            tapaRect.anchoredPosition = offsetTapa;
+            tapaRect.localEulerAngles = new Vector3(0f, 0f, rotacionTapa);
         }
-        return null;
     }
 
     private void SetBoteAbierto(bool abierto)
     {
-        if (boteImagen == null) return;
-        Sprite objetivo = abierto && boteAbierto != null ? boteAbierto : boteCerrado;
-        if (objetivo != null) boteImagen.sprite = objetivo;
+        if (boteImagen == null || abierto == boteEstaAbierto) return;
+        boteEstaAbierto = abierto;
+
+        if (rutinaTapa != null) { StopCoroutine(rutinaTapa); rutinaTapa = null; }
+        rutinaTapa = StartCoroutine(AnimarTapa(abierto));
+    }
+
+    private IEnumerator AnimarTapa(bool abrir)
+    {
+        float duracion = Mathf.Max(0.01f, duracionTapa);
+        float t = 0f;
+        Vector2 desde = abrir ? Vector2.zero : tapaAbiertaOffset;
+        float rotDesde = abrir ? 0f : tapaAbiertaRotacion;
+        Vector2 hasta = abrir ? tapaAbiertaOffset : Vector2.zero;
+        float rotHasta = abrir ? tapaAbiertaRotacion : 0f;
+
+        if (abrir) ApplyBoteState(true, desde, rotDesde);
+
+        while (t < 1f)
+        {
+            t += Time.unscaledDeltaTime / duracion;
+            float k = Mathf.SmoothStep(0f, 1f, Mathf.Clamp01(t));
+            ApplyBoteState(true, Vector2.Lerp(desde, hasta, k), Mathf.Lerp(rotDesde, rotHasta, k));
+            yield return null;
+        }
+
+        ApplyBoteState(abrir, hasta, rotHasta);
+        if (!abrir) boteImagen.enabled = true;
+        rutinaTapa = null;
     }
 
     private float IntervaloActual()
@@ -456,6 +553,7 @@ public class ControladorPedidos : MonoBehaviour
         }
 
         telefono.MostrarNotificacion(true);
+        ControladorAudioCAFY.ReproducirDiferido("notiTelefono", 0.35f);
         if (rutinaNoti != null) StopCoroutine(rutinaNoti);
         rutinaNoti = StartCoroutine(OcultarNotificacion(5f));
     }

@@ -1,40 +1,31 @@
 fileFormatVersion: 2
-guid: f3a9c21d6b744e0e8c5a7d91b2e60483
+guid: e9fc69a6af9d0074694cb4cac67b0727
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1285322829564717476
-    second: BoteBasura_0
+      213: 8624500136536131754
+    second: Chocolate animado_0
   - first:
-      213: -8155724829814100426
-    second: BoteBasura_1
+      213: -2871200688133865307
+    second: Chocolate animado_1
   - first:
-      213: -7404776277140438089
-    second: BoteBasura_2
+      213: 7299910847012243035
+    second: Chocolate animado_2
   - first:
-      213: -8446012771542007480
-    second: BoteBasura_3
+      213: -7788310335253977012
+    second: Chocolate animado_3
   - first:
-      213: 5573121748766315066
-    second: BoteBasura_4
+      213: 476666446699856713
+    second: Chocolate animado_4
   - first:
-      213: -8128416626857329205
-    second: BoteBasura_5
+      213: 2501543328097586895
+    second: Chocolate animado_5
   - first:
-      213: 6646928930352813988
-    second: BoteBasura_6
+      213: -8975203510244401561
+    second: Chocolate animado_6
   - first:
-      213: -3487709276400691890
-    second: BoteBasura_7
-  - first:
-      213: 8683188931223339021
-    second: BoteBasura_8
-  - first:
-      213: 9077622888016769045
-    second: BoteBasura_9
-  - first:
-      213: 4441248045151668092
-    second: BoteBasura_10
+      213: -3977132141500091706
+    second: Chocolate animado_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -132,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BoteBasura_0
+      name: Chocolate animado_0
       rect:
         serializedVersion: 2
-        x: 49
-        y: 689
-        width: 212
-        height: 232
+        x: 33
+        y: 233
+        width: 32
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +138,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c56581a42bd992ee0800000000000000
-      internalID: -1285322829564717476
+      spriteID: aa84b8bfd2160b770800000000000000
+      internalID: 8624500136536131754
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoteBasura_1
+      name: Chocolate animado_1
       rect:
         serializedVersion: 2
-        x: 369
-        y: 689
-        width: 212
-        height: 232
+        x: 110
+        y: 218
+        width: 64
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +160,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 63ee8196a7b01de80800000000000000
-      internalID: -8155724829814100426
+      spriteID: 5a08ce8bf227728d0800000000000000
+      internalID: -2871200688133865307
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoteBasura_2
+      name: Chocolate animado_2
       rect:
         serializedVersion: 2
-        x: 689
-        y: 689
-        width: 212
-        height: 242
+        x: 2
+        y: 139
+        width: 65
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7b30ec74533fc3990800000000000000
-      internalID: -7404776277140438089
+      spriteID: b568f202d3e7e4560800000000000000
+      internalID: 7299910847012243035
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoteBasura_3
+      name: Chocolate animado_3
       rect:
         serializedVersion: 2
-        x: 49
-        y: 539
-        width: 212
-        height: 82
+        x: 65
+        y: 161
+        width: 7
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -213,20 +204,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 84183d7122cb9ca80800000000000000
-      internalID: -8446012771542007480
+      spriteID: c48eeaaa30d5ae390800000000000000
+      internalID: -7788310335253977012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoteBasura_4
+      name: Chocolate animado_4
       rect:
         serializedVersion: 2
-        x: 369
-        y: 549
-        width: 212
-        height: 82
+        x: 102
+        y: 138
+        width: 78
+        height: 61
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -235,42 +226,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a32583de3b4b75d40800000000000000
-      internalID: 5573121748766315066
+      spriteID: 94384e79b957d9600800000000000000
+      internalID: 476666446699856713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoteBasura_5
-      rect:
-        serializedVersion: 2
-        x: 689
-        y: 559
-        width: 212
-        height: 82
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: bcd3ac1e420123f80800000000000000
-      internalID: -8128416626857329205
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BoteBasura_6
+      name: Chocolate animado_5
       rect:
         serializedVersion: 2
         x: 59
-        y: 369
-        width: 192
-        height: 162
+        y: 138
+        width: 21
+        height: 17
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,20 +248,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4a752fc25a2ae3c50800000000000000
-      internalID: 6646928930352813988
+      spriteID: fce4185376447b220800000000000000
+      internalID: 2501543328097586895
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoteBasura_7
+      name: Chocolate animado_6
       rect:
         serializedVersion: 2
-        x: 379
-        y: 369
-        width: 192
-        height: 162
+        x: 2
+        y: 39
+        width: 65
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,64 +270,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e455d4c44ea299fc0800000000000000
-      internalID: -3487709276400691890
+      spriteID: 76e1b09c5fba17380800000000000000
+      internalID: -8975203510244401561
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BoteBasura_8
-      rect:
-        serializedVersion: 2
-        x: 699
-        y: 369
-        width: 192
-        height: 162
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d00cb23d352e08870800000000000000
-      internalID: 8683188931223339021
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BoteBasura_9
-      rect:
-        serializedVersion: 2
-        x: 49
-        y: 239
-        width: 212
-        height: 82
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 510f13ddbe13afd70800000000000000
-      internalID: 9077622888016769045
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BoteBasura_10
+      name: Chocolate animado_7
       rect:
         serializedVersion: 2
         x: 59
-        y: 49
-        width: 192
-        height: 162
+        y: 38
+        width: 21
+        height: 34
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -367,8 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c77c9aaf09b72ad30800000000000000
-      internalID: 4441248045151668092
+      spriteID: 6c2391993636ec8c0800000000000000
+      internalID: -3977132141500091706
       vertices: []
       indices: 
       edges: []
@@ -387,17 +312,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BoteBasura_0: -1285322829564717476
-      BoteBasura_1: -8155724829814100426
-      BoteBasura_10: 4441248045151668092
-      BoteBasura_2: -7404776277140438089
-      BoteBasura_3: -8446012771542007480
-      BoteBasura_4: 5573121748766315066
-      BoteBasura_5: -8128416626857329205
-      BoteBasura_6: 6646928930352813988
-      BoteBasura_7: -3487709276400691890
-      BoteBasura_8: 8683188931223339021
-      BoteBasura_9: 9077622888016769045
+      Chocolate animado_0: 8624500136536131754
+      Chocolate animado_1: -2871200688133865307
+      Chocolate animado_2: 7299910847012243035
+      Chocolate animado_3: -7788310335253977012
+      Chocolate animado_4: 476666446699856713
+      Chocolate animado_5: 2501543328097586895
+      Chocolate animado_6: -8975203510244401561
+      Chocolate animado_7: -3977132141500091706
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

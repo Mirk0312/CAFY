@@ -19,6 +19,7 @@ public class ControladorAudioCAFY : MonoBehaviour
     private const string ClaveSilenciado = "CAFY_Silenciado";
     private const string ClaveMusica = "CAFY_SilenciarMusica";
     private const string ClaveEfectos = "CAFY_SilenciarEfectos";
+    private const float SegundosCierreMenu = 7f;
 
     private static ControladorAudioCAFY instancia;
 
@@ -40,6 +41,7 @@ public class ControladorAudioCAFY : MonoBehaviour
     private TextMeshProUGUI textoEfectos;
     private Image[] lineasBoton;
     private BotonMuteCAFY botonMute;
+    private Coroutine rutinaCierreMenu;
 
     private bool musicaSilenciada;
     private bool efectosSilenciados;
@@ -93,6 +95,7 @@ public class ControladorAudioCAFY : MonoBehaviour
         if (instancia == this) instancia = null;
         SceneManager.sceneLoaded -= OnSceneLoaded;
         EstadoPartida.VidasCambiadas -= AlCambiarVidas;
+        DetenerCierreMenu();
     }
 
     /// <summary>Suena daño solo cuando bajan las vidas, nunca al restaurarlas.</summary>
@@ -473,7 +476,35 @@ public class ControladorAudioCAFY : MonoBehaviour
 
     public void AlternarMenu()
     {
-        if (menuAudio != null) menuAudio.SetActive(!menuAudio.activeSelf);
+        if (menuAudio == null) return;
+
+        bool abrir = !menuAudio.activeSelf;
+        menuAudio.SetActive(abrir);
+        if (abrir) ReiniciarCierreMenu();
+        else DetenerCierreMenu();
+    }
+
+    /// <summary>El menú se cierra solo a los 7 s sin que lo toquen.</summary>
+    private void ReiniciarCierreMenu()
+    {
+        if (menuAudio == null || !menuAudio.activeSelf) return;
+        DetenerCierreMenu();
+        // Tiempo real: también debe cerrarse si el juego está en pausa.
+        rutinaCierreMenu = StartCoroutine(CerrarMenuTrasInactividad());
+    }
+
+    private void DetenerCierreMenu()
+    {
+        if (rutinaCierreMenu == null) return;
+        StopCoroutine(rutinaCierreMenu);
+        rutinaCierreMenu = null;
+    }
+
+    private IEnumerator CerrarMenuTrasInactividad()
+    {
+        yield return new WaitForSecondsRealtime(SegundosCierreMenu);
+        if (menuAudio != null) menuAudio.SetActive(false);
+        rutinaCierreMenu = null;
     }
 
     public void AlternarMusica()
@@ -481,6 +512,7 @@ public class ControladorAudioCAFY : MonoBehaviour
         musicaSilenciada = !musicaSilenciada;
         GuardarPreferencias();
         AplicarSilencio();
+        ReiniciarCierreMenu();
     }
 
     public void AlternarEfectos()
@@ -488,6 +520,7 @@ public class ControladorAudioCAFY : MonoBehaviour
         efectosSilenciados = !efectosSilenciados;
         GuardarPreferencias();
         AplicarSilencio();
+        ReiniciarCierreMenu();
     }
 
     /// <summary>
@@ -501,6 +534,7 @@ public class ControladorAudioCAFY : MonoBehaviour
         efectosSilenciados = silenciar;
         GuardarPreferencias();
         AplicarSilencio();
+        DetenerCierreMenu();
         if (menuAudio != null) menuAudio.SetActive(false);
     }
 

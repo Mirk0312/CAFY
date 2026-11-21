@@ -351,7 +351,7 @@ public class ControladorMinijuego : MonoBehaviour
             // chocolate conservan su escala reducida de siempre.
             Ingrediente ingrediente = IngredienteDelPaso();
             float escala = 1f;
-            if (ingrediente == Ingrediente.Leche) escala = 1.15f;
+            if (ingrediente == Ingrediente.Leche) escala = 1.3f;
             else if (ingrediente == Ingrediente.Vaporizado ||
                      ingrediente == Ingrediente.Chocolate) escala = 0.7f;
             arteExito.transform.localScale = Vector3.one * escala;

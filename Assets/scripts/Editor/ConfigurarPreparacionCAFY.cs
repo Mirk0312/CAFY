@@ -19,14 +19,15 @@ public static class ConfigurarPreparacionCAFY
     private const string RutaJuego = "Assets/Scenes/JuegoPrincipal.unity";
     private const string Marcador = "Temp/cafy_preparacion_configurada";
 
-    [InitializeOnLoadMethod]
-    private static void ConfigurarAlRecompilar()
-    {
-        EditorApplication.delayCall += () =>
-        {
-            if (!File.Exists(Marcador)) Configurar();
-        };
-    }
+    // Auto-configuración desactivada: sobrescribía la escena al recargar Unity.
+    // [InitializeOnLoadMethod]
+    // private static void ConfigurarAlRecompilar()
+    // {
+    //     EditorApplication.delayCall += () =>
+    //     {
+    //         if (!File.Exists(Marcador)) Configurar();
+    //     };
+    // }
 
     [MenuItem("Herramientas/CAFY/Configurar preparación")]
     public static void Configurar()

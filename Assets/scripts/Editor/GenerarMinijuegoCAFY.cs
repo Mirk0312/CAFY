@@ -23,14 +23,15 @@ public static class GenerarMinijuegoCAFY
     private const string CarpetaAnimaciones = "Assets/Animaciones";
     private const string Marcador = "Temp/cafy_minijuego_generado";
 
-    [InitializeOnLoadMethod]
-    private static void GenerarAlRecompilar()
-    {
-        EditorApplication.delayCall += () =>
-        {
-            if (!File.Exists(Marcador)) Generar();
-        };
-    }
+    // Auto-generación desactivada: sobrescribía la escena al recargar Unity.
+    // [InitializeOnLoadMethod]
+    // private static void GenerarAlRecompilar()
+    // {
+    //     EditorApplication.delayCall += () =>
+    //     {
+    //         if (!File.Exists(Marcador)) Generar();
+    //     };
+    // }
 
     [MenuItem("Herramientas/CAFY/Generar minijuego y pedido")]
     public static void Generar()

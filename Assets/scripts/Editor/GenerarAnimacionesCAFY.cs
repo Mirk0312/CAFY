@@ -18,7 +18,9 @@ using UnityEngine.UI;
 /// y cablea el teléfono del mostrador. Se ejecuta una sola vez al importarse;
 /// también se puede relanzar desde Herramientas > CAFY.
 /// </summary>
-[InitializeOnLoad]
+// Auto-generación desactivada: sobrescribía animaciones y escena al recargar Unity.
+// Para reconstruir, usar Herramientas > CAFY > Generar animaciones y teléfono.
+// [InitializeOnLoad]
 public static class GenerarAnimacionesCAFY
 {
     private const string CarpetaAnimaciones = "Assets/Animaciones";
@@ -29,10 +31,11 @@ public static class GenerarAnimacionesCAFY
     private const string RutaJuego = "Assets/Scenes/JuegoPrincipal.unity";
     private const string RutaGameOver = "Assets/Scenes/GameOver.unity";
 
-    static GenerarAnimacionesCAFY()
-    {
-        EditorApplication.delayCall += EjecutarUnaVez;
-    }
+    // Constructor desactivado: solo se ejecuta el menú manual.
+    // static GenerarAnimacionesCAFY()
+    // {
+    //     EditorApplication.delayCall += EjecutarUnaVez;
+    // }
 
     [MenuItem("Herramientas/CAFY/Generar animaciones y teléfono")]
     public static void GenerarTodo()

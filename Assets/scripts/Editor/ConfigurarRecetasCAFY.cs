@@ -26,14 +26,15 @@ public static class ConfigurarRecetasCAFY
     private static readonly Color Amarillo = new Color(0.95f, 0.82f, 0.30f, 0.95f);
     private static readonly Color Caramelo = new Color(0.78f, 0.45f, 0.18f, 0.95f);
 
-    [InitializeOnLoadMethod]
-    private static void ConfigurarAlRecompilar()
-    {
-        EditorApplication.delayCall += () =>
-        {
-            if (!File.Exists(Marcador)) Configurar();
-        };
-    }
+    // Auto-configuración desactivada: sobrescribía la escena al recargar Unity.
+    // [InitializeOnLoadMethod]
+    // private static void ConfigurarAlRecompilar()
+    // {
+    //     EditorApplication.delayCall += () =>
+    //     {
+    //         if (!File.Exists(Marcador)) Configurar();
+    //     };
+    // }
 
     [MenuItem("Herramientas/CAFY/Configurar recetas")]
     public static void Configurar()

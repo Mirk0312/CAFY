@@ -71,11 +71,46 @@ public class ControladorAudioCAFY : MonoBehaviour
             "notiTelefono", "SonidoApartado"
         };
 
+        foreach (string nombre in nombres) ObtenerClip(nombre);
+        StartCoroutine(VerificarClips(nombres));
+    }
+
+    /// <summary>
+    /// Busca el clip por nombre y reintenta más adelante si Unity todavía no
+    /// terminó de importarlo (evita el aviso de "falta sonido" al arrancar).
+    /// </summary>
+    private AudioClip ObtenerClip(string nombre)
+    {
+        if (clips.TryGetValue(nombre, out AudioClip clip) && clip != null) return clip;
+
+        clip = Resources.Load<AudioClip>("sonido/" + nombre);
+        if (clip == null)
+        {
+            AudioClip[] todos = Resources.LoadAll<AudioClip>("sonido");
+            if (todos != null)
+            {
+                foreach (AudioClip candidato in todos)
+                {
+                    if (candidato != null && candidato.name == nombre)
+                    {
+                        clip = candidato;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (clip != null) clips[nombre] = clip;
+        return clip;
+    }
+
+    private IEnumerator VerificarClips(string[] nombres)
+    {
+        yield return new WaitForSeconds(1.5f);
         foreach (string nombre in nombres)
         {
-            AudioClip clip = Resources.Load<AudioClip>("sonido/" + nombre);
-            if (clip != null) clips[nombre] = clip;
-            else Debug.LogWarning("CAFY Audio: falta sonido/" + nombre);
+            if (ObtenerClip(nombre) == null)
+                Debug.LogWarning("CAFY Audio: falta sonido/" + nombre);
         }
     }
 
@@ -105,7 +140,8 @@ public class ControladorAudioCAFY : MonoBehaviour
     private void ReproducirMusica()
     {
         if (fuenteMusica == null || clips == null) return;
-        if (!clips.TryGetValue("musicaFondo", out AudioClip musica) || musica == null) return;
+        AudioClip musica = ObtenerClip("musicaFondo");
+        if (musica == null) return;
         if (fuenteMusica.isPlaying && fuenteMusica.clip == musica) return;
 
         fuenteMusica.clip = musica;
@@ -116,8 +152,12 @@ public class ControladorAudioCAFY : MonoBehaviour
     public static void Reproducir(string nombre)
     {
         if (instancia == null) return;
-        if (instancia.clips == null || !instancia.clips.TryGetValue(nombre, out AudioClip clip) || clip == null) return;
-        if (instancia.fuenteEfectos == null) return;
+        AudioClip clip = instancia.ObtenerClip(nombre);
+        if (clip == null || instancia.fuenteEfectos == null) return;
+
+        // Los efectos son cortos: cortamos el anterior para que no se quede
+        // sonando encima del paso siguiente (Leche dura ~11 s).
+        instancia.fuenteEfectos.Stop();
         instancia.fuenteEfectos.PlayOneShot(clip);
     }
 
@@ -176,11 +216,13 @@ public class ControladorAudioCAFY : MonoBehaviour
         botonGO.transform.SetParent(canvasGO.transform, false);
 
         RectTransform rect = botonGO.GetComponent<RectTransform>();
-        rect.anchorMin = new Vector2(1f, 1f);
-        rect.anchorMax = new Vector2(1f, 1f);
-        rect.pivot = new Vector2(1f, 1f);
-        rect.anchoredPosition = new Vector2(-18f, -18f);
-        rect.sizeDelta = new Vector2(150f, 54f);
+        // Esquina inferior izquierda del PanelJuegoPrincipal, justo a la
+        // izquierda del teléfono, lejos del botón X.
+        rect.anchorMin = Vector2.zero;
+        rect.anchorMax = Vector2.zero;
+        rect.pivot = Vector2.zero;
+        rect.anchoredPosition = new Vector2(2f, 2f);
+        rect.sizeDelta = new Vector2(52f, 44f);
 
         Image imagen = botonGO.GetComponent<Image>();
         imagen.color = new Color(0.16f, 0.10f, 0.08f, 0.92f);
@@ -201,7 +243,7 @@ public class ControladorAudioCAFY : MonoBehaviour
 
         textoBoton = textoGO.GetComponent<TextMeshProUGUI>();
         if (TMP_Settings.defaultFontAsset != null) textoBoton.font = TMP_Settings.defaultFontAsset;
-        textoBoton.fontSize = 24f;
+        textoBoton.fontSize = 13f;
         textoBoton.alignment = TextAlignmentOptions.Center;
         textoBoton.color = Color.white;
         textoBoton.raycastTarget = false;

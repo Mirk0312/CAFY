@@ -332,6 +332,7 @@ public class ControladorMinijuego : MonoBehaviour
             animadorExito.runtimeAnimatorController = controller;
             animadorExito.enabled = true;
             arteExito.SetActive(true);
+            animadorExito.Play(0, 0, 0f);
 
             // Esperamos lo que dure el clip real para que la animación no se corte.
             float espera = duracionExito;

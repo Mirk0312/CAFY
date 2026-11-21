@@ -19,8 +19,8 @@ public class ControladorPedidos : MonoBehaviour
     private const string NombreInstancia = "CAFY - Sistema de pedidos";
 
     [Header("Llegada de pedidos")]
-    public float primerPedidoEn = 60f;
-    public float intervaloBase = 60f;
+    public float primerPedidoEn = 30f;
+    public float intervaloBase = 30f;
     public float intervaloMinimo = 20f;
     // Nivel 1 = 1 pedido a la vez; después se suma 1 por nivel (2, 3, 4...).
     public int maximoPedidosNivel1 = 1;
@@ -263,9 +263,9 @@ public class ControladorPedidos : MonoBehaviour
 
     [Header("Bote de basura (tapa separada)")]
     [Tooltip("Desplazamiento de la tapa cuando el bote está abierto.")]
-    public Vector2 tapaAbiertaOffset = new Vector2(6f, 28f);
+    public Vector2 tapaAbiertaOffset = new Vector2(6f, 56f);
     [Tooltip("Rotación de la tapa abierta en grados.")]
-    public float tapaAbiertaRotacion = -18f;
+    public float tapaAbiertaRotacion = -28f;
     public float duracionTapa = 0.18f;
 
     private Image boteCuerpo;
@@ -395,7 +395,7 @@ public class ControladorPedidos : MonoBehaviour
     private float IntervaloActual()
     {
         int nivel = Mathf.Max(1, EstadoPartida.Nivel);
-        // Nivel 1: 60 s. Cada nivel baja 10 s, con mínimo de 20 s.
+        // Nivel 1: 30 s. Cada nivel baja 10 s, con mínimo de 20 s.
         return Mathf.Max(intervaloMinimo, intervaloBase - 10f * (nivel - 1));
     }
 
@@ -532,24 +532,11 @@ public class ControladorPedidos : MonoBehaviour
         {
             PrepararNotificacionEstatica();
 
+            // El texto TextoPedido vive en la escena, dentro de NotificacionPedido,
+            // para que puedas moverlo o borrarlo desde el Hierarchy. Si lo borras,
+            // la notificación sigue funcionando solo con el icono.
             TextMeshProUGUI texto = notificacion.GetComponentInChildren<TextMeshProUGUI>(true);
-            if (texto == null)
-            {
-                GameObject go = new GameObject("TextoPedido", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
-                go.transform.SetParent(notificacion.transform, false);
-                RectTransform rect = go.GetComponent<RectTransform>();
-                rect.anchorMin = Vector2.zero;
-                rect.anchorMax = Vector2.one;
-                rect.offsetMin = Vector2.zero;
-                rect.offsetMax = Vector2.zero;
-                texto = go.GetComponent<TextMeshProUGUI>();
-                if (TMP_Settings.defaultFontAsset != null) texto.font = TMP_Settings.defaultFontAsset;
-                texto.alignment = TextAlignmentOptions.Center;
-                texto.fontSize = 20f;
-                texto.color = Color.white;
-                texto.raycastTarget = false;
-            }
-            texto.text = pedido.Titulo;
+            if (texto != null) texto.text = pedido.Titulo;
         }
 
         telefono.MostrarNotificacion(true);

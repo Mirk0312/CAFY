@@ -292,6 +292,8 @@ public class ControladorPedidos : MonoBehaviour
     public Vector2 tapaAbiertaOffset = new Vector2(6f, 180f);
     [Tooltip("Rotación de la tapa abierta en grados.")]
     public float tapaAbiertaRotacion = -28f;
+    [Tooltip("Escala de las capas del bote abierto respecto al botón estático.")]
+    public float escalaBoteAbierto = 0.85f;
     public float duracionTapa = 0.18f;
 
     private Image boteCuerpo;
@@ -334,6 +336,7 @@ public class ControladorPedidos : MonoBehaviour
         {
             tapaAbiertaOffset = ajustes.tapaAbiertaOffset;
             tapaAbiertaRotacion = ajustes.tapaAbiertaRotacion;
+            escalaBoteAbierto = ajustes.escalaBoteAbierto;
             duracionTapa = ajustes.duracionTapa;
             if (ajustes.spriteCerrado != null) boteCerrado = ajustes.spriteCerrado;
             if (ajustes.spriteTapa != null) boteTapaSprite = ajustes.spriteTapa;
@@ -362,6 +365,7 @@ public class ControladorPedidos : MonoBehaviour
         rect.anchorMax = Vector2.one;
         rect.offsetMin = Vector2.zero;
         rect.offsetMax = Vector2.zero;
+        rect.localScale = Vector3.one * Mathf.Clamp(escalaBoteAbierto, 0.4f, 1f);
 
         Image imagen = go.GetComponent<Image>();
         if (sprite != null) imagen.sprite = sprite;
@@ -750,6 +754,7 @@ public class ControladorPedidos : MonoBehaviour
 
         if (correcto)
         {
+            ControladorAudioCAFY.Reproducir("Entrega");
             float segundos = Mathf.Max(0f, Time.time - pedidoSeleccionado.creadoEn);
             int puntos = PuntosPorEntrega(segundos);
             EstadoPartida.SumarPuntos(puntos);
@@ -764,6 +769,8 @@ public class ControladorPedidos : MonoBehaviour
                 entregasCorrectas = 0;
                 EstadoPartida.SubirNivel();
                 subioDeNivel = true;
+                // Entrega dura ~2.8 s: el aviso de nivel entra justo después.
+                ControladorAudioCAFY.ReproducirDiferido("SubidaNivel", 3f);
             }
 
             string aviso = (subioDeNivel ? "¡Nivel " + EstadoPartida.Nivel + "! " : "")
@@ -786,6 +793,7 @@ public class ControladorPedidos : MonoBehaviour
     public void ConfirmarDesechar()
     {
         if (bebidaSeleccionada == null) return;
+        ControladorAudioCAFY.Reproducir("Basura");
         inventario.Remove(bebidaSeleccionada);
         MostrarAviso("Bebida descartada", new Color(1f, 0.75f, 0.3f));
         bebidaSeleccionada = null;

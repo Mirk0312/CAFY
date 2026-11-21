@@ -130,8 +130,8 @@ public class ControladorPreparacion : MonoBehaviour
         boton.targetGraphic = fondo;
 
         LayoutElement layout = ficha.GetComponent<LayoutElement>();
-        layout.preferredWidth = 180f;
-        layout.minWidth = 180f;
+        layout.preferredWidth = 220f;
+        layout.minWidth = 220f;
         layout.preferredHeight = 64f;
         layout.minHeight = 64f;
 

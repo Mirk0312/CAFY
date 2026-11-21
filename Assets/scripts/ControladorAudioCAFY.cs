@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /// Audio global de CAFY: música de fondo entre escenas, efectos por paso del
 /// minijuego, aviso de pedido, fin de partida y sonido al pulsar cualquier botón.
 /// Persiste en DontDestroyOnLoad. El botón de audio abre un mini menú con mute
-/// independiente para música y efectos; un doble clic silencia ambos.
+/// independiente para música y efectos; un doble clic alterna ambos a la vez.
 /// </summary>
 public class ControladorAudioCAFY : MonoBehaviour
 {
@@ -403,11 +403,15 @@ public class ControladorAudioCAFY : MonoBehaviour
         AplicarSilencio();
     }
 
-    /// <summary>Doble clic en el botón de audio: silencia música y efectos juntos.</summary>
-    public void SilenciarTodo()
+    /// <summary>
+    /// Doble clic en el botón de audio: alterna música y efectos juntos.
+    /// Si ambos están muteados, los reactiva; en cualquier otro caso los mutea.
+    /// </summary>
+    public void AlternarTodo()
     {
-        musicaSilenciada = true;
-        efectosSilenciados = true;
+        bool silenciar = !TodoSilenciado;
+        musicaSilenciada = silenciar;
+        efectosSilenciados = silenciar;
         GuardarPreferencias();
         AplicarSilencio();
         if (menuAudio != null) menuAudio.SetActive(false);
@@ -449,7 +453,7 @@ public class ControladorAudioCAFY : MonoBehaviour
 }
 
 /// <summary>
-/// Diferencia un clic (abre el menú de audio) de un doble clic (mute total).
+/// Diferencia un clic (abre el menú de audio) de un doble clic (alterna mute total).
 /// Se usa un retardo en tiempo real para que el primer clic no abra el menú
 /// antes de saber si viene un segundo clic.
 /// </summary>
@@ -474,7 +478,7 @@ public class BotonMuteCAFY : MonoBehaviour, IPointerClickHandler
                 rutinaClic = null;
             }
             ultimoClic = -999f;
-            controlador.SilenciarTodo();
+            controlador.AlternarTodo();
             return;
         }
 

@@ -289,7 +289,7 @@ public class ControladorPedidos : MonoBehaviour
 
     [Header("Bote de basura (tapa separada)")]
     [Tooltip("Desplazamiento de la tapa cuando el bote está abierto.")]
-    public Vector2 tapaAbiertaOffset = new Vector2(6f, 160f);
+    public Vector2 tapaAbiertaOffset = new Vector2(6f, 180f);
     [Tooltip("Rotación de la tapa abierta en grados.")]
     public float tapaAbiertaRotacion = -28f;
     public float duracionTapa = 0.18f;

@@ -8,7 +8,7 @@ public class ControladorBoteCAFY : MonoBehaviour
 {
     [Header("Tapa abierta")]
     [Tooltip("Cuánto se desplaza la tapa respecto al bote cerrado.")]
-    public Vector2 tapaAbiertaOffset = new Vector2(6f, 160f);
+    public Vector2 tapaAbiertaOffset = new Vector2(6f, 180f);
     [Tooltip("Rotación de la tapa en grados cuando está abierta.")]
     public float tapaAbiertaRotacion = -28f;
     [Tooltip("Segundos que tarda en subir o bajar la tapa.")]

@@ -89,7 +89,7 @@ public class ControladorMinijuego : MonoBehaviour
             animacionChocolate = Resources.Load<RuntimeAnimatorController>("Animaciones/ExitoChocolate");
 
         if (btnAccionar != null) btnAccionar.onClick.AddListener(Accionar);
-        if (arteExito != null) arteExito.SetActive(false);
+        if (arteExito != null) arteExito.SetActive(false); arteExito.transform.localScale = Vector3.one;
         AsegurarUITiempo();
         Detener();
     }
@@ -198,7 +198,7 @@ public class ControladorMinijuego : MonoBehaviour
         ocupado = false;
         activo = true;
 
-        if (arteExito != null) arteExito.SetActive(false);
+        if (arteExito != null) arteExito.SetActive(false); arteExito.transform.localScale = Vector3.one;
         ConfigurarPaso();
     }
 
@@ -208,7 +208,7 @@ public class ControladorMinijuego : MonoBehaviour
         activo = false;
         ocupado = false;
         if (rutina != null) { StopCoroutine(rutina); rutina = null; }
-        if (arteExito != null) arteExito.SetActive(false);
+        if (arteExito != null) arteExito.SetActive(false); arteExito.transform.localScale = Vector3.one;
         if (textoTiempo != null) textoTiempo.text = "";
         if (barraTiempo != null) barraTiempo.fillAmount = 1f;
     }
@@ -332,6 +332,14 @@ public class ControladorMinijuego : MonoBehaviour
             animadorExito.runtimeAnimatorController = controller;
             animadorExito.enabled = true;
             arteExito.SetActive(true);
+
+            // Leche, taza y chocolate se muestran al 70 % para que se vean
+            // mejor; el resto conserva su tamaño original.
+            Ingrediente ingrediente = IngredienteDelPaso();
+            float escala = (ingrediente == Ingrediente.Leche ||
+                            ingrediente == Ingrediente.Taza ||
+                            ingrediente == Ingrediente.Chocolate) ? 0.7f : 1f;
+            arteExito.transform.localScale = Vector3.one * escala;
             animadorExito.Play(0, 0, 0f);
 
             // Esperamos lo que dure el clip real para que la animación no se corte.
@@ -341,7 +349,7 @@ public class ControladorMinijuego : MonoBehaviour
                 espera = Mathf.Max(duracionExito, clips[0].length + 0.15f);
 
             yield return new WaitForSeconds(espera);
-            arteExito.SetActive(false);
+            arteExito.SetActive(false); arteExito.transform.localScale = Vector3.one;
         }
         else
         {
@@ -382,13 +390,18 @@ public class ControladorMinijuego : MonoBehaviour
     }
 
     /// <summary>Suena el recurso asociado al ingrediente de este paso al acertar.</summary>
+    private Ingrediente IngredienteDelPaso()
+    {
+        if (receta != null && receta.ingredientes != null && paso < receta.ingredientes.Length)
+            return receta.ingredientes[paso];
+        if (ingredientes != null && paso < ingredientes.Length)
+            return ingredientes[paso];
+        return Ingrediente.Cafe;
+    }
+
     private void ReproducirSonidoDelPaso()
     {
-        Ingrediente ingrediente = Ingrediente.Cafe;
-        if (receta != null && receta.ingredientes != null && paso < receta.ingredientes.Length)
-            ingrediente = receta.ingredientes[paso];
-        else if (ingredientes != null && paso < ingredientes.Length)
-            ingrediente = ingredientes[paso];
+        Ingrediente ingrediente = IngredienteDelPaso();
 
         string clip = null;
         switch (ingrediente)

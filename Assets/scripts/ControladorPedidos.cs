@@ -24,7 +24,7 @@ public class ControladorPedidos : MonoBehaviour
     public float intervaloMinimo = 20f;
     // Nivel 1 = 1 pedido a la vez; después se suma 1 por nivel (2, 3, 4...).
     public int maximoPedidosNivel1 = 1;
-    public int maximoPedidosMaximo = 4;
+    public int maximoPedidosMaximo = 5;
 
     [Header("HUD")]
     public TextMeshProUGUI textoNivel;
@@ -176,6 +176,7 @@ public class ControladorPedidos : MonoBehaviour
         contadorPedidos = 1;
         contadorBebidas = 1;
         entregasCorrectas = 0;
+        iconosVidas = null;
         bebidaSeleccionada = null;
         pedidoSeleccionado = null;
         CerrarPaneles();
@@ -187,11 +188,33 @@ public class ControladorPedidos : MonoBehaviour
         if (gestor != null) gestor.IrAGameOver();
     }
 
+    private GameObject[] iconosVidas;
+
+    private GameObject IconoVida(string nombre)
+    {
+        if (iconosVidas == null)
+        {
+            List<GameObject> encontrados = new List<GameObject>();
+            foreach (Transform t in FindObjectsByType<Transform>(FindObjectsInactive.Include))
+            {
+                if (t.name.Length == 5 && t.name.StartsWith("Vida") && char.IsDigit(t.name[4]))
+                    encontrados.Add(t.gameObject);
+            }
+            iconosVidas = encontrados.ToArray();
+        }
+
+        foreach (GameObject icono in iconosVidas)
+        {
+            if (icono != null && icono.name == nombre) return icono;
+        }
+        return null;
+    }
+
     private void AplicarVidas(int vidas)
     {
         for (int i = 1; i <= EstadoPartida.VidasIniciales; i++)
         {
-            GameObject icono = GameObject.Find("Vida" + i);
+            GameObject icono = IconoVida("Vida" + i);
             if (icono != null) icono.SetActive(i <= vidas);
         }
     }
@@ -263,7 +286,7 @@ public class ControladorPedidos : MonoBehaviour
 
     [Header("Bote de basura (tapa separada)")]
     [Tooltip("Desplazamiento de la tapa cuando el bote está abierto.")]
-    public Vector2 tapaAbiertaOffset = new Vector2(6f, 56f);
+    public Vector2 tapaAbiertaOffset = new Vector2(6f, 100f);
     [Tooltip("Rotación de la tapa abierta en grados.")]
     public float tapaAbiertaRotacion = -28f;
     public float duracionTapa = 0.18f;
@@ -402,7 +425,7 @@ public class ControladorPedidos : MonoBehaviour
     private int MaximoPedidosActual()
     {
         int nivel = Mathf.Max(1, EstadoPartida.Nivel);
-        // Nivel 1: 1 pedido. Nivel 2: 2. Nivel 3: 3. Nivel 4+: 4 (tope).
+        // Referencia por nivel (el ciclo ya no espera: 5 pedidos = partida perdida).
         int maximo = maximoPedidosNivel1 + (nivel - 1);
         return Mathf.Clamp(maximo, 1, maximoPedidosMaximo);
     }
@@ -419,8 +442,9 @@ public class ControladorPedidos : MonoBehaviour
 
         while (true)
         {
-            while (pedidos.Count >= MaximoPedidosActual()) yield return new WaitForSeconds(1f);
+            // Los pedidos se acumulan; al llegar a 5 se pierde la partida.
             CrearPedido();
+            if (EstadoPartida.SinVidas) yield break;
             yield return new WaitForSeconds(IntervaloActual());
         }
     }
@@ -467,6 +491,13 @@ public class ControladorPedidos : MonoBehaviour
                 : Color.white
         };
         pedidos.Add(pedido);
+
+        if (pedidos.Count >= 5)
+        {
+            MostrarAviso("¡Se juntaron 5 pedidos! Partida perdida", new Color(1f, 0.35f, 0.3f));
+            EstadoPartida.PerderPartida();
+            return;
+        }
 
         MostrarNotificacion(pedido);
         if (panelPedidos != null && panelPedidos.activeSelf) AbrirPanelPedidos();

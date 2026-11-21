@@ -49,6 +49,14 @@ public static class EstadoPartida
         if (SinVidas) PartidaPerdida?.Invoke();
     }
 
+    /// <summary>Fuerza el fin de la partida (por ejemplo, al juntar 5 pedidos).</summary>
+    public static void PerderPartida()
+    {
+        Vidas = 0;
+        VidasCambiadas?.Invoke(Vidas);
+        PartidaPerdida?.Invoke();
+    }
+
     public static void SumarPuntos(int cantidad)
     {
         if (cantidad <= 0) return;

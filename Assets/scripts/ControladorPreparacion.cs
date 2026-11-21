@@ -130,8 +130,9 @@ public class ControladorPreparacion : MonoBehaviour
         boton.targetGraphic = fondo;
 
         LayoutElement layout = ficha.GetComponent<LayoutElement>();
-        layout.preferredWidth = 220f;
-        layout.minWidth = 220f;
+        // Más anchas para que "Chocolate" y "Vaporizado" no partan el nombre.
+        layout.preferredWidth = 260f;
+        layout.minWidth = 260f;
         layout.preferredHeight = 64f;
         layout.minHeight = 64f;
 
@@ -152,7 +153,8 @@ public class ControladorPreparacion : MonoBehaviour
             ? TMP_Settings.defaultFontAsset
             : Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF");
         tmp.text = ControladorRecetas.Nombre(ingrediente) + "  ×" + cantidad;
-        tmp.fontSize = 24f;
+        tmp.fontSize = 22f;
+        tmp.textWrappingMode = TextWrappingModes.NoWrap;
         tmp.alignment = TextAlignmentOptions.Center;
         tmp.color = new Color(1f, 0.92f, 0.82f);
         tmp.raycastTarget = false;

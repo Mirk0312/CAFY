@@ -124,11 +124,15 @@ public class ControladorMinijuego : MonoBehaviour
             rect.anchorMax = new Vector2(0.70f, 0.74f);
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
+            rect.anchoredPosition = new Vector2(0f, -40f);
             textoTiempo = go.GetComponent<TextMeshProUGUI>();
             if (TMP_Settings.defaultFontAsset != null) textoTiempo.font = TMP_Settings.defaultFontAsset;
             textoTiempo.fontSize = 34f;
+            textoTiempo.fontStyle = FontStyles.Bold;
             textoTiempo.alignment = TextAlignmentOptions.Center;
-            textoTiempo.color = new Color(1f, 0.85f, 0.45f);
+            textoTiempo.color = new Color(1f, 0.9f, 0.35f);
+            textoTiempo.outlineWidth = 0.18f;
+            textoTiempo.outlineColor = new Color32(60, 22, 12, 255);
             textoTiempo.raycastTarget = false;
         }
 
@@ -146,6 +150,7 @@ public class ControladorMinijuego : MonoBehaviour
             rect.anchorMax = new Vector2(0.85f, 0.66f);
             rect.offsetMin = Vector2.zero;
             rect.offsetMax = Vector2.zero;
+            rect.anchoredPosition = new Vector2(0f, -40f);
             barraTiempo = go.GetComponent<Image>();
             barraTiempo.color = new Color(1f, 0.75f, 0.25f, 0.95f);
         }
@@ -558,12 +563,31 @@ public class ControladorMinijuego : MonoBehaviour
     private void ActualizarUITiempo()
     {
         float total = Mathf.Max(0.01f, SegundosPorPaso());
+        int segundos = Mathf.CeilToInt(Mathf.Max(0f, tiempoRestante));
+
         if (textoTiempo != null)
         {
-            textoTiempo.text = activo
-                ? Mathf.CeilToInt(Mathf.Max(0f, tiempoRestante)).ToString()
-                : "";
+            if (activo)
+            {
+                textoTiempo.text = segundos.ToString();
+                textoTiempo.color = ColorDelTiempo(segundos);
+
+                // En los últimos tres segundos el número late para llamar la atención.
+                float escala = 1f;
+                if (segundos <= 3)
+                {
+                    float pulso = Mathf.PingPong(Time.unscaledTime * 5f, 1f);
+                    escala = 1f + 0.18f * pulso;
+                }
+                textoTiempo.transform.localScale = Vector3.one * escala;
+            }
+            else
+            {
+                textoTiempo.text = "";
+                textoTiempo.transform.localScale = Vector3.one;
+            }
         }
+
         if (barraTiempo != null)
         {
             barraTiempo.fillAmount = activo ? Mathf.Clamp01(tiempoRestante / total) : 1f;
@@ -571,6 +595,16 @@ public class ControladorMinijuego : MonoBehaviour
                 ? new Color(0.95f, 0.30f, 0.25f, 0.95f)
                 : new Color(1f, 0.75f, 0.25f, 0.95f);
         }
+    }
+
+    /// <summary>Amarillo → naranja → rojo según se acaba el tiempo del paso.</summary>
+    private static Color ColorDelTiempo(int segundos)
+    {
+        if (segundos <= 1) return new Color(1f, 0.18f, 0.16f);
+        if (segundos == 2) return new Color(1f, 0.36f, 0.14f);
+        if (segundos == 3) return new Color(1f, 0.55f, 0.16f);
+        if (segundos == 4) return new Color(1f, 0.72f, 0.22f);
+        return new Color(1f, 0.9f, 0.35f);
     }
 
     private void TiempoAgotado()

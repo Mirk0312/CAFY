@@ -8,9 +8,10 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Audio global de CAFY: música de fondo entre escenas, efectos por paso del
-/// minijuego, aviso de pedido, fin de partida y sonido al pulsar cualquier botón.
-/// Persiste en DontDestroyOnLoad. El botón de audio abre un mini menú con mute
-/// independiente para música y efectos; un doble clic alterna ambos a la vez.
+/// minijuego, aviso de pedido, daño al perder vidas, fin de partida y sonido al
+/// pulsar cualquier botón. Persiste en DontDestroyOnLoad. El botón de audio abre
+/// un mini menú con mute independiente para música y efectos; un doble clic
+/// alterna ambos a la vez.
 /// </summary>
 public class ControladorAudioCAFY : MonoBehaviour
 {
@@ -30,6 +31,9 @@ public class ControladorAudioCAFY : MonoBehaviour
     // subida de nivel pueden oírse a la vez sin cortarse entre sí.
     private AudioSource fuenteEventos;
     private AudioSource fuenteSubida;
+    // El daño suena al perder una vida, en fuente propia para no cortar
+    // entregas, descartes ni avisos de subida de nivel.
+    private AudioSource fuenteDano;
 
     private GameObject menuAudio;
     private TextMeshProUGUI textoMusica;
@@ -39,6 +43,7 @@ public class ControladorAudioCAFY : MonoBehaviour
 
     private bool musicaSilenciada;
     private bool efectosSilenciados;
+    private int vidasAnteriores;
     private int idEfecto;
     private int idEvento;
     private int idSubida;
@@ -66,6 +71,9 @@ public class ControladorAudioCAFY : MonoBehaviour
         instancia = this;
         DontDestroyOnLoad(gameObject);
 
+        vidasAnteriores = EstadoPartida.Vidas;
+        EstadoPartida.VidasCambiadas += AlCambiarVidas;
+
         bool legacy = PlayerPrefs.GetInt(ClaveSilenciado, 0) == 1;
         musicaSilenciada = PlayerPrefs.GetInt(ClaveMusica, legacy ? 1 : 0) == 1;
         efectosSilenciados = PlayerPrefs.GetInt(ClaveEfectos, legacy ? 1 : 0) == 1;
@@ -84,6 +92,14 @@ public class ControladorAudioCAFY : MonoBehaviour
     {
         if (instancia == this) instancia = null;
         SceneManager.sceneLoaded -= OnSceneLoaded;
+        EstadoPartida.VidasCambiadas -= AlCambiarVidas;
+    }
+
+    /// <summary>Suena daño solo cuando bajan las vidas, nunca al restaurarlas.</summary>
+    private void AlCambiarVidas(int vidas)
+    {
+        if (vidas < vidasAnteriores) ReproducirDano();
+        vidasAnteriores = vidas;
     }
 
     private void CargarClips()
@@ -91,7 +107,7 @@ public class ControladorAudioCAFY : MonoBehaviour
         string[] nombres =
         {
             "AzucarCafe", "HaciendoCafe", "Leche", "JarabeChocolate", "GameOver",
-            "Basura", "Entrega", "SubidaNivel",
+            "Basura", "Entrega", "SubidaNivel", "daño",
             "musicaFondo", "notiTelefono", "SonidoApartado"
         };
 
@@ -163,6 +179,12 @@ public class ControladorAudioCAFY : MonoBehaviour
         fuenteSubida.loop = false;
         fuenteSubida.spatialBlend = 0f;
         fuenteSubida.volume = 0.9f;
+
+        fuenteDano = gameObject.AddComponent<AudioSource>();
+        fuenteDano.playOnAwake = false;
+        fuenteDano.loop = false;
+        fuenteDano.spatialBlend = 0f;
+        fuenteDano.volume = 0.9f;
 
         ReproducirMusica();
     }
@@ -261,6 +283,15 @@ public class ControladorAudioCAFY : MonoBehaviour
         AudioClip clip = instancia.ObtenerClip(nombre);
         if (clip == null) return;
         instancia.ReproducirEn(instancia.fuenteSubida, clip, duracionMaxima, 2);
+    }
+
+    /// <summary>Daño al perder una vida. Fuente separada para no cortar otros avisos.</summary>
+    public static void ReproducirDano()
+    {
+        if (instancia == null || instancia.fuenteDano == null) return;
+        AudioClip clip = instancia.ObtenerClip("daño");
+        if (clip == null) return;
+        instancia.fuenteDano.PlayOneShot(clip);
     }
 
     /// <summary>Efecto con retardo: se usa para el aviso del teléfono.</summary>
@@ -487,6 +518,7 @@ public class ControladorAudioCAFY : MonoBehaviour
         if (fuenteEfectos != null) fuenteEfectos.mute = efectosSilenciados;
         if (fuenteEventos != null) fuenteEventos.mute = efectosSilenciados;
         if (fuenteSubida != null) fuenteSubida.mute = efectosSilenciados;
+        if (fuenteDano != null) fuenteDano.mute = efectosSilenciados;
         ActualizarIndicadores();
     }
 

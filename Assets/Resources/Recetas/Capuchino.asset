@@ -15,13 +15,13 @@ MonoBehaviour:
   nombre: Capuchino
   descripcion: Espresso con leche vaporizada y espuma.
   icono: {fileID: 3485356707303423563, guid: 3c1a7cbb506f53a42b7c2c725bac34ec, type: 3}
-  ingredientes: 0000000002000000i
+  ingredientes: 0000000005000000i
   nombresPaso:
   - "Extracci\xF3n"
   - Vaporizado de leche
   animacionesExito:
   - {fileID: 9100000, guid: 0882121d09849c94b8d2665b75e08a93, type: 2}
-  - {fileID: 0}
+  - {fileID: 9100000, guid: 9bb292d1b75a457ca68bd6e6c7f704b2, type: 2}
   velocidades:
   - 1.1
   - 1.7

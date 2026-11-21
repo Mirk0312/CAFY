@@ -37,6 +37,14 @@ public class ControladorMinijuego : MonoBehaviour
     public Image barraTiempo;
     public float segundosPorPaso = 12f;
 
+    [Header("Curva de dificultad niveles 1 a 5")]
+    [Tooltip("Velocidad del cursor por nivel. El paso ya aplica su propia base.")]
+    public float[] multiplicadoresVelocidadPorNivel = { 1f, 1.12f, 1.24f, 1.36f, 1.5f };
+    [Tooltip("Ancho de la zona verde por nivel.")]
+    public float[] multiplicadoresAnchoPorNivel = { 1f, 0.92f, 0.84f, 0.75f, 0.65f };
+    [Tooltip("Tiempo por paso. 1 = 12 s, nivel 5 = 72 % de ese tiempo.")]
+    public float[] multiplicadoresTiempoPorNivel = { 1f, 0.93f, 0.86f, 0.79f, 0.72f };
+
     [Header("Dificultad al fallar")]
     [Tooltip("Cada fallo reduce la zona verde a este factor del ancho actual.")]
     public float reduccionPorFallo = 0.88f;
@@ -316,7 +324,6 @@ public class ControladorMinijuego : MonoBehaviour
     private IEnumerator MostrarExito()
     {
         ocupado = true;
-        ReproducirSonidoDelPaso();
         if (feedback != null)
         {
             feedback.text = "¡Perfecto!";
@@ -326,6 +333,13 @@ public class ControladorMinijuego : MonoBehaviour
         RuntimeAnimatorController controller = receta != null
             ? receta.Animacion(paso)
             : (animacionesExito != null && paso < animacionesExito.Length ? animacionesExito[paso] : null);
+
+        // Duración real del clip: el efecto se corta cuando termina la animación.
+        float duracionAnimacion = 0f;
+        AnimationClip[] clips = controller != null ? controller.animationClips : null;
+        if (clips != null && clips.Length > 0) duracionAnimacion = clips[0].length;
+
+        ReproducirSonidoDelPaso(duracionAnimacion > 0f ? duracionAnimacion : duracionMensaje);
 
         if (controller != null && animadorExito != null && arteExito != null)
         {
@@ -343,10 +357,9 @@ public class ControladorMinijuego : MonoBehaviour
             animadorExito.Play(0, 0, 0f);
 
             // Esperamos lo que dure el clip real para que la animación no se corte.
-            float espera = duracionExito;
-            AnimationClip[] clips = controller.animationClips;
-            if (clips != null && clips.Length > 0)
-                espera = Mathf.Max(duracionExito, clips[0].length + 0.15f);
+            float espera = duracionAnimacion > 0f
+                ? Mathf.Max(duracionExito, duracionAnimacion + 0.15f)
+                : duracionMensaje;
 
             yield return new WaitForSeconds(espera);
             arteExito.SetActive(false); arteExito.transform.localScale = Vector3.one;
@@ -399,7 +412,7 @@ public class ControladorMinijuego : MonoBehaviour
         return Ingrediente.Cafe;
     }
 
-    private void ReproducirSonidoDelPaso()
+    private void ReproducirSonidoDelPaso(float duracionAnimacion)
     {
         Ingrediente ingrediente = IngredienteDelPaso();
 
@@ -410,9 +423,10 @@ public class ControladorMinijuego : MonoBehaviour
             case Ingrediente.Azucar: clip = "AzucarCafe"; break;
             case Ingrediente.Leche:
             case Ingrediente.Taza: clip = "Leche"; break;
+            case Ingrediente.Jarabe: clip = "JarabeChocolate"; break;
         }
 
-        if (!string.IsNullOrEmpty(clip)) ControladorAudioCAFY.Reproducir(clip);
+        if (!string.IsNullOrEmpty(clip)) ControladorAudioCAFY.Reproducir(clip, duracionAnimacion);
     }
 
     private Receta ConstruirRecetaDesdeIngredientes(Ingrediente[] seleccionados)
@@ -496,20 +510,28 @@ public class ControladorMinijuego : MonoBehaviour
         return Mathf.Max(1, EstadoPartida.Nivel);
     }
 
-    /// <summary>Cada nivel el cursor va más rápido y la zona se reduce.</summary>
+    private int IndiceNivel()
+    {
+        // Nivel 1 -> índice 0; nivel 5 o más -> índice 4 (techo de dificultad).
+        return Mathf.Clamp(NivelActual() - 1, 0, 4);
+    }
+
+    /// <summary>Curva explícita de velocidad para los niveles 1 a 5.</summary>
     private float MultiplicadorVelocidad()
     {
-        return 1f + 0.12f * (NivelActual() - 1);
+        return Obtener(multiplicadoresVelocidadPorNivel, IndiceNivel(), 1f);
     }
 
+    /// <summary>Curva explícita de ancho de zona para los niveles 1 a 5.</summary>
     private float MultiplicadorAncho()
     {
-        return Mathf.Max(0.55f, 1f - 0.10f * (NivelActual() - 1));
+        return Obtener(multiplicadoresAnchoPorNivel, IndiceNivel(), 1f);
     }
 
+    /// <summary>Curva explícita de tiempo por paso para los niveles 1 a 5.</summary>
     private float SegundosPorPaso()
     {
-        return segundosPorPaso * Mathf.Max(0.6f, 1f - 0.07f * (NivelActual() - 1));
+        return segundosPorPaso * Obtener(multiplicadoresTiempoPorNivel, IndiceNivel(), 1f);
     }
 
     /// <summary>Desde el nivel 3 la zona objetivo se desplaza de lado a lado.</summary>

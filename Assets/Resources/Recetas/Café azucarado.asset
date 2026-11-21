@@ -21,7 +21,7 @@ MonoBehaviour:
   - Endulzado
   animacionesExito:
   - {fileID: 9100000, guid: 0882121d09849c94b8d2665b75e08a93, type: 2}
-  - {fileID: 0}
+  - {fileID: 9100000, guid: a7d6adc852f1464fb35603d7d2a78c76, type: 2}
   velocidades:
   - 1.1
   - 1.4

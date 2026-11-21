@@ -15,15 +15,15 @@ MonoBehaviour:
   nombre: Mocha
   descripcion: "Caf\xE9, leche y chocolate con latte art final."
   icono: {fileID: -5344859917596524088, guid: 95793a5ce7f81974692a4dde8dfe293b, type: 3}
-  ingredientes: 000000000200000003000000i
+  ingredientes: 000000000500000003000000i
   nombresPaso:
   - "Extracci\xF3n"
   - Vaporizado de leche
   - Latte art
   animacionesExito:
   - {fileID: 9100000, guid: 0882121d09849c94b8d2665b75e08a93, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 9100000, guid: 9bb292d1b75a457ca68bd6e6c7f704b2, type: 2}
+  - {fileID: 9100000, guid: 31b7cec4a04647658da9365e799c99eb, type: 2}
   velocidades:
   - 1.1
   - 1.7

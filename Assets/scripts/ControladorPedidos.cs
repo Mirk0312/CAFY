@@ -184,6 +184,9 @@ public class ControladorPedidos : MonoBehaviour
 
     private void AlPerderPartida()
     {
+        // El audio global sobrevive al cambio de escena, así que el sonido de
+        // fin de partida termina de oírse ya en la pantalla de GameOver.
+        ControladorAudioCAFY.Reproducir("GameOver");
         GestorEscenas gestor = FindAnyObjectByType<GestorEscenas>();
         if (gestor != null) gestor.IrAGameOver();
     }
@@ -286,7 +289,7 @@ public class ControladorPedidos : MonoBehaviour
 
     [Header("Bote de basura (tapa separada)")]
     [Tooltip("Desplazamiento de la tapa cuando el bote está abierto.")]
-    public Vector2 tapaAbiertaOffset = new Vector2(6f, 100f);
+    public Vector2 tapaAbiertaOffset = new Vector2(6f, 160f);
     [Tooltip("Rotación de la tapa abierta en grados.")]
     public float tapaAbiertaRotacion = -28f;
     public float duracionTapa = 0.18f;
@@ -472,11 +475,22 @@ public class ControladorPedidos : MonoBehaviour
         string extra = "";
         if (EstadoPartida.Nivel >= 2 && Random.value < 0.5f)
         {
-            Ingrediente[] todos = (Ingrediente[])System.Enum.GetValues(typeof(Ingrediente));
-            Ingrediente elegido = todos[Random.Range(0, todos.Length)];
-            int cantidad = Random.Range(2, 5);
-            for (int i = 0; i < cantidad; i++) ingredientes.Add(elegido);
-            extra = "+" + cantidad + " de " + ControladorRecetas.Nombre(elegido);
+            // Taza es un paso de elaboración (vaporizado), nunca un extra que
+            // un cliente pueda pedir. Solo se permiten ingredientes de receta.
+            List<Ingrediente> candidatos = new List<Ingrediente>();
+            foreach (Ingrediente ingrediente in System.Enum.GetValues(typeof(Ingrediente)))
+            {
+                if (ingrediente == Ingrediente.Taza) continue;
+                candidatos.Add(ingrediente);
+            }
+
+            if (candidatos.Count > 0)
+            {
+                Ingrediente elegido = candidatos[Random.Range(0, candidatos.Count)];
+                int cantidad = Random.Range(2, 5);
+                for (int i = 0; i < cantidad; i++) ingredientes.Add(elegido);
+                extra = "+" + cantidad + " de " + ControladorRecetas.Nombre(elegido);
+            }
         }
 
         PedidoCliente pedido = new PedidoCliente

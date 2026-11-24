@@ -26,6 +26,10 @@ public class ControladorPedidos : MonoBehaviour
     public int maximoPedidosNivel1 = 1;
     public int maximoPedidosMaximo = 5;
 
+    [Header("Animación de entrega")]
+    [Tooltip("Velocidad del Animator por nivel (1 a 5). Cuanto mayor el nivel, más rápido entrega el trabajador.")]
+    public float[] velocidadesEntregaPorNivel = { 1f, 1.15f, 1.3f, 1.5f, 1.75f };
+
     [Header("HUD")]
     public TextMeshProUGUI textoNivel;
     public TextMeshProUGUI textoPuntos;
@@ -156,6 +160,7 @@ public class ControladorPedidos : MonoBehaviour
         EstadoPartida.PartidaReiniciada -= AlReiniciarPartida;
         EstadoPartida.PartidaPerdida -= AlPerderPartida;
         if (rutinaBolsa != null) { StopCoroutine(rutinaBolsa); rutinaBolsa = null; }
+        entregaEnCurso = false;
         if (Instancia == this) Instancia = null;
     }
 
@@ -205,6 +210,8 @@ public class ControladorPedidos : MonoBehaviour
     private ConfigVidasCAFY configVidas;
     private RuntimeAnimatorController animacionBolsa;
     private Coroutine rutinaBolsa;
+    // Mientras se muestra la entrega, el reloj de llegada de clientes se detiene.
+    private bool entregaEnCurso;
 
     private GameObject IconoVida(string nombre)
     {
@@ -483,14 +490,28 @@ public class ControladorPedidos : MonoBehaviour
         {
             yield return null;
         }
-        yield return new WaitForSeconds(primerPedidoEn);
+        yield return EsperarSinEntrega(primerPedidoEn);
 
         while (true)
         {
             // Los pedidos se acumulan; al llegar a 5 se pierde la partida.
             CrearPedido();
             if (EstadoPartida.SinVidas) yield break;
-            yield return new WaitForSeconds(IntervaloActual());
+            yield return EsperarSinEntrega(IntervaloActual());
+        }
+    }
+
+    /// <summary>
+    /// Espera normal pero no cuenta el tiempo mientras se está mostrando la
+    /// animación de entrega: así el jugador no pierde tiempo de pedidos.
+    /// </summary>
+    private IEnumerator EsperarSinEntrega(float segundos)
+    {
+        float restante = Mathf.Max(0f, segundos);
+        while (restante > 0f)
+        {
+            if (!entregaEnCurso) restante -= Time.deltaTime;
+            yield return null;
         }
     }
 
@@ -878,15 +899,22 @@ public class ControladorPedidos : MonoBehaviour
 
         Animator animador = bolsa.GetComponent<Animator>();
         animador.runtimeAnimatorController = animacionBolsa;
-        // Animación más rápida de la entrega.
-        animador.speed = 0.9f;
+        // A nivel más alto el trabajador se apura más en entregar.
+        float velocidad = 1f;
+        if (velocidadesEntregaPorNivel != null && velocidadesEntregaPorNivel.Length > 0)
+        {
+            int nivel = Mathf.Clamp(EstadoPartida.Nivel, 1, velocidadesEntregaPorNivel.Length);
+            velocidad = Mathf.Max(0.1f, velocidadesEntregaPorNivel[nivel - 1]);
+        }
+        animador.speed = velocidad;
         animador.Play(0, 0, 0f);
 
         float duracion = 3f;
         AnimationClip[] clips = animacionBolsa.animationClips;
         if (clips != null && clips.Length > 0 && clips[0].length > 0f)
-            duracion = clips[0].length / Mathf.Max(0.01f, animador.speed);
+            duracion = clips[0].length / velocidad;
 
+        entregaEnCurso = true;
         if (rutinaBolsa != null) StopCoroutine(rutinaBolsa);
         rutinaBolsa = StartCoroutine(OcultarBolsaTras(panel, duracion));
     }
@@ -895,6 +923,7 @@ public class ControladorPedidos : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(duracion);
         if (panel != null) Destroy(panel);
+        entregaEnCurso = false;
         rutinaBolsa = null;
     }
 

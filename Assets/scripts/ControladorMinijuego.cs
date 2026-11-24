@@ -32,7 +32,7 @@ public class ControladorMinijuego : MonoBehaviour
     public float duracionExito = 1.4f;
     public float duracionMensaje = 0.9f;
     [Tooltip("Mueve el efecto de chocolate y jarabe: X negativa = izquierda, Y negativa = abajo.")]
-    public Vector2 desplazamientoEfectosGrandes = new Vector2(50f, -230f);
+    public Vector2 desplazamientoEfectosGrandes = new Vector2(-60f, -320f);
     [Tooltip("Los reduce para que el sprite se vea completo sin salirse de la pantalla.")]
     public float escalaEfectosGrandes = 0.65f;
 
@@ -452,7 +452,9 @@ public class ControladorMinijuego : MonoBehaviour
             case Ingrediente.Azucar: clip = "AzucarCafe"; break;
             case Ingrediente.Leche: clip = "Leche"; break;
             case Ingrediente.Vaporizado: clip = "vaporizado"; break;
-            case Ingrediente.Jarabe: clip = "JarabeChocolate"; break;
+            // Chocolate y jarabe comparten el mismo sonido de preparación.
+            case Ingrediente.Jarabe:
+            case Ingrediente.Chocolate: clip = "JarabeChocolate"; break;
         }
 
         if (!string.IsNullOrEmpty(clip)) ControladorAudioCAFY.ReproducirPreparacion(clip, duracionAnimacion);

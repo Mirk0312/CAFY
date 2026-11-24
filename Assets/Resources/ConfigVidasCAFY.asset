@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e7a1b94d6f4b8ba2e5170c9d3f8462, type: 3}
+  m_Name: ConfigVidasCAFY
+  m_EditorClassIdentifier: Assembly-CSharp::ConfigVidasCAFY
+  vidaBuena: {fileID: 4697106098260271757, guid: 0a2384425824f874fa231c71b19bdd61, type: 3}
+  vidaPerdida: {fileID: -1925182649581103216, guid: 1c08ea0bcee33af40b3b49b164fe4a35, type: 3}

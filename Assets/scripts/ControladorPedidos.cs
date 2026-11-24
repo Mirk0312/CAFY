@@ -102,6 +102,8 @@ public class ControladorPedidos : MonoBehaviour
 
         recetas = Resources.LoadAll<Receta>("Recetas");
         spriteNoti = CargarSpriteNotificacion();
+        configVidas = Resources.Load<ConfigVidasCAFY>("ConfigVidasCAFY");
+        animacionBolsa = Resources.Load<RuntimeAnimatorController>("Animaciones/BolsaEntrega");
 
         telefono = FindAnyObjectByType<ControladorTelefono>();
         preparacion = FindAnyObjectByType<ControladorPreparacion>();
@@ -147,6 +149,7 @@ public class ControladorPedidos : MonoBehaviour
         EstadoPartida.NivelSubido -= AlSubirNivel;
         EstadoPartida.PartidaReiniciada -= AlReiniciarPartida;
         EstadoPartida.PartidaPerdida -= AlPerderPartida;
+        if (rutinaBolsa != null) { StopCoroutine(rutinaBolsa); rutinaBolsa = null; }
         if (Instancia == this) Instancia = null;
     }
 
@@ -192,6 +195,9 @@ public class ControladorPedidos : MonoBehaviour
     }
 
     private GameObject[] iconosVidas;
+    private ConfigVidasCAFY configVidas;
+    private RuntimeAnimatorController animacionBolsa;
+    private Coroutine rutinaBolsa;
 
     private GameObject IconoVida(string nombre)
     {
@@ -218,7 +224,18 @@ public class ControladorPedidos : MonoBehaviour
         for (int i = 1; i <= EstadoPartida.VidasIniciales; i++)
         {
             GameObject icono = IconoVida("Vida" + i);
-            if (icono != null) icono.SetActive(i <= vidas);
+            if (icono == null) continue;
+
+            // Antes se apagaba el icono. Ahora se queda en su sitio y cambia
+            // al sprite de "vida perdida", sin mover sus RectTransform.
+            icono.SetActive(true);
+            if (configVidas == null) continue;
+
+            Image imagen = icono.GetComponent<Image>();
+            if (imagen == null) continue;
+
+            Sprite sprite = i <= vidas ? configVidas.vidaBuena : configVidas.vidaPerdida;
+            if (sprite != null) imagen.sprite = sprite;
         }
     }
 
@@ -754,6 +771,7 @@ public class ControladorPedidos : MonoBehaviour
         if (correcto)
         {
             ControladorAudioCAFY.ReproducirEvento("Entrega", 1.3f);
+            MostrarBolsaEntrega();
             float segundos = Mathf.Max(0f, Time.time - pedidoSeleccionado.creadoEn);
             int puntos = PuntosPorEntrega(segundos);
             EstadoPartida.SumarPuntos(puntos);
@@ -787,6 +805,57 @@ public class ControladorPedidos : MonoBehaviour
         bebidaSeleccionada = null;
         pedidoSeleccionado = null;
         CerrarPaneles();
+    }
+
+    /// <summary>Muestra la animación de la bolsa en el centro al entregar un pedido.</summary>
+    private void MostrarBolsaEntrega()
+    {
+        if (animacionBolsa == null)
+            animacionBolsa = Resources.Load<RuntimeAnimatorController>("Animaciones/BolsaEntrega");
+        if (animacionBolsa == null) return;
+
+        GameObject lienzo = GameObject.Find("Canvas");
+        Canvas canvas = lienzo != null ? lienzo.GetComponent<Canvas>() : FindAnyObjectByType<Canvas>();
+        if (canvas == null) return;
+
+        GameObject anterior = GameObject.Find("BolsaEntrega");
+        if (anterior != null) Destroy(anterior);
+
+        GameObject bolsa = new GameObject(
+            "BolsaEntrega", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Animator));
+        bolsa.transform.SetParent(canvas.transform, false);
+        bolsa.transform.SetAsLastSibling();
+
+        RectTransform rect = (RectTransform)bolsa.transform;
+        rect.anchorMin = new Vector2(0.5f, 0.5f);
+        rect.anchorMax = new Vector2(0.5f, 0.5f);
+        rect.pivot = new Vector2(0.5f, 0.5f);
+        rect.anchoredPosition = Vector2.zero;
+        rect.sizeDelta = new Vector2(360f, 430f);
+        rect.localScale = Vector3.one;
+
+        Image imagen = bolsa.GetComponent<Image>();
+        imagen.preserveAspect = true;
+        imagen.raycastTarget = false;
+
+        Animator animador = bolsa.GetComponent<Animator>();
+        animador.runtimeAnimatorController = animacionBolsa;
+        animador.Play(0, 0, 0f);
+
+        float duracion = 3f;
+        AnimationClip[] clips = animacionBolsa.animationClips;
+        if (clips != null && clips.Length > 0 && clips[0].length > 0f)
+            duracion = clips[0].length;
+
+        if (rutinaBolsa != null) StopCoroutine(rutinaBolsa);
+        rutinaBolsa = StartCoroutine(OcultarBolsaTras(bolsa, duracion));
+    }
+
+    private IEnumerator OcultarBolsaTras(GameObject bolsa, float duracion)
+    {
+        yield return new WaitForSecondsRealtime(duracion);
+        if (bolsa != null) Destroy(bolsa);
+        rutinaBolsa = null;
     }
 
     public void ConfirmarDesechar()

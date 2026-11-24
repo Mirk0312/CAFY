@@ -1,31 +1,40 @@
 fileFormatVersion: 2
-guid: e9fc69a6af9d0074694cb4cac67b0727
+guid: 27662bff020969444ad6db27e49ba141
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8624500136536131754
-    second: Chocolate animado_0
+      213: -4488165407152989406
+    second: JARABE 2 animado_0
   - first:
-      213: -2871200688133865307
-    second: Chocolate animado_1
+      213: 3869385946763391105
+    second: JARABE 2 animado_1
   - first:
-      213: 7299910847012243035
-    second: Chocolate animado_2
+      213: -307379065066857697
+    second: JARABE 2 animado_2
   - first:
-      213: -7788310335253977012
-    second: Chocolate animado_3
+      213: 5110809105064659966
+    second: JARABE 2 animado_3
   - first:
-      213: 476666446699856713
-    second: Chocolate animado_4
+      213: -7211241838304370047
+    second: JARABE 2 animado_4
   - first:
-      213: 2501543328097586895
-    second: Chocolate animado_5
+      213: 1534944731752121804
+    second: JARABE 2 animado_5
   - first:
-      213: -8975203510244401561
-    second: Chocolate animado_6
+      213: 4168532739810880882
+    second: JARABE 2 animado_6
   - first:
-      213: -3977132141500091706
-    second: Chocolate animado_7
+      213: 5555971089400953320
+    second: JARABE 2 animado_7
+  - first:
+      213: 6892939643449939309
+    second: JARABE 2 animado_8
+  - first:
+      213: -2031374244175597398
+    second: JARABE 2 animado_9
+  - first:
+      213: 135900741610095631
+    second: JARABE 2 animado_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -123,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chocolate animado_0
+      name: JARABE 2 animado_0
       rect:
         serializedVersion: 2
-        x: 33
-        y: 233
-        width: 32
-        height: 33
+        x: 240
+        y: 1224
+        width: 23
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -138,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: aa84b8bfd2160b770800000000000000
-      internalID: 8624500136536131754
+      spriteID: 22b137d6755d6b1c0800000000000000
+      internalID: -4488165407152989406
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chocolate animado_1
+      name: JARABE 2 animado_1
       rect:
         serializedVersion: 2
-        x: 110
-        y: 218
-        width: 64
-        height: 60
+        x: 730
+        y: 1253
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +169,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5a08ce8bf227728d0800000000000000
-      internalID: -2871200688133865307
+      spriteID: 18078b78402d2b530800000000000000
+      internalID: 3869385946763391105
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chocolate animado_2
+      name: JARABE 2 animado_2
       rect:
         serializedVersion: 2
-        x: 2
-        y: 139
-        width: 65
-        height: 60
+        x: 746
+        y: 1223
+        width: 23
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +191,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b568f202d3e7e4560800000000000000
-      internalID: 7299910847012243035
+      spriteID: f1b5c4f6e58fbbbf0800000000000000
+      internalID: -307379065066857697
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chocolate animado_3
+      name: JARABE 2 animado_3
       rect:
         serializedVersion: 2
-        x: 65
-        y: 161
-        width: 7
-        height: 11
+        x: 1214
+        y: 1251
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c48eeaaa30d5ae390800000000000000
-      internalID: -7788310335253977012
+      spriteID: efb06368dcd3de640800000000000000
+      internalID: 5110809105064659966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chocolate animado_4
+      name: JARABE 2 animado_4
       rect:
         serializedVersion: 2
-        x: 102
-        y: 138
-        width: 78
-        height: 61
+        x: 1228
+        y: 1221
+        width: 23
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 94384e79b957d9600800000000000000
-      internalID: 476666446699856713
+      spriteID: 182ee6e31c58ceb90800000000000000
+      internalID: -7211241838304370047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chocolate animado_5
+      name: JARABE 2 animado_5
       rect:
         serializedVersion: 2
-        x: 59
-        y: 138
-        width: 21
-        height: 17
+        x: 214
+        y: 751
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,20 +257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fce4185376447b220800000000000000
-      internalID: 2501543328097586895
+      spriteID: cc541fdd9183d4510800000000000000
+      internalID: 1534944731752121804
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chocolate animado_6
+      name: JARABE 2 animado_6
       rect:
         serializedVersion: 2
-        x: 2
-        y: 39
-        width: 65
-        height: 60
+        x: 228
+        y: 721
+        width: 23
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -270,20 +279,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 76e1b09c5fba17380800000000000000
-      internalID: -8975203510244401561
+      spriteID: 27d6307e07a99d930800000000000000
+      internalID: 4168532739810880882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Chocolate animado_7
+      name: JARABE 2 animado_7
       rect:
         serializedVersion: 2
-        x: 59
-        y: 38
-        width: 21
-        height: 34
+        x: 714
+        y: 721
+        width: 37
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -292,8 +301,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c2391993636ec8c0800000000000000
-      internalID: -3977132141500091706
+      spriteID: 8e9751ed446ca1d40800000000000000
+      internalID: 5555971089400953320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JARABE 2 animado_8
+      rect:
+        serializedVersion: 2
+        x: 1214
+        y: 751
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d659a0ad514a8af50800000000000000
+      internalID: 6892939643449939309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JARABE 2 animado_9
+      rect:
+        serializedVersion: 2
+        x: 1228
+        y: 721
+        width: 23
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa0390a33eb1fc3e0800000000000000
+      internalID: -2031374244175597398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: JARABE 2 animado_10
+      rect:
+        serializedVersion: 2
+        x: 214
+        y: 221
+        width: 37
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f04c1642101d2e100800000000000000
+      internalID: 135900741610095631
       vertices: []
       indices: 
       edges: []
@@ -312,14 +387,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Chocolate animado_0: 8624500136536131754
-      Chocolate animado_1: -2871200688133865307
-      Chocolate animado_2: 7299910847012243035
-      Chocolate animado_3: -7788310335253977012
-      Chocolate animado_4: 476666446699856713
-      Chocolate animado_5: 2501543328097586895
-      Chocolate animado_6: -8975203510244401561
-      Chocolate animado_7: -3977132141500091706
+      JARABE 2 animado_0: -4488165407152989406
+      JARABE 2 animado_1: 3869385946763391105
+      JARABE 2 animado_10: 135900741610095631
+      JARABE 2 animado_2: -307379065066857697
+      JARABE 2 animado_3: 5110809105064659966
+      JARABE 2 animado_4: -7211241838304370047
+      JARABE 2 animado_5: 1534944731752121804
+      JARABE 2 animado_6: 4168532739810880882
+      JARABE 2 animado_7: 5555971089400953320
+      JARABE 2 animado_8: 6892939643449939309
+      JARABE 2 animado_9: -2031374244175597398
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Receta
   nombre: "Caf\xE9 con caramelo"
   descripcion: Espresso con un toque de jarabe.
-  icono: {fileID: 3626345525142943855, guid: 320e5328c4804f64f9b89a200f06b6da, type: 3}
+  icono: {fileID: -4522823387595593598, guid: 3afa3e69d2a94ca4cbb1404ba4464442, type: 3}
   ingredientes: 0000000004000000i
   nombresPaso:
   - "Extracci\xF3n"

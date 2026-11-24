@@ -1,37 +1,40 @@
 fileFormatVersion: 2
-guid: 320e5328c4804f64f9b89a200f06b6da
+guid: 81f503e447d150743ae86badf244152f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3626345525142943855
-    second: Jarabe CAFYs animado_0
+      213: -5881321939474534810
+    second: Chocolate liquido animado_0
   - first:
-      213: -447309951438341621
-    second: Jarabe CAFYs animado_1
+      213: 95485383537310094
+    second: Chocolate liquido animado_1
   - first:
-      213: -9159516310398870684
-    second: Jarabe CAFYs animado_2
+      213: 5044833824679737180
+    second: Chocolate liquido animado_2
   - first:
-      213: 9169534920614166125
-    second: Jarabe CAFYs animado_3
+      213: -6025941469808810222
+    second: Chocolate liquido animado_3
   - first:
-      213: -7169612919809493703
-    second: Jarabe CAFYs animado_4
+      213: -1104576844137177795
+    second: Chocolate liquido animado_4
   - first:
-      213: -3663513640583530599
-    second: Jarabe CAFYs animado_5
+      213: 3937737964955541965
+    second: Chocolate liquido animado_5
   - first:
-      213: -318480332211974426
-    second: Jarabe CAFYs animado_6
+      213: 743655898534557550
+    second: Chocolate liquido animado_6
   - first:
-      213: -8561918549550456396
-    second: Jarabe CAFYs animado_7
+      213: 7627178237808635622
+    second: Chocolate liquido animado_7
   - first:
-      213: -4305041697191639419
-    second: Jarabe CAFYs animado_8
+      213: 88367079026420064
+    second: Chocolate liquido animado_8
   - first:
-      213: -7732197505604651506
-    second: Jarabe CAFYs animado_9
+      213: 1741154850759662421
+    second: Chocolate liquido animado_9
+  - first:
+      213: -6306000878917492334
+    second: Chocolate liquido animado_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -129,13 +132,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_0
+      name: Chocolate liquido animado_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 202
-        width: 93
-        height: 96
+        x: 238
+        y: 1223
+        width: 23
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +147,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f68f8faba0e535230800000000000000
-      internalID: 3626345525142943855
+      spriteID: 66ea8eb4bd8516ea0800000000000000
+      internalID: -5881321939474534810
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_1
+      name: Chocolate liquido animado_1
       rect:
         serializedVersion: 2
-        x: 99
-        y: 224
-        width: 33
-        height: 30
+        x: 730
+        y: 1253
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +169,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b0a350818f5dac9f0800000000000000
-      internalID: -447309951438341621
+      spriteID: e89bbfe437b335100800000000000000
+      internalID: 95485383537310094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_2
+      name: Chocolate liquido animado_2
       rect:
         serializedVersion: 2
-        x: 105
-        y: 202
-        width: 93
-        height: 93
+        x: 746
+        y: 1223
+        width: 23
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -188,20 +191,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 46b5744e17cd2e080800000000000000
-      internalID: -9159516310398870684
+      spriteID: c5739e682a9d20640800000000000000
+      internalID: 5044833824679737180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_3
+      name: Chocolate liquido animado_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 124
-        width: 32
-        height: 45
+        x: 1231
+        y: 1253
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -210,20 +213,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d6e3fb29d6bb04f70800000000000000
-      internalID: 9169534920614166125
+      spriteID: 21720c6f82e8f5ca0800000000000000
+      internalID: -6025941469808810222
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_4
+      name: Chocolate liquido animado_4
       rect:
         serializedVersion: 2
-        x: 2
-        y: 102
-        width: 96
-        height: 93
+        x: 1245
+        y: 1223
+        width: 23
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,20 +235,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 93534b1290b608c90800000000000000
-      internalID: -7169612919809493703
+      spriteID: d3dd41a6631cba0f0800000000000000
+      internalID: -1104576844137177795
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_5
+      name: Chocolate liquido animado_5
       rect:
         serializedVersion: 2
-        x: 99
-        y: 124
-        width: 33
-        height: 35
+        x: 231
+        y: 754
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -254,20 +257,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 997783701c5982dc0800000000000000
-      internalID: -3663513640583530599
+      spriteID: dc1aebbe0d7a5a630800000000000000
+      internalID: 3937737964955541965
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_6
+      name: Chocolate liquido animado_6
       rect:
         serializedVersion: 2
-        x: 102
-        y: 155
-        width: 15
-        height: 21
+        x: 245
+        y: 724
+        width: 23
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -276,20 +279,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6ee8e8243d7849bf0800000000000000
-      internalID: -318480332211974426
+      spriteID: e67b643891ff15a00800000000000000
+      internalID: 743655898534557550
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_7
+      name: Chocolate liquido animado_7
       rect:
         serializedVersion: 2
-        x: 105
-        y: 102
-        width: 93
-        height: 93
+        x: 731
+        y: 723
+        width: 37
+        height: 54
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -298,20 +301,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4b1a7323174fd2980800000000000000
-      internalID: -8561918549550456396
+      spriteID: 6ee6c2f523e29d960800000000000000
+      internalID: 7627178237808635622
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_8
+      name: Chocolate liquido animado_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 24
-        width: 32
-        height: 43
+        x: 1231
+        y: 754
+        width: 20
+        height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,20 +323,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 586c5afa26b6144c0800000000000000
-      internalID: -4305041697191639419
+      spriteID: 0696533e361f93100800000000000000
+      internalID: 88367079026420064
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Jarabe CAFYs animado_9
+      name: Chocolate liquido animado_9
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 96
-        height: 93
+        x: 1245
+        y: 724
+        width: 23
+        height: 53
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -342,8 +345,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e06f549e557b1b490800000000000000
-      internalID: -7732197505604651506
+      spriteID: 55b5a7a9c13d92810800000000000000
+      internalID: 1741154850759662421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chocolate liquido animado_10
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 223
+        width: 37
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29162da7c959c78a0800000000000000
+      internalID: -6306000878917492334
       vertices: []
       indices: 
       edges: []
@@ -362,16 +387,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Jarabe CAFYs animado_0: 3626345525142943855
-      Jarabe CAFYs animado_1: -447309951438341621
-      Jarabe CAFYs animado_2: -9159516310398870684
-      Jarabe CAFYs animado_3: 9169534920614166125
-      Jarabe CAFYs animado_4: -7169612919809493703
-      Jarabe CAFYs animado_5: -3663513640583530599
-      Jarabe CAFYs animado_6: -318480332211974426
-      Jarabe CAFYs animado_7: -8561918549550456396
-      Jarabe CAFYs animado_8: -4305041697191639419
-      Jarabe CAFYs animado_9: -7732197505604651506
+      Chocolate liquido animado_0: -5881321939474534810
+      Chocolate liquido animado_1: 95485383537310094
+      Chocolate liquido animado_10: -6306000878917492334
+      Chocolate liquido animado_2: 5044833824679737180
+      Chocolate liquido animado_3: -6025941469808810222
+      Chocolate liquido animado_4: -1104576844137177795
+      Chocolate liquido animado_5: 3937737964955541965
+      Chocolate liquido animado_6: 743655898534557550
+      Chocolate liquido animado_7: 7627178237808635622
+      Chocolate liquido animado_8: 88367079026420064
+      Chocolate liquido animado_9: 1741154850759662421
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

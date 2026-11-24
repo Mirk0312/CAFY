@@ -1,0 +1,587 @@
+fileFormatVersion: 2
+guid: 4f3dbb1860141e64a85c6bce4cff51b9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5150628906577180999
+    second: Bolsa animacion_0
+  - first:
+      213: 6957581943781311195
+    second: Bolsa animacion_1
+  - first:
+      213: -4124247816232611079
+    second: Bolsa animacion_2
+  - first:
+      213: -6033734607610662182
+    second: Bolsa animacion_3
+  - first:
+      213: -1681805664577419843
+    second: Bolsa animacion_4
+  - first:
+      213: -2842147813056415878
+    second: Bolsa animacion_5
+  - first:
+      213: 1877654280126406237
+    second: Bolsa animacion_6
+  - first:
+      213: -1357998323618169036
+    second: Bolsa animacion_7
+  - first:
+      213: 7872566720205582421
+    second: Bolsa animacion_8
+  - first:
+      213: 790192902816809369
+    second: Bolsa animacion_9
+  - first:
+      213: 7066439557510821147
+    second: Bolsa animacion_10
+  - first:
+      213: 3849885385902590759
+    second: Bolsa animacion_11
+  - first:
+      213: 2858989278898030938
+    second: Bolsa animacion_12
+  - first:
+      213: 3263363705825233310
+    second: Bolsa animacion_13
+  - first:
+      213: -135784588393547302
+    second: Bolsa animacion_14
+  - first:
+      213: 8082220230441505889
+    second: Bolsa animacion_15
+  - first:
+      213: 851377875621478956
+    second: Bolsa animacion_16
+  - first:
+      213: -3329195541166751893
+    second: Bolsa animacion_17
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Bolsa animacion_0
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 423
+        width: 42
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b6cb957c4a4588b0800000000000000
+      internalID: -5150628906577180999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_1
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 423
+        width: 42
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd2c1ce3aeb4e8060800000000000000
+      internalID: 6957581943781311195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_2
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 453
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f256cb567ab3c6c0800000000000000
+      internalID: -4124247816232611079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_3
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 423
+        width: 42
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad2b26ca75ed34ca0800000000000000
+      internalID: -6033734607610662182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_4
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 465
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db58f9d98a609a8e0800000000000000
+      internalID: -1681805664577419843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_5
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 423
+        width: 42
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a777e935f99ae88d0800000000000000
+      internalID: -2842147813056415878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_6
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 424
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5e1de99e94ce0a10800000000000000
+      internalID: 1877654280126406237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_7
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 438
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 43fb92b38bb672de0800000000000000
+      internalID: -1357998323618169036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_8
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 338
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5507a6ca8b9f04d60800000000000000
+      internalID: 7872566720205582421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_9
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 295
+        width: 42
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9914e6c224457fa00800000000000000
+      internalID: 790192902816809369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_10
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 295
+        width: 47
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1573348659011260800000000000000
+      internalID: 7066439557510821147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_11
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 295
+        width: 42
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72b01b46c5a8d6530800000000000000
+      internalID: 3849885385902590759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_12
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 295
+        width: 42
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a590e510a9b2da720800000000000000
+      internalID: 2858989278898030938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_13
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 167
+        width: 42
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e998d9a100cc94d20800000000000000
+      internalID: 3263363705825233310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_14
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 167
+        width: 42
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad974d2e2a89d1ef0800000000000000
+      internalID: -135784588393547302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_15
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 167
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16411f76a70d92070800000000000000
+      internalID: 8082220230441505889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_16
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 167
+        width: 43
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c228b06caa3b0db00800000000000000
+      internalID: 851377875621478956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bolsa animacion_17
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 39
+        width: 42
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6ff0fc4b425cc1d0800000000000000
+      internalID: -3329195541166751893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Bolsa animacion_0: -5150628906577180999
+      Bolsa animacion_1: 6957581943781311195
+      Bolsa animacion_10: 7066439557510821147
+      Bolsa animacion_11: 3849885385902590759
+      Bolsa animacion_12: 2858989278898030938
+      Bolsa animacion_13: 3263363705825233310
+      Bolsa animacion_14: -135784588393547302
+      Bolsa animacion_15: 8082220230441505889
+      Bolsa animacion_16: 851377875621478956
+      Bolsa animacion_17: -3329195541166751893
+      Bolsa animacion_2: -4124247816232611079
+      Bolsa animacion_3: -6033734607610662182
+      Bolsa animacion_4: -1681805664577419843
+      Bolsa animacion_5: -2842147813056415878
+      Bolsa animacion_6: 1877654280126406237
+      Bolsa animacion_7: -1357998323618169036
+      Bolsa animacion_8: 7872566720205582421
+      Bolsa animacion_9: 790192902816809369
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

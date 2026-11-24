@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ConfigVidasCAFY
   vidaBuena: {fileID: 4697106098260271757, guid: 0a2384425824f874fa231c71b19bdd61, type: 3}
   vidaPerdida: {fileID: -1925182649581103216, guid: 1c08ea0bcee33af40b3b49b164fe4a35, type: 3}
-  bolsaEntrega: {fileID: -5150628906577180999, guid: 4f3dbb1860141e64a85c6bce4cff51b9, type: 3}
+  bolsaEntrega: {fileID: 790192902816809369, guid: 4f3dbb1860141e64a85c6bce4cff51b9, type: 3}

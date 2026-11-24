@@ -27,6 +27,9 @@ public class ControladorRecetas : MonoBehaviour
     {
         if (panel == null) return;
         ConstruirTarjetas();
+        // El HUD de puntos es hermano del panel y estaba después en el Canvas,
+        // por eso se dibujaba encima. Solo cambiamos el orden, no su posición.
+        panel.transform.SetAsLastSibling();
         panel.SetActive(true);
     }
 

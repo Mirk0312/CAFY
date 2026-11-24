@@ -31,6 +31,8 @@ public class ControladorMinijuego : MonoBehaviour
     public RuntimeAnimatorController[] animacionesExito = new RuntimeAnimatorController[3];
     public float duracionExito = 1.4f;
     public float duracionMensaje = 0.9f;
+    [Tooltip("Aleja el efecto de chocolate y jarabe de la barra del minijuego.")]
+    public Vector2 desplazamientoEfectosGrandes = new Vector2(300f, 300f);
 
     [Header("Temporizador")]
     public TextMeshProUGUI textoTiempo;
@@ -78,6 +80,7 @@ public class ControladorMinijuego : MonoBehaviour
     private bool activo;
     private bool ocupado;
     private Coroutine rutina;
+    private Vector2 posicionBaseArteExito;
 
     private void Awake()
     {
@@ -97,7 +100,12 @@ public class ControladorMinijuego : MonoBehaviour
             animacionChocolate = Resources.Load<RuntimeAnimatorController>("Animaciones/ExitoChocolate");
 
         if (btnAccionar != null) btnAccionar.onClick.AddListener(Accionar);
-        if (arteExito != null) arteExito.SetActive(false); arteExito.transform.localScale = Vector3.one;
+        if (arteExito != null)
+        {
+            arteExito.SetActive(false);
+            arteExito.transform.localScale = Vector3.one;
+            posicionBaseArteExito = arteExito.GetComponent<RectTransform>().anchoredPosition;
+        }
         AsegurarUITiempo();
         Detener();
     }
@@ -362,6 +370,15 @@ public class ControladorMinijuego : MonoBehaviour
                 ingrediente == Ingrediente.Jarabe) escala = 1.3f;
             else if (ingrediente == Ingrediente.Vaporizado) escala = 0.7f;
             arteExito.transform.localScale = Vector3.one * escala;
+
+            // Chocolate y jarabe se alejan bastante de la barra para que el
+            // efecto no tape la zona de juego. El resto conserva su posición.
+            RectTransform rectArte = arteExito.GetComponent<RectTransform>();
+            Vector2 desplazamiento = (ingrediente == Ingrediente.Chocolate ||
+                                      ingrediente == Ingrediente.Jarabe)
+                ? desplazamientoEfectosGrandes : Vector2.zero;
+            rectArte.anchoredPosition = posicionBaseArteExito + desplazamiento;
+
             animadorExito.Play(0, 0, 0f);
 
             // Esperamos lo que dure el clip real para que la animación no se corte.
@@ -370,7 +387,9 @@ public class ControladorMinijuego : MonoBehaviour
                 : duracionMensaje;
 
             yield return new WaitForSeconds(espera);
-            arteExito.SetActive(false); arteExito.transform.localScale = Vector3.one;
+            arteExito.SetActive(false);
+            arteExito.transform.localScale = Vector3.one;
+            arteExito.GetComponent<RectTransform>().anchoredPosition = posicionBaseArteExito;
         }
         else
         {
@@ -434,7 +453,7 @@ public class ControladorMinijuego : MonoBehaviour
             case Ingrediente.Jarabe: clip = "JarabeChocolate"; break;
         }
 
-        if (!string.IsNullOrEmpty(clip)) ControladorAudioCAFY.Reproducir(clip, duracionAnimacion);
+        if (!string.IsNullOrEmpty(clip)) ControladorAudioCAFY.ReproducirPreparacion(clip, duracionAnimacion);
     }
 
     private Receta ConstruirRecetaDesdeIngredientes(Ingrediente[] seleccionados)

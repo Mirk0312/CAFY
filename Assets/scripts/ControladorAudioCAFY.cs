@@ -35,6 +35,11 @@ public class ControladorAudioCAFY : MonoBehaviour
     // El daño suena al perder una vida, en fuente propia para no cortar
     // entregas, descartes ni avisos de subida de nivel.
     private AudioSource fuenteDano;
+    // Los sonidos de preparación de ingredientes van en fuente propia y más
+    // altos: antes se oían demasiado bajos sobre la música de fondo.
+    private AudioSource fuentePreparacion;
+    private const float VolumenPreparacion = 1.45f;
+    private int idPreparacion;
 
     private GameObject menuAudio;
     private TextMeshProUGUI textoMusica;
@@ -189,6 +194,12 @@ public class ControladorAudioCAFY : MonoBehaviour
         fuenteDano.spatialBlend = 0f;
         fuenteDano.volume = 0.9f;
 
+        fuentePreparacion = gameObject.AddComponent<AudioSource>();
+        fuentePreparacion.playOnAwake = false;
+        fuentePreparacion.loop = false;
+        fuentePreparacion.spatialBlend = 0f;
+        fuentePreparacion.volume = 1f;
+
         ReproducirMusica();
     }
 
@@ -225,6 +236,30 @@ public class ControladorAudioCAFY : MonoBehaviour
         AudioClip clip = instancia.ObtenerClip(nombre);
         if (clip == null || instancia.fuenteEfectos == null) return;
         instancia.ReproducirEn(instancia.fuenteEfectos, clip, duracionMaxima, 0);
+    }
+
+    /// <summary>
+    /// Sonido de un paso del minijuego. Se corta cuando termina su animación,
+    /// pero suena más alto que un efecto normal para destacar sobre la música.
+    /// </summary>
+    public static void ReproducirPreparacion(string nombre, float duracionMaxima)
+    {
+        if (instancia == null || instancia.fuentePreparacion == null) return;
+        AudioClip clip = instancia.ObtenerClip(nombre);
+        if (clip == null) return;
+
+        AudioSource fuente = instancia.fuentePreparacion;
+        int id = ++instancia.idPreparacion;
+        fuente.Stop();
+        fuente.PlayOneShot(clip, VolumenPreparacion);
+        if (duracionMaxima > 0f)
+            instancia.StartCoroutine(instancia.DetenerPreparacion(id, duracionMaxima));
+    }
+
+    private IEnumerator DetenerPreparacion(int id, float duracion)
+    {
+        yield return new WaitForSeconds(Mathf.Max(0f, duracion));
+        if (id == idPreparacion && fuentePreparacion != null) fuentePreparacion.Stop();
     }
 
     /// <summary>Aviso importante (entrega, descarte) en su propia fuente.</summary>
@@ -553,6 +588,7 @@ public class ControladorAudioCAFY : MonoBehaviour
         if (fuenteEventos != null) fuenteEventos.mute = efectosSilenciados;
         if (fuenteSubida != null) fuenteSubida.mute = efectosSilenciados;
         if (fuenteDano != null) fuenteDano.mute = efectosSilenciados;
+        if (fuentePreparacion != null) fuentePreparacion.mute = efectosSilenciados;
         ActualizarIndicadores();
     }
 

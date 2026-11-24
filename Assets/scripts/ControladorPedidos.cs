@@ -139,6 +139,12 @@ public class ControladorPedidos : MonoBehaviour
         EstadoPartida.NivelSubido += AlSubirNivel;
         EstadoPartida.PartidaReiniciada += AlReiniciarPartida;
         EstadoPartida.PartidaPerdida += AlPerderPartida;
+
+        // Al recompilar con el editor en Play (o pausar y reanudar) Unity puede
+        // recargar el dominio: EstadoPartida vuelve a 3 vidas pero el sprite del
+        // Image seguía en "Vida Perdida". OnEnable vuelve a sincronizar el HUD.
+        AplicarVidas(EstadoPartida.Vidas);
+        StartCoroutine(ReaplicarVidasAlInicio());
     }
 
     private void OnDisable()
@@ -158,7 +164,6 @@ public class ControladorPedidos : MonoBehaviour
         AplicarVidas(EstadoPartida.Vidas);
         AplicarPuntos(EstadoPartida.Puntos);
         AplicarNivel(EstadoPartida.Nivel);
-        StartCoroutine(ReaplicarVidasAlInicio());
         StartCoroutine(CicloPedidos());
     }
 
@@ -823,7 +828,7 @@ public class ControladorPedidos : MonoBehaviour
         CerrarPaneles();
     }
 
-    /// <summary>Muestra la animación de la bolsa en el centro al entregar un pedido.</summary>
+    /// <summary>Animación de la bolsa sobre un panel oscuro en el centro.</summary>
     private void MostrarBolsaEntrega()
     {
         if (animacionBolsa == null)
@@ -834,13 +839,28 @@ public class ControladorPedidos : MonoBehaviour
         Canvas canvas = lienzo != null ? lienzo.GetComponent<Canvas>() : FindAnyObjectByType<Canvas>();
         if (canvas == null) return;
 
-        GameObject anterior = GameObject.Find("BolsaEntrega");
+        GameObject anterior = GameObject.Find("EntregaCAFY");
         if (anterior != null) Destroy(anterior);
 
-        GameObject bolsa = new GameObject(
-            "BolsaEntrega", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Animator));
-        bolsa.transform.SetParent(canvas.transform, false);
-        bolsa.transform.SetAsLastSibling();
+        GameObject panel = new GameObject("EntregaCAFY",
+            typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+        panel.transform.SetParent(canvas.transform, false);
+        panel.transform.SetAsLastSibling();
+
+        RectTransform rectPanel = (RectTransform)panel.transform;
+        rectPanel.anchorMin = new Vector2(0.5f, 0.5f);
+        rectPanel.anchorMax = new Vector2(0.5f, 0.5f);
+        rectPanel.pivot = new Vector2(0.5f, 0.5f);
+        rectPanel.anchoredPosition = Vector2.zero;
+        rectPanel.sizeDelta = new Vector2(560f, 650f);
+
+        Image fondo = panel.GetComponent<Image>();
+        fondo.color = new Color(0.07f, 0.05f, 0.04f, 0.78f);
+        fondo.raycastTarget = false;
+
+        GameObject bolsa = new GameObject("BolsaEntrega",
+            typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Animator));
+        bolsa.transform.SetParent(panel.transform, false);
 
         RectTransform rect = (RectTransform)bolsa.transform;
         rect.anchorMin = new Vector2(0.5f, 0.5f);
@@ -851,8 +871,6 @@ public class ControladorPedidos : MonoBehaviour
         rect.localScale = Vector3.one;
 
         Image imagen = bolsa.GetComponent<Image>();
-        // Si el Animator tarda un frame en aplicar el primer frame, el Image
-        // dibujaría un cuadrado blanco. Le damos el primer frame ya aquí.
         if (configVidas != null && configVidas.bolsaEntrega != null)
             imagen.sprite = configVidas.bolsaEntrega;
         imagen.preserveAspect = true;
@@ -860,21 +878,23 @@ public class ControladorPedidos : MonoBehaviour
 
         Animator animador = bolsa.GetComponent<Animator>();
         animador.runtimeAnimatorController = animacionBolsa;
+        // Un poco más lenta para que se aprecie bien la animación.
+        animador.speed = 0.7f;
         animador.Play(0, 0, 0f);
 
         float duracion = 3f;
         AnimationClip[] clips = animacionBolsa.animationClips;
         if (clips != null && clips.Length > 0 && clips[0].length > 0f)
-            duracion = clips[0].length;
+            duracion = clips[0].length / Mathf.Max(0.01f, animador.speed);
 
         if (rutinaBolsa != null) StopCoroutine(rutinaBolsa);
-        rutinaBolsa = StartCoroutine(OcultarBolsaTras(bolsa, duracion));
+        rutinaBolsa = StartCoroutine(OcultarBolsaTras(panel, duracion));
     }
 
-    private IEnumerator OcultarBolsaTras(GameObject bolsa, float duracion)
+    private IEnumerator OcultarBolsaTras(GameObject panel, float duracion)
     {
         yield return new WaitForSecondsRealtime(duracion);
-        if (bolsa != null) Destroy(bolsa);
+        if (panel != null) Destroy(panel);
         rutinaBolsa = null;
     }
 

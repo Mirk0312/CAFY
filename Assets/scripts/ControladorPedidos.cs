@@ -30,6 +30,10 @@ public class ControladorPedidos : MonoBehaviour
     [Tooltip("Velocidad del Animator por nivel (1 a 5). Cuanto mayor el nivel, más rápido entrega el trabajador.")]
     public float[] velocidadesEntregaPorNivel = { 1f, 1.15f, 1.3f, 1.5f, 1.75f };
 
+    [Header("Descanso al subir de nivel")]
+    [Tooltip("Segundos sin pedidos después de subir de nivel.")]
+    public float descansoTrasSubirNivel = 30f;
+
     [Header("HUD")]
     public TextMeshProUGUI textoNivel;
     public TextMeshProUGUI textoPuntos;
@@ -161,6 +165,7 @@ public class ControladorPedidos : MonoBehaviour
         EstadoPartida.PartidaPerdida -= AlPerderPartida;
         if (rutinaBolsa != null) { StopCoroutine(rutinaBolsa); rutinaBolsa = null; }
         entregaEnCurso = false;
+        descansoPendiente = false;
         if (Instancia == this) Instancia = null;
     }
 
@@ -190,6 +195,7 @@ public class ControladorPedidos : MonoBehaviour
         contadorPedidos = 1;
         contadorBebidas = 1;
         entregasCorrectas = 0;
+        descansoPendiente = false;
         iconosVidas = null;
         AplicarVidas(EstadoPartida.Vidas);
         bebidaSeleccionada = null;
@@ -212,6 +218,7 @@ public class ControladorPedidos : MonoBehaviour
     private Coroutine rutinaBolsa;
     // Mientras se muestra la entrega, el reloj de llegada de clientes se detiene.
     private bool entregaEnCurso;
+    private bool descansoPendiente;
 
     private GameObject IconoVida(string nombre)
     {
@@ -494,6 +501,13 @@ public class ControladorPedidos : MonoBehaviour
 
         while (true)
         {
+            // Descanso de 30 s tras subir de nivel: no llega ningún pedido.
+            if (descansoPendiente)
+            {
+                yield return EsperarSinEntrega(descansoTrasSubirNivel);
+                descansoPendiente = false;
+            }
+
             // Los pedidos se acumulan; al llegar a 5 se pierde la partida.
             CrearPedido();
             if (EstadoPartida.SinVidas) yield break;
@@ -508,7 +522,7 @@ public class ControladorPedidos : MonoBehaviour
     private IEnumerator EsperarSinEntrega(float segundos)
     {
         float restante = Mathf.Max(0f, segundos);
-        while (restante > 0f)
+        while (restante > 0f && !descansoPendiente)
         {
             if (!entregaEnCurso) restante -= Time.deltaTime;
             yield return null;
@@ -767,10 +781,11 @@ public class ControladorPedidos : MonoBehaviour
 
             if (!entregar && bebidaSeleccionada != null)
             {
+                // Separamos el botón de la bebida del inventario. La X del panel
+                // ya sirve para cancelar, así que no hace falta otro botón.
+                UILogica.CrearEspaciador(contenedorAcciones, 42f);
                 UILogica.CrearBotonFila(contenedorAcciones, "Descartar " + bebidaSeleccionada.Titulo,
                     ConfirmarDesechar, new Color(0.55f, 0.22f, 0.22f, 1f));
-                UILogica.CrearBotonFila(contenedorAcciones, "Cancelar", AbrirDesechar,
-                    new Color(0.35f, 0.35f, 0.4f, 1f));
             }
             return;
         }
@@ -796,11 +811,13 @@ public class ControladorPedidos : MonoBehaviour
 
         if (pedidoSeleccionado != null)
         {
+            // Hueco entre la tarjeta del pedido y el botón para que no queden pegados.
+            UILogica.CrearEspaciador(contenedorAcciones, 42f);
             UILogica.CrearBotonFila(contenedorAcciones,
                 "Entregar a " + pedidoSeleccionado.Titulo, ConfirmarEntrega,
                 new Color(0.20f, 0.50f, 0.30f, 1f));
         }
-        UILogica.CrearBotonFila(contenedorAcciones, "Volver", AbrirEntrega, new Color(0.35f, 0.35f, 0.4f, 1f));
+        // La X del panel ya cierra la ventana; sobraba el botón "Volver".
     }
 
     private void ConfirmarEntrega()
@@ -954,6 +971,7 @@ public class ControladorPedidos : MonoBehaviour
     {
         if (!gameObject.activeInHierarchy) return;
         AplicarVidas(EstadoPartida.Vidas);
+        descansoPendiente = true;
         StartCoroutine(MostrarBannerNivel(nivel));
     }
 
@@ -1116,6 +1134,15 @@ public class ControladorPedidos : MonoBehaviour
             layout.minHeight = 50f;
 
             CrearTexto(botonGO.transform, "Texto", texto, Vector2.zero, Vector2.one, 26f, Color.white);
+        }
+
+        /// <summary>Hueco invisible dentro del VerticalLayoutGroup.</summary>
+        internal static void CrearEspaciador(Transform contenedor, float altura)
+        {
+            GameObject hueco = new GameObject("Espaciador", typeof(RectTransform), typeof(LayoutElement));
+            hueco.transform.SetParent(contenedor, false);
+            LayoutElement layout = hueco.GetComponent<LayoutElement>();
+            layout.preferredHeight = altura;
         }
 
         internal static TextMeshProUGUI CrearTexto(Transform padre, string nombre, string contenido,

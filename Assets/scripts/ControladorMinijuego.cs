@@ -31,8 +31,8 @@ public class ControladorMinijuego : MonoBehaviour
     public RuntimeAnimatorController[] animacionesExito = new RuntimeAnimatorController[3];
     public float duracionExito = 1.4f;
     public float duracionMensaje = 0.9f;
-    [Tooltip("Ancla del efecto de chocolate y jarabe dentro del minijuego (0,0 = abajo-izquierda).")]
-    public Vector2 anclajeEfectosGrandes = new Vector2(0.2f, 0.2f);
+    [Tooltip("Posición manual en píxeles desde el CENTRO del panel. X negativa = izquierda, Y negativa = abajo.")]
+    public Vector2 posicionEfectosGrandes = new Vector2(-576f, -324f);
     [Tooltip("Tamaño del rect para que el sprite quepa entero dentro del panel.")]
     public Vector2 tamanoEfectosGrandes = new Vector2(220f, 260f);
     [Tooltip("Los reduce para que el sprite se vea completo sin salirse de la pantalla.")]
@@ -381,15 +381,15 @@ public class ControladorMinijuego : MonoBehaviour
             else if (ingrediente == Ingrediente.Vaporizado) escala = 0.7f;
             arteExito.transform.localScale = Vector3.one * escala;
 
-            // Chocolate y jarabe se anclan directamente abajo-izquierda del
-            // panel. Cambiar el ancla evita que el Animator o un layout vuelvan
-            // a colocar el sprite arriba aunque se mueva la anchoredPosition.
+            // Chocolate y jarabe usan anclas al centro y una posición manual en
+            // píxeles, así puedes moverlos a ojo desde el Inspector sin que un
+            // layout o el Animator vuelvan a colocarlos arriba.
             RectTransform rectArte = arteExito.GetComponent<RectTransform>();
             if (ingrediente == Ingrediente.Chocolate || ingrediente == Ingrediente.Jarabe)
             {
-                rectArte.anchorMin = anclajeEfectosGrandes;
-                rectArte.anchorMax = anclajeEfectosGrandes;
-                rectArte.anchoredPosition = Vector2.zero;
+                rectArte.anchorMin = new Vector2(0.5f, 0.5f);
+                rectArte.anchorMax = new Vector2(0.5f, 0.5f);
+                rectArte.anchoredPosition = posicionEfectosGrandes;
                 rectArte.sizeDelta = tamanoEfectosGrandes;
             }
             else

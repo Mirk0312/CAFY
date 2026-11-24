@@ -31,8 +31,8 @@ public class ControladorMinijuego : MonoBehaviour
     public RuntimeAnimatorController[] animacionesExito = new RuntimeAnimatorController[3];
     public float duracionExito = 1.4f;
     public float duracionMensaje = 0.9f;
-    [Tooltip("Aleja el efecto de chocolate y jarabe de la barra del minijuego.")]
-    public Vector2 desplazamientoEfectosGrandes = new Vector2(350f, -20f);
+    [Tooltip("Mueve el efecto de chocolate y jarabe: X negativa = izquierda, Y negativa = abajo.")]
+    public Vector2 desplazamientoEfectosGrandes = new Vector2(150f, -140f);
     [Tooltip("Los reduce para que el sprite se vea completo sin salirse de la pantalla.")]
     public float escalaEfectosGrandes = 0.65f;
 
@@ -373,8 +373,8 @@ public class ControladorMinijuego : MonoBehaviour
             else if (ingrediente == Ingrediente.Vaporizado) escala = 0.7f;
             arteExito.transform.localScale = Vector3.one * escala;
 
-            // Chocolate y jarabe se alejan bastante de la barra para que el
-            // efecto no tape la zona de juego. El resto conserva su posición.
+            // Chocolate y jarabe se desplazan a la izquierda y abajo para que
+            // el sprite quede dentro del panel. El resto conserva su posición.
             RectTransform rectArte = arteExito.GetComponent<RectTransform>();
             Vector2 desplazamiento = (ingrediente == Ingrediente.Chocolate ||
                                       ingrediente == Ingrediente.Jarabe)

@@ -32,7 +32,7 @@ public class ControladorMinijuego : MonoBehaviour
     public float duracionExito = 1.4f;
     public float duracionMensaje = 0.9f;
     [Tooltip("Posición manual en píxeles desde el CENTRO del panel. X negativa = izquierda, Y negativa = abajo.")]
-    public Vector2 posicionEfectosGrandes = new Vector2(-576f, -324f);
+    public Vector2 posicionEfectosGrandes = new Vector2(-772f, 147f);
     [Tooltip("Tamaño del rect para que el sprite quepa entero dentro del panel.")]
     public Vector2 tamanoEfectosGrandes = new Vector2(220f, 260f);
     [Tooltip("Los reduce para que el sprite se vea completo sin salirse de la pantalla.")]

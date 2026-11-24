@@ -852,7 +852,7 @@ public class ControladorPedidos : MonoBehaviour
         rectPanel.anchorMax = new Vector2(0.5f, 0.5f);
         rectPanel.pivot = new Vector2(0.5f, 0.5f);
         rectPanel.anchoredPosition = Vector2.zero;
-        rectPanel.sizeDelta = new Vector2(420f, 500f);
+        rectPanel.sizeDelta = new Vector2(340f, 400f);
 
         Image fondo = panel.GetComponent<Image>();
         fondo.color = new Color(0.07f, 0.05f, 0.04f, 0.78f);
@@ -867,7 +867,7 @@ public class ControladorPedidos : MonoBehaviour
         rect.anchorMax = new Vector2(0.5f, 0.5f);
         rect.pivot = new Vector2(0.5f, 0.5f);
         rect.anchoredPosition = Vector2.zero;
-        rect.sizeDelta = new Vector2(240f, 290f);
+        rect.sizeDelta = new Vector2(190f, 230f);
         rect.localScale = Vector3.one;
 
         Image imagen = bolsa.GetComponent<Image>();
@@ -878,8 +878,8 @@ public class ControladorPedidos : MonoBehaviour
 
         Animator animador = bolsa.GetComponent<Animator>();
         animador.runtimeAnimatorController = animacionBolsa;
-        // Un poco más lenta para que se aprecie bien la animación.
-        animador.speed = 0.55f;
+        // Animación más rápida de la entrega.
+        animador.speed = 0.9f;
         animador.Play(0, 0, 0f);
 
         float duracion = 3f;

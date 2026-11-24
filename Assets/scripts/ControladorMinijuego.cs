@@ -32,7 +32,9 @@ public class ControladorMinijuego : MonoBehaviour
     public float duracionExito = 1.4f;
     public float duracionMensaje = 0.9f;
     [Tooltip("Aleja el efecto de chocolate y jarabe de la barra del minijuego.")]
-    public Vector2 desplazamientoEfectosGrandes = new Vector2(300f, 300f);
+    public Vector2 desplazamientoEfectosGrandes = new Vector2(350f, -20f);
+    [Tooltip("Los reduce para que el sprite se vea completo sin salirse de la pantalla.")]
+    public float escalaEfectosGrandes = 0.65f;
 
     [Header("Temporizador")]
     public TextMeshProUGUI textoTiempo;
@@ -361,13 +363,13 @@ public class ControladorMinijuego : MonoBehaviour
             animadorExito.enabled = true;
             arteExito.SetActive(true);
 
-            // Los sprites nuevos de chocolate y jarabe se muestran tan grandes
-            // como la leche; solo el vaporizado conserva su escala reducida.
+            // Chocolate y jarabe se reducen para que el dibujo completo quepa
+            // en pantalla; leche mantiene su tamaño y vaporizado el suyo.
             Ingrediente ingrediente = IngredienteDelPaso();
             float escala = 1f;
-            if (ingrediente == Ingrediente.Leche ||
-                ingrediente == Ingrediente.Chocolate ||
-                ingrediente == Ingrediente.Jarabe) escala = 1.3f;
+            if (ingrediente == Ingrediente.Leche) escala = 1.3f;
+            else if (ingrediente == Ingrediente.Chocolate ||
+                     ingrediente == Ingrediente.Jarabe) escala = escalaEfectosGrandes;
             else if (ingrediente == Ingrediente.Vaporizado) escala = 0.7f;
             arteExito.transform.localScale = Vector3.one * escala;
 

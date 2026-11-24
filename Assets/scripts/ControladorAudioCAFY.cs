@@ -38,7 +38,7 @@ public class ControladorAudioCAFY : MonoBehaviour
     // Los sonidos de preparación de ingredientes van en fuente propia y más
     // altos: antes se oían demasiado bajos sobre la música de fondo.
     private AudioSource fuentePreparacion;
-    private const float VolumenPreparacion = 1.45f;
+    private const float VolumenPreparacion = 1.9f;
     private int idPreparacion;
 
     private GameObject menuAudio;

@@ -18,7 +18,8 @@ public class ControladorTelefono : MonoBehaviour
     public ControladorRecetas panelRecetas;
 
     [Header("Tiempo de las animaciones")]
-    public float duracionSubida = 1f;
+    [Tooltip("Duración de la subida; coincide con el clip TelefonoSube (0.6 s).")]
+    public float duracionSubida = 0.6f;
     public float duracionBajada = 1f;
 
     private bool arriba;

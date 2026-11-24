@@ -32,7 +32,7 @@ public class ControladorMinijuego : MonoBehaviour
     public float duracionExito = 1.4f;
     public float duracionMensaje = 0.9f;
     [Tooltip("Mueve el efecto de chocolate y jarabe: X negativa = izquierda, Y negativa = abajo.")]
-    public Vector2 desplazamientoEfectosGrandes = new Vector2(150f, -140f);
+    public Vector2 desplazamientoEfectosGrandes = new Vector2(50f, -230f);
     [Tooltip("Los reduce para que el sprite se vea completo sin salirse de la pantalla.")]
     public float escalaEfectosGrandes = 0.65f;
 

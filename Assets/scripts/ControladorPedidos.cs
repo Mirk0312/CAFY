@@ -158,6 +158,7 @@ public class ControladorPedidos : MonoBehaviour
         AplicarVidas(EstadoPartida.Vidas);
         AplicarPuntos(EstadoPartida.Puntos);
         AplicarNivel(EstadoPartida.Nivel);
+        StartCoroutine(ReaplicarVidasAlInicio());
         StartCoroutine(CicloPedidos());
     }
 
@@ -180,6 +181,7 @@ public class ControladorPedidos : MonoBehaviour
         contadorBebidas = 1;
         entregasCorrectas = 0;
         iconosVidas = null;
+        AplicarVidas(EstadoPartida.Vidas);
         bebidaSeleccionada = null;
         pedidoSeleccionado = null;
         CerrarPaneles();
@@ -221,22 +223,36 @@ public class ControladorPedidos : MonoBehaviour
 
     private void AplicarVidas(int vidas)
     {
+        if (configVidas == null)
+            configVidas = Resources.Load<ConfigVidasCAFY>("ConfigVidasCAFY");
+        if (configVidas == null) return;
+
+        // EstadoPartida es la fuente de la verdad. Así un evento atrasado al
+        // recargar la escena no deja una vida mostrando "Vida Perdida".
+        int total = Mathf.Clamp(EstadoPartida.Vidas, 0, EstadoPartida.VidasIniciales);
+
         for (int i = 1; i <= EstadoPartida.VidasIniciales; i++)
         {
             GameObject icono = IconoVida("Vida" + i);
             if (icono == null) continue;
 
-            // Antes se apagaba el icono. Ahora se queda en su sitio y cambia
-            // al sprite de "vida perdida", sin mover sus RectTransform.
+            // El icono nunca se apaga: cambia Vida Bien <-> Vida Perdida.
             icono.SetActive(true);
-            if (configVidas == null) continue;
 
             Image imagen = icono.GetComponent<Image>();
             if (imagen == null) continue;
 
-            Sprite sprite = i <= vidas ? configVidas.vidaBuena : configVidas.vidaPerdida;
+            Sprite sprite = i <= total ? configVidas.vidaBuena : configVidas.vidaPerdida;
             if (sprite != null) imagen.sprite = sprite;
         }
+    }
+
+    /// <summary>Reaplica el HUD un frame después para corregir eventos atrasados.</summary>
+    private IEnumerator ReaplicarVidasAlInicio()
+    {
+        yield return null;
+        iconosVidas = null;
+        AplicarVidas(EstadoPartida.Vidas);
     }
 
     private void AsegurarTextoNivel()
@@ -835,6 +851,10 @@ public class ControladorPedidos : MonoBehaviour
         rect.localScale = Vector3.one;
 
         Image imagen = bolsa.GetComponent<Image>();
+        // Si el Animator tarda un frame en aplicar el primer frame, el Image
+        // dibujaría un cuadrado blanco. Le damos el primer frame ya aquí.
+        if (configVidas != null && configVidas.bolsaEntrega != null)
+            imagen.sprite = configVidas.bolsaEntrega;
         imagen.preserveAspect = true;
         imagen.raycastTarget = false;
 
@@ -884,6 +904,7 @@ public class ControladorPedidos : MonoBehaviour
     private void AlSubirNivel(int nivel)
     {
         if (!gameObject.activeInHierarchy) return;
+        AplicarVidas(EstadoPartida.Vidas);
         StartCoroutine(MostrarBannerNivel(nivel));
     }
 

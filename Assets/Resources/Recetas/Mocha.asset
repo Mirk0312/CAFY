@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Receta
   nombre: Mocha
   descripcion: "Caf\xE9, leche y chocolate con latte art final."
-  icono: {fileID: -5344859917596524088, guid: 95793a5ce7f81974692a4dde8dfe293b, type: 3}
+  icono: {fileID: -1604265831722732024, guid: cb97e673670a00f458d1548465006b43, type: 3}
   ingredientes: 000000000500000003000000i
   nombresPaso:
   - "Extracci\xF3n"

@@ -10,4 +10,6 @@ public class ConfigVidasCAFY : ScriptableObject
 {
     public Sprite vidaBuena;
     public Sprite vidaPerdida;
+    /// <summary>Primer frame de la bolsa para que no aparezca un cuadro blanco.</summary>
+    public Sprite bolsaEntrega;
 }

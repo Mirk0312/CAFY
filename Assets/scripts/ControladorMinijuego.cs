@@ -31,8 +31,10 @@ public class ControladorMinijuego : MonoBehaviour
     public RuntimeAnimatorController[] animacionesExito = new RuntimeAnimatorController[3];
     public float duracionExito = 1.4f;
     public float duracionMensaje = 0.9f;
-    [Tooltip("Mueve el efecto de chocolate y jarabe: X negativa = izquierda, Y negativa = abajo.")]
-    public Vector2 desplazamientoEfectosGrandes = new Vector2(-60f, -320f);
+    [Tooltip("Ancla del efecto de chocolate y jarabe dentro del minijuego (0,0 = abajo-izquierda).")]
+    public Vector2 anclajeEfectosGrandes = new Vector2(0.2f, 0.2f);
+    [Tooltip("Tamaño del rect para que el sprite quepa entero dentro del panel.")]
+    public Vector2 tamanoEfectosGrandes = new Vector2(220f, 260f);
     [Tooltip("Los reduce para que el sprite se vea completo sin salirse de la pantalla.")]
     public float escalaEfectosGrandes = 0.65f;
 
@@ -83,6 +85,9 @@ public class ControladorMinijuego : MonoBehaviour
     private bool ocupado;
     private Coroutine rutina;
     private Vector2 posicionBaseArteExito;
+    private Vector2 anclaMinBaseArteExito;
+    private Vector2 anclaMaxBaseArteExito;
+    private Vector2 tamanoBaseArteExito;
 
     private void Awake()
     {
@@ -104,9 +109,12 @@ public class ControladorMinijuego : MonoBehaviour
         if (btnAccionar != null) btnAccionar.onClick.AddListener(Accionar);
         if (arteExito != null)
         {
+            RectTransform rectBase = arteExito.GetComponent<RectTransform>();
+            posicionBaseArteExito = rectBase.anchoredPosition;
+            anclaMinBaseArteExito = rectBase.anchorMin;
+            anclaMaxBaseArteExito = rectBase.anchorMax;
+            tamanoBaseArteExito = rectBase.sizeDelta;
             arteExito.SetActive(false);
-            arteExito.transform.localScale = Vector3.one;
-            posicionBaseArteExito = arteExito.GetComponent<RectTransform>().anchoredPosition;
         }
         AsegurarUITiempo();
         Detener();
@@ -222,7 +230,7 @@ public class ControladorMinijuego : MonoBehaviour
         ocupado = false;
         activo = true;
 
-        if (arteExito != null) arteExito.SetActive(false); arteExito.transform.localScale = Vector3.one;
+        RestaurarArteExito();
         ConfigurarPaso();
     }
 
@@ -232,7 +240,7 @@ public class ControladorMinijuego : MonoBehaviour
         activo = false;
         ocupado = false;
         if (rutina != null) { StopCoroutine(rutina); rutina = null; }
-        if (arteExito != null) arteExito.SetActive(false); arteExito.transform.localScale = Vector3.one;
+        RestaurarArteExito();
         if (textoTiempo != null) textoTiempo.text = "";
         if (barraTiempo != null) barraTiempo.fillAmount = 1f;
     }
@@ -373,13 +381,24 @@ public class ControladorMinijuego : MonoBehaviour
             else if (ingrediente == Ingrediente.Vaporizado) escala = 0.7f;
             arteExito.transform.localScale = Vector3.one * escala;
 
-            // Chocolate y jarabe se desplazan a la izquierda y abajo para que
-            // el sprite quede dentro del panel. El resto conserva su posición.
+            // Chocolate y jarabe se anclan directamente abajo-izquierda del
+            // panel. Cambiar el ancla evita que el Animator o un layout vuelvan
+            // a colocar el sprite arriba aunque se mueva la anchoredPosition.
             RectTransform rectArte = arteExito.GetComponent<RectTransform>();
-            Vector2 desplazamiento = (ingrediente == Ingrediente.Chocolate ||
-                                      ingrediente == Ingrediente.Jarabe)
-                ? desplazamientoEfectosGrandes : Vector2.zero;
-            rectArte.anchoredPosition = posicionBaseArteExito + desplazamiento;
+            if (ingrediente == Ingrediente.Chocolate || ingrediente == Ingrediente.Jarabe)
+            {
+                rectArte.anchorMin = anclajeEfectosGrandes;
+                rectArte.anchorMax = anclajeEfectosGrandes;
+                rectArte.anchoredPosition = Vector2.zero;
+                rectArte.sizeDelta = tamanoEfectosGrandes;
+            }
+            else
+            {
+                rectArte.anchorMin = anclaMinBaseArteExito;
+                rectArte.anchorMax = anclaMaxBaseArteExito;
+                rectArte.anchoredPosition = posicionBaseArteExito;
+                rectArte.sizeDelta = tamanoBaseArteExito;
+            }
 
             animadorExito.Play(0, 0, 0f);
 
@@ -389,9 +408,7 @@ public class ControladorMinijuego : MonoBehaviour
                 : duracionMensaje;
 
             yield return new WaitForSeconds(espera);
-            arteExito.SetActive(false);
-            arteExito.transform.localScale = Vector3.one;
-            arteExito.GetComponent<RectTransform>().anchoredPosition = posicionBaseArteExito;
+            RestaurarArteExito();
         }
         else
         {
@@ -439,6 +456,24 @@ public class ControladorMinijuego : MonoBehaviour
         if (ingredientes != null && paso < ingredientes.Length)
             return ingredientes[paso];
         return Ingrediente.Cafe;
+    }
+
+    /// <summary>Devuelve el ArteExito a la posición original del escenario.</summary>
+    private void RestaurarArteExito()
+    {
+        if (arteExito == null) return;
+
+        RectTransform rect = arteExito.GetComponent<RectTransform>();
+        if (rect != null)
+        {
+            rect.anchorMin = anclaMinBaseArteExito;
+            rect.anchorMax = anclaMaxBaseArteExito;
+            rect.anchoredPosition = posicionBaseArteExito;
+            rect.sizeDelta = tamanoBaseArteExito;
+        }
+
+        arteExito.transform.localScale = Vector3.one;
+        arteExito.SetActive(false);
     }
 
     private void ReproducirSonidoDelPaso(float duracionAnimacion)

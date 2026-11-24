@@ -16,26 +16,32 @@ public class ControladorRecetas : MonoBehaviour
     public Button botonCerrar;
 
     private bool construido;
+    private bool abierto;
 
     private void Awake()
     {
-        if (panel != null) panel.SetActive(false);
+        // El panel viene inactivo en la escena y el script está en ese mismo
+        // GameObject. Si el botón lo activa antes de que Unity llame a Awake,
+        // desactivarlo aquí haría que el primer clic pareciera no funcionar.
+        if (!abierto && panel != null) panel.SetActive(false);
         if (botonCerrar != null) botonCerrar.onClick.AddListener(Cerrar);
     }
 
     public void Abrir()
     {
         if (panel == null) return;
+        abierto = true;
         ConstruirTarjetas();
         // El HUD de puntos es hermano del panel y estaba después en el Canvas,
         // por eso se dibujaba encima. Solo cambiamos el orden, no su posición.
         panel.transform.SetAsLastSibling();
-        panel.SetActive(true);
+        if (!panel.activeSelf) panel.SetActive(true);
     }
 
     public void Cerrar()
     {
-        if (panel != null) panel.SetActive(false);
+        abierto = false;
+        if (panel != null && panel.activeSelf) panel.SetActive(false);
     }
 
     private void ConstruirTarjetas()

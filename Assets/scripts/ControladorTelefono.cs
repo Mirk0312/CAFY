@@ -20,7 +20,8 @@ public class ControladorTelefono : MonoBehaviour
     [Header("Tiempo de las animaciones")]
     [Tooltip("Duración de la subida; coincide con el clip TelefonoSube (0.6 s).")]
     public float duracionSubida = 0.6f;
-    public float duracionBajada = 1f;
+    [Tooltip("Duración de la bajada; coincide con el clip TelefonoBaja (0.65 s).")]
+    public float duracionBajada = 0.65f;
 
     private bool arriba;
     private bool animando;
@@ -35,6 +36,11 @@ public class ControladorTelefono : MonoBehaviour
 
     private void Awake()
     {
+        // La escena guardaba 1 s de la versión anterior; los clips ahora duran
+        // 0.6 s y 0.65 s. Se fuerza aquí para que siempre coincidan.
+        duracionSubida = 0.6f;
+        duracionBajada = 0.65f;
+
         if (animador == null) animador = GetComponent<Animator>();
         if (panelOpciones != null) panelOpciones.SetActive(false);
         if (notificacion != null) notificacion.SetActive(false);
